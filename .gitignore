@@ -2,3 +2,4 @@
 *.pdf
 *.xml
 supybook-*.tar.gz
+Makefile.local

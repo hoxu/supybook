@@ -8,7 +8,12 @@ else
 PARAMS+=-a revision=$(shell git describe)$(shell git diff-index HEAD |grep '' > /dev/null && echo '+dirty')
 endif
 
-all: html
+# local optional makefile for deploying
+# WEBDIR=/path/to/supybook.fealdia.org/
+WEBDIR=
+-include Makefile.local
+
+all: html deploy
 
 html: index.html
 
@@ -31,4 +36,12 @@ endif
 clean:
 	@$(RM) index.html index.pdf
 
-.PHONY: all pdf release release-tar
+deploy: html
+ifeq ($(WEBDIR),)
+	@echo "No Makefile.local, skipping deploy"
+else
+	@echo "Deploying to $(WEBDIR)"
+	cp index.html $(WEBDIR)/devel/index.html
+endif
+
+.PHONY: all deploy pdf release release-tar
