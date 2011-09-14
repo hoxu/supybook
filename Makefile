@@ -13,19 +13,32 @@ endif
 WEBDIR=
 -include Makefile.local
 
+DISTFILES=index.txt index.html Makefile index.pdf
+
 all: html deploy
 
 html: index.html
 
 pdf: index.pdf
 
-release: clean html pdf
+have-version:
 ifndef VERSION
 	@echo "Usage: make release VERSION=x"
 	@false
 else
-	tar --owner=0 --group=0 --transform 's!^!supybook-$(VERSION)/!' -zcf supybook-$(VERSION).tar.gz index.txt index.html Makefile index.pdf
+	@echo "Version: $(VERSION)"
 endif
+
+have-webdir:
+ifeq ($(WEBDIR),)
+	@echo "No Makefile.local, skipping deploy"
+	@false
+else
+	@echo "Using WEBDIR $(WEBDIR)"
+endif
+
+release: have-version clean html pdf
+	tar --owner=0 --group=0 --transform 's!^!supybook-$(VERSION)/!' -zcf supybook-$(VERSION).tar.gz $(DISTFILES)
 
 %.html: %.txt
 	asciidoc $(PARAMS) $<
@@ -36,12 +49,13 @@ endif
 clean:
 	@$(RM) index.html index.pdf
 
-deploy: html
-ifeq ($(WEBDIR),)
-	@echo "No Makefile.local, skipping deploy"
-else
+deploy: have-webdir html
 	@echo "Deploying to $(WEBDIR)"
 	cp index.html $(WEBDIR)/devel/index.html
-endif
 
-.PHONY: all deploy pdf release release-tar
+deploy-release: have-webdir release
+	mkdir $(WEBDIR)/$(VERSION)
+	cp -t $(WEBDIR)/$(VERSION)/ $(DISTFILES)
+	@echo "Remember to modify $(WEBDIR)/index.html manually"
+
+.PHONY: all deploy have-version have-webdir pdf release release-tar
