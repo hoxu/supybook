@@ -56,6 +56,7 @@ deploy: have-webdir html
 deploy-release: have-webdir release
 	mkdir $(WEBDIR)/$(VERSION)
 	cp -t $(WEBDIR)/$(VERSION)/ $(DISTFILES)
+	cp supybook-$(VERSION).tar.gz $(WEBDIR)/download/
 	@echo "Remember to modify $(WEBDIR)/index.html manually"
 
 .PHONY: all deploy have-version have-webdir pdf release release-tar
