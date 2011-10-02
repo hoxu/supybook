@@ -1072,6 +1072,11 @@ MessageParser allows adding regular expression triggers that can match any line.
 
 Visit the http://sourceforge.net/apps/mediawiki/gribble/index.php?title=MessageParser_Plugin[MessageParser wiki] for more information.
 
+[[plugin_twitter]]
+==== Twitter ====
+
+Robert Bergermann has written a https://github.com/rbbremen/Twitter4Supybot[Twitter plugin] for Supybot. See https://github.com/rbbremen/Twitter4Supybot/tree/master/Twitter#readme[the readme] for more information.
+
 == Caveats ==
 
 This is a list of issues I have not yet figured out how to do, or there simply isn't a way.
