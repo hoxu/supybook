@@ -1092,6 +1092,16 @@ Visit the http://sourceforge.net/apps/mediawiki/gribble/index.php?title=MessageP
 
 Robert Bergermann has written a https://github.com/rbbremen/Twitter4Supybot[Twitter plugin] for Supybot. See https://github.com/rbbremen/Twitter4Supybot/tree/master/Twitter#readme[the readme] for more information.
 
+[[plugin_weather]]
+==== Weather ====
+
+James McCoy has written a https://github.com/jamessan/Supybot-Weather[Weather plugin].
+
+----
+<user> weather berlin, germany
+<supybot> The current temperature in Prenzlauer Berg, Berlin, Germany is -7.1°C (6:13 PM CET on February 01, 2012). Conditions: Clear. Humidity: 25%. Dew Point: -24.0°C. Windchill: -12.0°C. Pressure: 30.66 in 1038.1 hPa (Rising).
+----
+
 == Caveats ==
 
 This is a list of issues I have not yet figured out how to do, or there simply isn't a way.
