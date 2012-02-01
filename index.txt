@@ -117,12 +117,25 @@ WARNING: This does not really make the plugins private. They can still be listed
 	List commands provided by the given plugin.
 
 `load [--deprecated] <plugin>`::
-	Load a plugin. Supybot looks for plugins in directories listed in `config conf.supybot.directories.plugins`.
+	Load a plugin. Supybot looks for plugins in directories listed in `config conf.supybot.directories.plugins`. Use comma as a separator.
 
 `unload <plugin>`::
 	Unloads a plugin. The [green]#Owner# plugin cannot be unloaded.
 
 NOTE: Plugins can store information in a database. By default, the database is channel-specific. This can be changed by modifying `config databases.plugins.channelSpecific` to be global. The config item can also be set on per-channel basis.
+
+[[plugins_installing]]
+==== Installing additional plugins ====
+
+To install a third-party plugin, you need first need to copy the plugin in one of the directories listed in `conf.supybot.directories.plugins` (`~/supybot/plugins/` for example). Then you simply `load <plugin>`.
+
+.For example:
+----
+cd ~/supybot/plugins
+git clone git://github.com/jamessan/Supybot-Weather.git Weather
+----
+
+NOTE: The plugin directory name under the plugins directory must match the plugin name. In the example above, both "Weather" and "weather" as directory names work, but Supybot-Weather does not.
 
 === Configuration ===
 
