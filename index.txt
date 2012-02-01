@@ -124,7 +124,7 @@ WARNING: This does not really make the plugins private. They can still be listed
 
 NOTE: Plugins can store information in a database. By default, the database is channel-specific. This can be changed by modifying `config databases.plugins.channelSpecific` to be global. The config item can also be set on per-channel basis.
 
-[[plugins_installing]]
+[[installing_plugins]]
 ==== Installing additional plugins ====
 
 To install a third-party plugin, you need first need to copy the plugin in one of the directories listed in `conf.supybot.directories.plugins` (`~/supybot/plugins/` for example). Then you simply `load <plugin>`.
@@ -1069,6 +1069,8 @@ randomGrabber.minimumWords,3,"Ditto, but for words."
 ~~~~
 
 === Third-party plugins ===
+
+This section lists some useful third-party plugins. See <<installing_plugins,Installing additional plugins>> for how to install third-party plugins. If you feel something is missing from this session, please e-mail the author.
 
 [[plugin_messageparser]]
 ==== MessageParser ====
