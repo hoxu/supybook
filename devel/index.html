@@ -2,25 +2,15 @@
     "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
-<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.5" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="generator" content="AsciiDoc 8.5.2" />
 <title>Supybook</title>
 <style type="text/css">
-/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
-
-/* Default font. */
-body {
-  font-family: Georgia,serif;
-}
-
-/* Title font. */
-h1, h2, h3, h4, h5, h6,
-div.title, caption.title,
-thead, p.table.header,
-#toctitle,
-#author, #revnumber, #revdate, #revremark,
-#footer {
-  font-family: Arial,Helvetica,sans-serif;
+/* Debug borders */
+p, li, dt, dd, div, pre, h1, h2, h3, h4, h5, h6 {
+/*
+  border: 1px solid red;
+*/
 }
 
 body {
@@ -45,8 +35,13 @@ strong {
   color: #083194;
 }
 
+tt {
+  color: navy;
+}
+
 h1, h2, h3, h4, h5, h6 {
   color: #527bbd;
+  font-family: sans-serif;
   margin-top: 1.2em;
   margin-bottom: 0.5em;
   line-height: 1.3;
@@ -64,11 +59,9 @@ h3 {
 h3 + * {
   clear: left;
 }
-h5 {
-  font-size: 1.0em;
-}
 
 div.sectionbody {
+  font-family: serif;
   margin-left: 0;
 }
 
@@ -84,44 +77,45 @@ p {
 ul, ol, li > p {
   margin-top: 0;
 }
-ul > li     { color: #aaa; }
-ul > li > * { color: black; }
 
 pre {
   padding: 0;
   margin: 0;
 }
 
-#author {
+span#author {
   color: #527bbd;
+  font-family: sans-serif;
   font-weight: bold;
   font-size: 1.1em;
 }
-#email {
+span#email {
 }
-#revnumber, #revdate, #revremark {
+span#revnumber, span#revdate, span#revremark {
+  font-family: sans-serif;
 }
 
-#footer {
+div#footer {
+  font-family: sans-serif;
   font-size: small;
   border-top: 2px solid silver;
   padding-top: 0.5em;
   margin-top: 4.0em;
 }
-#footer-text {
+div#footer-text {
   float: left;
   padding-bottom: 0.5em;
 }
-#footer-badges {
+div#footer-badges {
   float: right;
   padding-bottom: 0.5em;
 }
 
-#preamble {
+div#preamble {
   margin-top: 1.5em;
   margin-bottom: 1.5em;
 }
-div.imageblock, div.exampleblock, div.verseblock,
+div.tableblock, div.imageblock, div.exampleblock, div.verseblock,
 div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
 div.admonitionblock {
   margin-top: 1.0em;
@@ -141,6 +135,7 @@ div.content { /* Block element content. */
 /* Block element titles. */
 div.title, caption.title {
   color: #527bbd;
+  font-family: sans-serif;
   font-weight: bold;
   text-align: left;
   margin-top: 1.0em;
@@ -162,15 +157,13 @@ div.content + div.title {
 
 div.sidebarblock > div.content {
   background: #ffffee;
-  border: 1px solid #dddddd;
-  border-left: 4px solid #f0f0f0;
+  border: 1px solid silver;
   padding: 0.5em;
 }
 
 div.listingblock > div.content {
-  border: 1px solid #dddddd;
-  border-left: 5px solid #f0f0f0;
-  background: #f8f8f8;
+  border: 1px solid silver;
+  background: #f4f4f4;
   padding: 0.5em;
 }
 
@@ -178,7 +171,7 @@ div.quoteblock, div.verseblock {
   padding-left: 1.0em;
   margin-left: 1.0em;
   margin-right: 10%;
-  border-left: 5px solid #f0f0f0;
+  border-left: 5px solid #dddddd;
   color: #777777;
 }
 
@@ -187,9 +180,8 @@ div.quoteblock > div.attribution {
   text-align: right;
 }
 
-div.verseblock > pre.content {
-  font-family: inherit;
-  font-size: inherit;
+div.verseblock > div.content {
+  white-space: pre;
 }
 div.verseblock > div.attribution {
   padding-top: 0.75em;
@@ -262,12 +254,35 @@ div.compact div, div.compact div {
   margin-bottom: 0.1em;
 }
 
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-family: sans-serif;
+  font-weight: bold;
+}
 tfoot {
   font-weight: bold;
 }
 td > div.verse {
   white-space: pre;
 }
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
 
 div.hdlist {
   margin-top: 0.8em;
@@ -324,25 +339,18 @@ span.footnote, span.footnoteref {
   min-width: 100px;
 }
 
-div.colist td {
-  padding-right: 0.5em;
-  padding-bottom: 0.3em;
-  vertical-align: top;
-}
-div.colist td img {
-  margin-top: 0.3em;
-}
 
 @media print {
-  #footer-badges { display: none; }
+  div#footer-badges { display: none; }
 }
 
-#toc {
+div#toc {
   margin-bottom: 2.5em;
 }
 
-#toctitle {
+div#toctitle {
   color: #527bbd;
+  font-family: sans-serif;
   font-size: 1.1em;
   font-weight: bold;
   margin-top: 1.0em;
@@ -365,158 +373,51 @@ div.toclevel4 {
   margin-left: 6em;
   font-size: 0.9em;
 }
+/* Workarounds for IE6's broken and incomplete CSS2. */
 
-span.aqua { color: aqua; }
-span.black { color: black; }
-span.blue { color: blue; }
-span.fuchsia { color: fuchsia; }
-span.gray { color: gray; }
-span.green { color: green; }
-span.lime { color: lime; }
-span.maroon { color: maroon; }
-span.navy { color: navy; }
-span.olive { color: olive; }
-span.purple { color: purple; }
-span.red { color: red; }
-span.silver { color: silver; }
-span.teal { color: teal; }
-span.white { color: white; }
-span.yellow { color: yellow; }
-
-span.aqua-background { background: aqua; }
-span.black-background { background: black; }
-span.blue-background { background: blue; }
-span.fuchsia-background { background: fuchsia; }
-span.gray-background { background: gray; }
-span.green-background { background: green; }
-span.lime-background { background: lime; }
-span.maroon-background { background: maroon; }
-span.navy-background { background: navy; }
-span.olive-background { background: olive; }
-span.purple-background { background: purple; }
-span.red-background { background: red; }
-span.silver-background { background: silver; }
-span.teal-background { background: teal; }
-span.white-background { background: white; }
-span.yellow-background { background: yellow; }
-
-span.big { font-size: 2em; }
-span.small { font-size: 0.6em; }
-
-span.underline { text-decoration: underline; }
-span.overline { text-decoration: overline; }
-span.line-through { text-decoration: line-through; }
-
-
-/*
- * xhtml11 specific
- *
- * */
-
-tt {
-  font-family: monospace;
-  font-size: inherit;
-  color: navy;
+div.sidebar-content {
+  background: #ffffee;
+  border: 1px solid silver;
+  padding: 0.5em;
 }
-
-div.tableblock {
-  margin-top: 1.0em;
-  margin-bottom: 1.5em;
-}
-div.tableblock > table {
-  border: 3px solid #527bbd;
-}
-thead, p.table.header {
-  font-weight: bold;
+div.sidebar-title, div.image-title {
   color: #527bbd;
-}
-p.table {
-  margin-top: 0;
-}
-/* Because the table frame attribute is overriden by CSS in most browsers. */
-div.tableblock > table[frame="void"] {
-  border-style: none;
-}
-div.tableblock > table[frame="hsides"] {
-  border-left-style: none;
-  border-right-style: none;
-}
-div.tableblock > table[frame="vsides"] {
-  border-top-style: none;
-  border-bottom-style: none;
-}
-
-
-/*
- * html5 specific
- *
- * */
-
-.monospaced {
-  font-family: monospace;
-  font-size: inherit;
-  color: navy;
-}
-
-table.tableblock {
-  margin-top: 1.0em;
-  margin-bottom: 1.5em;
-}
-thead, p.tableblock.header {
+  font-family: sans-serif;
   font-weight: bold;
-  color: #527bbd;
-}
-p.tableblock {
-  margin-top: 0;
-}
-table.tableblock {
-  border-width: 3px;
-  border-spacing: 0px;
-  border-style: solid;
-  border-color: #527bbd;
-  border-collapse: collapse;
-}
-th.tableblock, td.tableblock {
-  border-width: 1px;
-  padding: 4px;
-  border-style: solid;
-  border-color: #527bbd;
+  margin-top: 0.0em;
+  margin-bottom: 0.5em;
 }
 
-table.tableblock.frame-topbot {
-  border-left-style: hidden;
-  border-right-style: hidden;
-}
-table.tableblock.frame-sides {
-  border-top-style: hidden;
-  border-bottom-style: hidden;
-}
-table.tableblock.frame-none {
-  border-style: hidden;
+div.listingblock div.content {
+  border: 1px solid silver;
+  background: #f4f4f4;
+  padding: 0.5em;
 }
 
-th.tableblock.halign-left, td.tableblock.halign-left {
-  text-align: left;
-}
-th.tableblock.halign-center, td.tableblock.halign-center {
-  text-align: center;
-}
-th.tableblock.halign-right, td.tableblock.halign-right {
+div.quoteblock-attribution {
+  padding-top: 0.5em;
   text-align: right;
 }
 
-th.tableblock.valign-top, td.tableblock.valign-top {
-  vertical-align: top;
+div.verseblock-content {
+  white-space: pre;
 }
-th.tableblock.valign-middle, td.tableblock.valign-middle {
-  vertical-align: middle;
+div.verseblock-attribution {
+  padding-top: 0.75em;
+  text-align: left;
 }
-th.tableblock.valign-bottom, td.tableblock.valign-bottom {
-  vertical-align: bottom;
+
+div.exampleblock-content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
 }
+
+/* IE6 sets dynamically generated links as visited. */
+div#toc a:visited { color: blue; }
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
+window.onload = function(){asciidoc.footnotes(); asciidoc.toc(3);}
 var asciidoc = {  // Namespace.
 
 /////////////////////////////////////////////////////////////////////
@@ -578,25 +479,6 @@ toc: function (toclevels) {
   }
 
   var toc = document.getElementById("toc");
-  if (!toc) {
-    return;
-  }
-
-  // Delete existing TOC entries in case we're reloading the TOC.
-  var tocEntriesToRemove = [];
-  var i;
-  for (i = 0; i < toc.childNodes.length; i++) {
-    var entry = toc.childNodes[i];
-    if (entry.nodeName == 'DIV'
-     && entry.getAttribute("class")
-     && entry.getAttribute("class").match(/^toclevel/))
-      tocEntriesToRemove.push(entry);
-  }
-  for (i = 0; i < tocEntriesToRemove.length; i++) {
-    toc.removeChild(tocEntriesToRemove[i]);
-  }
-
-  // Rebuild TOC entries.
   var entries = tocEntries(document.getElementById("content"), toclevels);
   for (var i = 0; i < entries.length; ++i) {
     var entry = entries[i];
@@ -624,44 +506,24 @@ toc: function (toclevels) {
  */
 
 footnotes: function () {
-  // Delete existing footnote entries in case we're reloading the footnodes.
-  var i;
-  var noteholder = document.getElementById("footnotes");
-  if (!noteholder) {
-    return;
-  }
-  var entriesToRemove = [];
-  for (i = 0; i < noteholder.childNodes.length; i++) {
-    var entry = noteholder.childNodes[i];
-    if (entry.nodeName == 'DIV' && entry.getAttribute("class") == "footnote")
-      entriesToRemove.push(entry);
-  }
-  for (i = 0; i < entriesToRemove.length; i++) {
-    noteholder.removeChild(entriesToRemove[i]);
-  }
-
-  // Rebuild footnote entries.
   var cont = document.getElementById("content");
+  var noteholder = document.getElementById("footnotes");
   var spans = cont.getElementsByTagName("span");
   var refs = {};
   var n = 0;
   for (i=0; i<spans.length; i++) {
     if (spans[i].className == "footnote") {
       n++;
-      var note = spans[i].getAttribute("data-note");
-      if (!note) {
-        // Use [\s\S] in place of . so multi-line matches work.
-        // Because JavaScript has no s (dotall) regex flag.
-        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
-        spans[i].innerHTML =
-          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
-          "' title='View footnote' class='footnote'>" + n + "</a>]";
-        spans[i].setAttribute("data-note", note);
-      }
+      // Use [\s\S] in place of . so multi-line matches work.
+      // Because JavaScript has no s (dotall) regex flag.
+      note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
       noteholder.innerHTML +=
         "<div class='footnote' id='_footnote_" + n + "'>" +
         "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
         n + "</a>. " + note + "</div>";
+      spans[i].innerHTML =
+        "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+        "' title='View footnote' class='footnote'>" + n + "</a>]";
       var id =spans[i].getAttribute("id");
       if (id != null) refs["#"+id] = n;
     }
@@ -681,42 +543,19 @@ footnotes: function () {
       }
     }
   }
-},
-
-install: function(toclevels) {
-  var timerId;
-
-  function reinstall() {
-    asciidoc.footnotes();
-    if (toclevels) {
-      asciidoc.toc(toclevels);
-    }
-  }
-
-  function reinstallAndRemoveTimer() {
-    clearInterval(timerId);
-    reinstall();
-  }
-
-  timerId = setInterval(reinstall, 500);
-  if (document.addEventListener)
-    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
-  else
-    window.onload = reinstallAndRemoveTimer;
 }
 
 }
-asciidoc.install(3);
 /*]]>*/
 </script>
 </head>
-<body class="book">
+<body>
 <div id="header">
 <h1>Supybook</h1>
 <span id="author">Heikki Hokkanen</span><br />
 <span id="email"><tt>&lt;<a href="mailto:hoxu@users.sf.net">hoxu@users.sf.net</a>&gt;</tt></span><br />
-<span id="revnumber">version v0.0.4-1-g917a31e+dirty,</span>
-<span id="revdate">2011-10-02</span>
+<span id="revnumber">version v0.0.4-4-gc376014+dirty,</span>
+<span id="revdate">2012-02-01</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -725,10 +564,9 @@ asciidoc.install(3);
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>v0.0.4-1-g917a31e+dirty</p></div>
+<div class="paragraph"><p>v0.0.4-4-gc376014+dirty</p></div>
 </div>
 </div>
-<div class="sect1">
 <h2 id="_preface">1. Preface</h2>
 <div class="sectionbody">
 <div class="admonitionblock">
@@ -747,18 +585,13 @@ asciidoc.install(3);
 <td class="content">This document is very much a work in process. It covers nowhere near everything there is to Supybot. However, it hopefully allows a good start into learning Supybot.</td>
 </tr></table>
 </div>
-<div class="sect2">
-<h3 id="_what_is_this_document">1.1. What is this document?</h3>
+<h3 id="_what_is_this_document">1.1. What is this document?</h3><div style="clear:left"></div>
 <div class="paragraph"><p>This document is a handbook for <a href="http://supybot.com/">Supybot</a>, the IRC (<a href="http://en.wikipedia.org/wiki/Internet_Relay_Chat">Internet Relay Chat</a>) bot written in Python.</p></div>
-</div>
-<div class="sect2">
-<h3 id="_motivation_behind_this_document">1.2. Motivation behind this document</h3>
+<h3 id="_motivation_behind_this_document">1.2. Motivation behind this document</h3><div style="clear:left"></div>
 <div class="paragraph"><p>Some time ago I started needing an IRC bot for various purposes. The bot would have to be able to take care of auto-opping and similar "traditional" channel duties. This made me think of <a href="http://oer.equnet.org/">Oer</a>, an old but very nice bot. However, I also wanted to have factoid functionality similar to <a href="http://blootbot.sourceforge.net/">blootbot</a>/<a href="http://infobot.org/">infobot</a>, without having to run multiple bots. That was when I arrived at Supybot once again. This time I decided to give it a closer look.</p></div>
 <div class="paragraph"><p>My experience of the documentation was lacking though. I longed for something similar to <a href="http://oer.equnet.org/um.php">Oer&#8217;s User Manual</a> that provides a quick references for basic administrator tasks and so forth. Alas, I could not find such document.</p></div>
 <div class="paragraph"><p>I figured I could as well wrap up such a handbook while learning to use the bot myself. Hopefully someone finds reading this document as useful as writing it was.</p></div>
-</div>
-<div class="sect2">
-<h3 id="_conventions_used_in_this_document">1.3. Conventions used in this document</h3>
+<h3 id="_conventions_used_in_this_document">1.3. Conventions used in this document</h3><div style="clear:left"></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <tt>command &lt;name&gt; [value]</tt>
@@ -785,7 +618,7 @@ asciidoc.install(3);
 </p>
 </dd>
 <dt class="hdlist1">
-<span class="green">Plugin</span>
+<span style="color:green;">Plugin</span>
 </dt>
 <dd>
 <p>
@@ -793,22 +626,14 @@ asciidoc.install(3);
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect2">
-<h3 id="_this_document_is_free">1.4. This document is Free</h3>
+<h3 id="_this_document_is_free">1.4. This document is Free</h3><div style="clear:left"></div>
 <div class="paragraph"><p>This document is Free &#8482; as defined by the <a href="http://www.fsf.org/">Free Software Foundation</a>, more specifically, this document is available under the terms of <a href="http://www.gnu.org/licenses/gpl-3.0.txt">GNU General Public License version 3 (GPLv3)</a>. The source is a text file that can be converted to various formats by <a href="http://www.methods.co.nz/asciidoc/">asciidoc</a>.</p></div>
-</div>
-<div class="sect2">
-<h3 id="_how_to_give_feedback">1.5. How to give feedback</h3>
+<h3 id="_how_to_give_feedback">1.5. How to give feedback</h3><div style="clear:left"></div>
 <div class="paragraph"><p>If you spot an error, have suggestions or just want to tell me how much you love/hate the document, send e-mail to <a href="mailto:hoxu@users.sf.net">hoxu@users.sf.net</a>. Prefix the Subject with <tt>[supybook]</tt>.</p></div>
 </div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="_getting_started">2. Getting started</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_initial_configuration">2.1. Initial configuration</h3>
+<h3 id="_initial_configuration">2.1. Initial configuration</h3><div style="clear:left"></div>
 <div class="paragraph"><p>Create a new directory (eg. <tt>mkdir ~/supybot</tt>) and run <tt>supybot-wizard</tt> in it. Follow the directions to get the bot initially configured.</p></div>
 <div class="paragraph"><p>Once you are ready with the wizard, I suggest you start the bot inside screen:</p></div>
 <div class="listingblock">
@@ -823,9 +648,7 @@ $ supybot configFile</tt></pre>
 <pre><tt>$ crontab -e
 &gt; @reboot screen -d -m supybot /path/to/configFile</tt></pre>
 </div></div>
-</div>
-<div class="sect2">
-<h3 id="_identifying_to_the_bot">2.2. Identifying to the bot</h3>
+<h3 id="_identifying_to_the_bot">2.2. Identifying to the bot</h3><div style="clear:left"></div>
 <div class="paragraph"><p>After running supybot-wizard and starting the bot, connect to the same IRC network it is on, and /query it. You can identify with the <tt>identify &lt;name&gt; &lt;password&gt;</tt> command. You can check the bot&#8217;s idea of who you are with the <tt>whoami</tt> command.</p></div>
 <div class="admonitionblock">
 <table><tr>
@@ -835,26 +658,18 @@ $ supybot configFile</tt></pre>
 <td class="content">All commands that contain a <tt>password</tt> must be sent to the bot in private.</td>
 </tr></table>
 </div>
-</div>
-<div class="sect2">
-<h3 id="_accessing_the_online_help">2.3. Accessing the online help</h3>
+<h3 id="_accessing_the_online_help">2.3. Accessing the online help</h3><div style="clear:left"></div>
 <div class="paragraph"><p>Most commands on the bot have a short online help available. You can use <tt>list</tt> to list loaded plugins, and <tt>list &lt;plugin&gt;</tt> to list commands in those plugins. <tt>help [plugin] &lt;command&gt;</tt> can be used to access the command help. Use <tt>more</tt> to read long messages from the bot.</p></div>
 <div class="paragraph"><p>Help for configuration items can be accessed with the <tt>config help &lt;key&gt;</tt> command.</p></div>
 </div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="_understanding_supybot_8217_s_peculiarities">3. Understanding supybot&#8217;s peculiarities</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>Supybot has a couple of features that sets it apart from more traditional bots. More specifically, nested commands, plugin framework (even the basic functionality is implemented using plugins), and capabilities. This section covers some basic information about Supybot. Feel free to skip it, but come back later if you run into something you don&#8217;t understand.</p></div>
-<div class="sect2">
-<h3 id="_nested_commands">3.1. Nested commands</h3>
+<h3 id="_nested_commands">3.1. Nested commands</h3><div style="clear:left"></div>
 <div class="paragraph"><p>Supybot allows nested commands, in other words, you can pass the result of a command to another command as a parameter. What does this allow then, though, apart from the obvious bragging rights? For example, if you want to restore a configuration entry to the default value, you can type:</p></div>
 <div class="paragraph"><p><tt>config reply.withNickPrefix [config default reply.withNickPrefix]</tt></p></div>
 <div class="paragraph"><p>Obviously, that wasn&#8217;t very neat. They could&#8217;ve included a <tt>config reset &lt;key&gt;</tt> command instead, for example. But I&#8217;m sure you can figure out <strong>something</strong> more useful to do with this, as a homework ;-)</p></div>
-</div>
-<div class="sect2">
-<h3 id="_plugins">3.2. Plugins</h3>
+<h3 id="_plugins">3.2. Plugins</h3><div style="clear:left"></div>
 <div class="paragraph"><p>Pretty much everything in Supybot is a plugin. Most commands you use belong to a plugin. If two plugins provide the same command, then you need to prefix the command with the plugin name. For example, the <tt>ignore list</tt> command yields the following output:</p></div>
 <div class="listingblock">
 <div class="title">output</div>
@@ -862,8 +677,8 @@ $ supybot configFile</tt></pre>
 <pre><tt>Error: The command "ignore list" is available in the Admin and Channel plugins.
 Please specify the plugin whose command you wish to call by using its name as a command before "ignore list".</tt></pre>
 </div></div>
-<div class="paragraph"><p>Thus, you need to either use <tt>admin ignore list</tt> or <tt>channel ignore list</tt> command. That is, unless you define which plugin is the default one using the <tt>defaultplugin [--remove] &lt;command&gt; [plugin]</tt> command provided in the <span class="green">Owner</span> plugin.</p></div>
-<div class="paragraph"><p>The <tt>list</tt> command (<span class="green">Plugin</span>) can be used to list loaded plugins. You can prevent some plugins from showing in the list with the command:</p></div>
+<div class="paragraph"><p>Thus, you need to either use <tt>admin ignore list</tt> or <tt>channel ignore list</tt> command. That is, unless you define which plugin is the default one using the <tt>defaultplugin [--remove] &lt;command&gt; [plugin]</tt> command provided in the <span style="color:green;">Owner</span> plugin.</p></div>
+<div class="paragraph"><p>The <tt>list</tt> command (<span style="color:green;">Plugin</span>) can be used to list loaded plugins. You can prevent some plugins from showing in the list with the command:</p></div>
 <div class="paragraph"><p><tt>config plugins.&lt;plugin&gt;.public False</tt></p></div>
 <div class="admonitionblock">
 <table><tr>
@@ -903,7 +718,7 @@ Please specify the plugin whose command you wish to call by using its name as a 
 </dt>
 <dd>
 <p>
-        Load a plugin. Supybot looks for plugins in directories listed in <tt>config conf.supybot.directories.plugins</tt>.
+        Load a plugin. Supybot looks for plugins in directories listed in <tt>config conf.supybot.directories.plugins</tt>. Use comma as a separator.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -911,7 +726,7 @@ Please specify the plugin whose command you wish to call by using its name as a 
 </dt>
 <dd>
 <p>
-        Unloads a plugin. The <span class="green">Owner</span> plugin cannot be unloaded.
+        Unloads a plugin. The <span style="color:green;">Owner</span> plugin cannot be unloaded.
 </p>
 </dd>
 </dl></div>
@@ -923,10 +738,24 @@ Please specify the plugin whose command you wish to call by using its name as a 
 <td class="content">Plugins can store information in a database. By default, the database is channel-specific. This can be changed by modifying <tt>config databases.plugins.channelSpecific</tt> to be global. The config item can also be set on per-channel basis.</td>
 </tr></table>
 </div>
+<h4 id="installing_plugins">3.2.1. Installing additional plugins</h4>
+<div class="paragraph"><p>To install a third-party plugin, you need first need to copy the plugin in one of the directories listed in <tt>conf.supybot.directories.plugins</tt> (<tt>~/supybot/plugins/</tt> for example). Then you simply <tt>load &lt;plugin&gt;</tt>.</p></div>
+<div class="listingblock">
+<div class="title">For example:</div>
+<div class="content">
+<pre><tt>cd ~/supybot/plugins
+git clone git://github.com/jamessan/Supybot-Weather.git Weather</tt></pre>
+</div></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">The plugin directory name under the plugins directory must match the plugin name. In the example above, both "Weather" and "weather" as directory names work, but Supybot-Weather does not.</td>
+</tr></table>
 </div>
-<div class="sect2">
-<h3 id="_configuration">3.3. Configuration</h3>
-<div class="paragraph"><p>Most of Supybot configuration is done online using the <span class="green">Config</span> plugin. This excludes things such as granting the owner capability (must be done by modifying the files).</p></div>
+<h3 id="_configuration">3.3. Configuration</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Most of Supybot configuration is done online using the <span style="color:green;">Config</span> plugin. This excludes things such as granting the owner capability (must be done by modifying the files).</p></div>
 <div class="paragraph"><p>There are two types of configuration items: global and channel-specific. The latter are actually no different from the global ones, except that they can be set for channels as well. This means you can have a global default which is overridden for specific channels.</p></div>
 <div class="paragraph"><p>Configuration items are hierarchical. The "root" item is <tt>supybot</tt>, which can be omitted. Configs for plugins live under their own key, <tt>supybot.plugins</tt>, or shortly, <tt>plugins</tt>.</p></div>
 <div class="dlist"><dl>
@@ -1058,9 +887,7 @@ cellspacing="0" cellpadding="4">
 </tbody>
 </table>
 </div>
-</div>
-<div class="sect2">
-<h3 id="capabilities">3.4. Capabilities</h3>
+<h3 id="capabilities">3.4. Capabilities</h3><div style="clear:left"></div>
 <div class="paragraph"><p>Many traditional IRC bots manage permissions of users using flags. Some network services in fact, do, too. Each user can have various flags on each channel. The flags can mean auto-op, op, use of !ban command and so forth. On side of those, there are often global user flags that entitle the user to full access, global auto-op, etc. Some bots also support channel flags that determine what bot functionality is available on the channel.</p></div>
 <div class="paragraph"><p>Supybot does not have any flags. Instead, the permissions are managed using <em>capabilities</em>. There are two kinds of capabilities: <tt>user capabilities</tt> and <tt>channel capabilities</tt>.</p></div>
 <div class="paragraph"><p><em>User capabilities</em> are checked first when a user tries to run a command. If the user has an <em>anticapability</em> for the command (eg. <tt>-command</tt>, <tt>-Plugin.command</tt>) or the Plugin (<tt>-Plugin</tt>), it won&#8217;t be run.</p></div>
@@ -1102,15 +929,10 @@ cellspacing="0" cellpadding="4">
 </dl></div>
 <div class="paragraph"><p>Commands used to manipulate capabilities are covered in the <a href="#channel-capabilities">Manipulating channel capabilities</a> and <a href="#user-capabilities">Manipulating user capabilities</a> sections.</p></div>
 </div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="_administrative_tasks">4. Administrative tasks</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_networks">4.1. Networks</h3>
-<div class="paragraph"><p>Related plugins: <span class="green">Network, Services</span>.</p></div>
-<div class="sect3">
+<h3 id="_networks">4.1. Networks</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Related plugins: <span style="color:green;">Network, Services</span>.</p></div>
 <h4 id="_adding_a_network">4.1.1. Adding a network</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1122,8 +944,6 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="_reconnecting">4.1.2. Reconnecting</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1135,8 +955,6 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="_disconnecting">4.1.3. Disconnecting</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1148,8 +966,6 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="_listing_networks">4.1.4. Listing networks</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1176,13 +992,9 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="_adding_more_servers">4.1.5. Adding more servers</h4>
 <div class="paragraph"><p>Once you&#8217;ve added a network with the initial server, you can add more servers:</p></div>
 <div class="paragraph"><p><tt>config networks.&lt;network&gt;.servers [config networks.&lt;network&gt;.servers] server:6667</tt></p></div>
-</div>
-<div class="sect3">
 <h4 id="_listing_network_servers">4.1.6. Listing network servers</h4>
 <div class="paragraph"><p><tt>config networks.&lt;network&gt;.servers</tt></p></div>
 <div class="listingblock">
@@ -1190,15 +1002,13 @@ cellspacing="0" cellpadding="4">
 <div class="content">
 <pre><tt>chat.freenode.net:6667</tt></pre>
 </div></div>
-</div>
-<div class="sect3">
 <h4 id="_services_nickserv">4.1.7. Services: NickServ</h4>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
 <div class="title">Warning</div>
 </td>
-<td class="content">My pratical experience with <span class="green">Services</span> plugin on Freenode is&#8230; not-so-good. It definitely does not work all the time as expected.</td>
+<td class="content">My pratical experience with <span style="color:green;">Services</span> plugin on Freenode is&#8230; not-so-good. It definitely does not work all the time as expected.</td>
 </tr></table>
 </div>
 <div class="paragraph"><p>You can make Supybot identify itself to the network NickServ after it has connected.</p></div>
@@ -1240,8 +1050,6 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="_services_chanserv">4.1.8. Services: ChanServ</h4>
 <div class="paragraph"><p>You can make Supybot request op after joining a channel on a network with ChanServ.</p></div>
 <div class="dlist"><dl>
@@ -1271,11 +1079,8 @@ cellspacing="0" cellpadding="4">
 </dd>
 </dl></div>
 <div class="paragraph"><p>Voice and half-op (on networks supporting it) can be used similarly.</p></div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_channels">4.2. Channels</h3>
-<div class="paragraph"><p>Related plugins: <span class="green">Channel</span>.</p></div>
+<h3 id="_channels">4.2. Channels</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Related plugins: <span style="color:green;">Channel</span>.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -1300,7 +1105,6 @@ cellspacing="0" cellpadding="4">
 <td class="content">The <tt>network command</tt> command does not seem to check if the user having your nick in the other network is recognized (eg. identified or recognized by hostmasks), so the reply may end up to someone else.</td>
 </tr></table>
 </div>
-<div class="sect3">
 <h4 id="_adding_a_new_channel">4.2.1. Adding a new channel</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1320,8 +1124,6 @@ cellspacing="0" cellpadding="4">
 <td class="content"><tt>config plugins.Channel.alwaysRejoin</tt> determines whether the bot will (attempt to) rejoin the channel when kicked out (the default).</td>
 </tr></table>
 </div>
-</div>
-<div class="sect3">
 <h4 id="_listing_channels">4.2.2. Listing channels</h4>
 <div class="paragraph"><p><tt>channels</tt></p></div>
 <div class="admonitionblock">
@@ -1333,8 +1135,6 @@ cellspacing="0" cellpadding="4">
 </tr></table>
 </div>
 <div class="paragraph"><p>You can list channels in another network with <tt>config networks.&lt;network&gt;.channels</tt>. Or with <tt>network command &lt;network&gt; channels</tt>.</p></div>
-</div>
-<div class="sect3">
 <h4 id="_removing_a_channel">4.2.3. Removing a channel</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1346,8 +1146,6 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="_modifying_channel_config">4.2.4. Modifying channel config</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1359,8 +1157,6 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="_setting_the_key">4.2.5. Setting the key</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1372,8 +1168,6 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="_setting_the_limit">4.2.6. Setting the limit</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1385,8 +1179,6 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="_channel_commands">4.2.7. Channel commands</h4>
 <div class="paragraph"><p>Channel ops can use the following commands to control the channel via the bot, assuming it is opped.</p></div>
 <div class="dlist"><dl>
@@ -1487,8 +1279,6 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="_maintaining_the_ban_list">4.2.8. Maintaining the ban list</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1532,8 +1322,6 @@ cellspacing="0" cellpadding="4">
 <td class="content">Users matching the ban list are not automatically kicked off the channel. See the <tt>kban</tt> command in the previous section to kick and ban a user.</td>
 </tr></table>
 </div>
-</div>
-<div class="sect3">
 <h4 id="_maintaining_the_ignore_list">4.2.9. Maintaining the ignore list</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1569,14 +1357,10 @@ cellspacing="0" cellpadding="4">
 <td class="content">There is also a global ignore list, available for admins.</td>
 </tr></table>
 </div>
-</div>
-<div class="sect3">
 <h4 id="_listing_channel_nicks">4.2.10. Listing channel nicks</h4>
 <div class="paragraph"><p><tt>channel nicks [channel]</tt></p></div>
-</div>
-<div class="sect3">
 <h4 id="_topic_operations">4.2.11. Topic operations</h4>
-<div class="paragraph"><p>Related plugins: <span class="green">Topic</span>.</p></div>
+<div class="paragraph"><p>Related plugins: <span style="color:green;">Topic</span>.</p></div>
 <div class="paragraph"><p>Supybot allows elaborate manipulation of the channel topic. Topic consists of items, separated by a configurable character (default is <tt>||</tt>). Items are one-indexed.</p></div>
 <div class="paragraph"><p>People who have used the Oer bot may notice that the topic manipulation commands are <a href="http://oer.equnet.org/help.php#um39">somewhat similar</a>.</p></div>
 <div class="dlist"><dl>
@@ -1828,30 +1612,26 @@ alias add td topic delete $1
 alias add te topic replace $1 $2
 alias add ts topic swap $1 $2</tt></pre>
 </div></div>
-</div>
-<div class="sect3">
 <h4 id="_logging">4.2.12. Logging</h4>
-<div class="paragraph"><p>Logging of channels is provided by the <span class="green">ChannelLogger</span> plugin. Various channel-specific configuration items are provided, see <tt>config list plugins.ChannelLogger</tt>.</p></div>
+<div class="paragraph"><p>Logging of channels is provided by the <span style="color:green;">ChannelLogger</span> plugin. Various channel-specific configuration items are provided, see <tt>config list plugins.ChannelLogger</tt>.</p></div>
 <div class="paragraph"><p>By default logs will go into logs/ChannelLogger/&lt;network&gt;/&lt;channel&gt;/&lt;channel&gt;.log and will be rotated when the default "%d-%a-%Y" (eg. 06-Sat-2008) timestamp rotates. See <a href="http://docs.python.org/lib/module-time.html">the python documentation for strftime</a> for the formatting characters.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
 <div class="title">Note</div>
 </td>
-<td class="content">The logs of <span class="green">ChannelLogger</span> cannot be searched online. However, other plugins provide some searching functionality. See <a href="#searching-history">Searching the history</a>.</td>
+<td class="content">The logs of <span style="color:green;">ChannelLogger</span> cannot be searched online. However, other plugins provide some searching functionality. See <a href="#searching-history">Searching the history</a>.</td>
 </tr></table>
 </div>
-</div>
-<div class="sect3">
 <h4 id="_auto_ops_and_voices">4.2.13. Auto-ops and voices</h4>
-<div class="paragraph"><p>Auto-opping is provided by the <span class="green">AutoMode</span> plugin.</p></div>
+<div class="paragraph"><p>Auto-opping is provided by the <span style="color:green;">AutoMode</span> plugin.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <tt>load AutoMode</tt>
 </dt>
 <dd>
 <p>
-        Loads the <span class="green">AutoMode</span> plugin, which works out-of-box. By default it&#8217;s enabled on all channels and voices/halfops/ops users with respective capabilities. You can enable auto-opping only on some channels by tweaking the config keys below.
+        Loads the <span style="color:green;">AutoMode</span> plugin, which works out-of-box. By default it&#8217;s enabled on all channels and voices/halfops/ops users with respective capabilities. You can enable auto-opping only on some channels by tweaking the config keys below.
 </p>
 </dd>
 </dl></div>
@@ -1957,8 +1737,6 @@ cellspacing="0" cellpadding="4">
 </tbody>
 </table>
 </div>
-</div>
-<div class="sect3">
 <h4 id="channel-capabilities">4.2.14. Manipulating channel capabilities</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1997,11 +1775,8 @@ cellspacing="0" cellpadding="4">
 </dd>
 </dl></div>
 <div class="paragraph"><p>See also <a href="#capabilities">Capabilities</a>.</p></div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_users">4.3. Users</h3>
-<div class="paragraph"><p>Related plugins: <span class="green">Users</span>.</p></div>
+<h3 id="_users">4.3. Users</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Related plugins: <span style="color:green;">Users</span>.</p></div>
 <div class="paragraph"><p>Supybot users are global: they are visible across networks. This means the same username/password and hostmasks will work in all networks the bot is on.</p></div>
 <div class="paragraph"><p>Users are recognized either by matching hostmasks, or after manually identifying to the bot. In secure mode, the user must both match a hostmask and identify to the bot (<tt>uset set secure [password] &lt;True|False&gt;</tt>).</p></div>
 <div class="admonitionblock">
@@ -2012,11 +1787,8 @@ cellspacing="0" cellpadding="4">
 <td class="content">If users knowing each others' nicks is an issue, they could come up with different aliases when registering to the bot. The bot username does not have to match the nick of the user.</td>
 </tr></table>
 </div>
-<div class="sect3">
 <h4 id="_adding_a_new_user">4.3.1. Adding a new user</h4>
 <div class="paragraph"><p><tt>user register &lt;name&gt; &lt;password&gt;</tt></p></div>
-</div>
-<div class="sect3">
 <h4 id="_manipulating_hostmasks">4.3.2. Manipulating hostmasks</h4>
 <div class="paragraph"><p><tt>user hostmask add</tt> - add your current hostmask. Obviously this makes only sense after identify.</p></div>
 <div class="paragraph"><p><tt>user hostmask add [name] [hostmask] [password]</tt> - add hostmask for another user. If not owner, password must be given.</p></div>
@@ -2029,25 +1801,15 @@ cellspacing="0" cellpadding="4">
 <td class="content">There is no way to add network-specific hostmasks.</td>
 </tr></table>
 </div>
-</div>
-<div class="sect3">
 <h4 id="_listing_users">4.3.3. Listing users</h4>
 <div class="paragraph"><p><tt>user list [glob]</tt> - list registered users. Note that the list of users is global across networks.</p></div>
-</div>
-<div class="sect3">
 <h4 id="_deleting_users">4.3.4. Deleting users</h4>
 <div class="paragraph"><p><tt>user unregister &lt;name&gt; [password]</tt></p></div>
-</div>
-<div class="sect3">
 <h4 id="_changing_password">4.3.5. Changing password</h4>
 <div class="paragraph"><p><tt>user set password &lt;user&gt; &lt;old password&gt; &lt;new password&gt;</tt>.</p></div>
-</div>
-<div class="sect3">
 <h4 id="_renaming_a_user">4.3.6. Renaming a user</h4>
 <div class="paragraph"><p><tt>user changename &lt;name&gt; &lt;new name&gt; [password]</tt></p></div>
 <div class="paragraph"><p>Users can change their name themselves.</p></div>
-</div>
-<div class="sect3">
 <h4 id="user-capabilities">4.3.7. Manipulating user capabilities</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -2113,12 +1875,8 @@ cellspacing="0" cellpadding="4">
 <pre><tt>-owner -admin -trusted</tt></pre>
 </div></div>
 <div class="paragraph"><p>See also <a href="#capabilities">Capabilities</a>.</p></div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_general_bot_maintenance">4.4. General bot maintenance</h3>
-<div class="paragraph"><p>Related plugins: <span class="green">Admin, Config</span>.</p></div>
-<div class="sect3">
+<h3 id="_general_bot_maintenance">4.4. General bot maintenance</h3><div style="clear:left"></div>
+<div class="paragraph"><p>Related plugins: <span style="color:green;">Admin, Config</span>.</p></div>
 <h4 id="_setting_nickname_amp_alternative_nick">4.4.1. Setting nickname &amp; alternative nick</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -2154,8 +1912,6 @@ cellspacing="0" cellpadding="4">
 <td class="content">It is not possible to have a different nick in different networks.</td>
 </tr></table>
 </div>
-</div>
-<div class="sect3">
 <h4 id="_setting_ident">4.4.2. Setting ident</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -2167,8 +1923,6 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="_setting_ircname">4.4.3. Setting ircname</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -2180,8 +1934,6 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="_setting_command_prefix_controlling_when_the_bot_replies">4.4.4. Setting command prefix / controlling when the bot replies</h4>
 <div class="paragraph"><p>Like most other bots, the bot can be addressed by its nickname, or a command prefix character (any or many of <tt>~!@#$%^&amp;*()_-+=[{}]\|'";:,&lt;.&gt;/?</tt>). For special (braindead?) purposes the bot can also be made assume that all lines are addressed to it.</p></div>
 <div class="dlist"><dl>
@@ -2219,10 +1971,8 @@ cellspacing="0" cellpadding="4">
 </dd>
 </dl></div>
 <div class="paragraph"><p>See also: <a href="#config_reply">Configuration: reply</a>.</p></div>
-</div>
-<div class="sect3">
 <h4 id="_keeping_the_primary_nick">4.4.5. Keeping the primary nick</h4>
-<div class="paragraph"><p>Like other bots, Supybot can be configured to try and keep the primary nick using the <span class="green">NickCapture</span> plugin. This is primarily useful in networks with no NickServ support.</p></div>
+<div class="paragraph"><p>Like other bots, Supybot can be configured to try and keep the primary nick using the <span style="color:green;">NickCapture</span> plugin. This is primarily useful in networks with no NickServ support.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <tt>load NickCapture</tt>
@@ -2249,20 +1999,13 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_owner_commands">4.5. Owner commands</h3>
+<h3 id="_owner_commands">4.5. Owner commands</h3><div style="clear:left"></div>
 <div class="paragraph"><p><tt>owner announce &lt;text&gt;</tt> - send <tt>text</tt> to all channels the bot is on.</p></div>
 <div class="paragraph"><p><tt>owner ircquote &lt;raw&gt;</tt> - send <tt>raw</tt> as-is to the server. You need to know your way around <a href="http://www.faqs.org/rfcs/rfc1459.html">RFC1459</a> pretty well to use this.</p></div>
 </div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="_user_commands">5. User commands</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="searching-history">5.1. Searching the history</h3>
+<h3 id="searching-history">5.1. Searching the history</h3><div style="clear:left"></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <tt>url last [channel] [--{from,with,without,near,proto} value] [--nolimit]</tt>
@@ -2285,10 +2028,7 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect2">
-<h3 id="_useful_plugins">5.2. Useful plugins</h3>
-<div class="sect3">
+<h3 id="_useful_plugins">5.2. Useful plugins</h3><div style="clear:left"></div>
 <h4 id="plugin_alias">5.2.1. Alias</h4>
 <div class="paragraph"><p>Alias is one of the most powerful plugins available in Supybot. It allows you to set up <em>shortcuts</em> to other commands. When put together with command nesting, and the ability to provide arbitrary number of required and optional arguments to each alias, this becomes a very versatile feature. The main commands in this plugin are <tt>add</tt> and <tt>remove</tt> to add and remove aliases:</p></div>
 <div class="dlist"><dl>
@@ -2401,8 +2141,6 @@ cellspacing="0" cellpadding="4">
 </div></div>
 <div class="paragraph"><p>Note what is happening here. First, we quote the entire content of the alias as an argument, to get string parsing going. We escape the quote character before bla, to get a literal quote character into the alias string. We then triple-escape the second quote character. <tt>\\</tt> gets a literal backslash into our alias string, while the following <tt>\"</tt> gets a literal quote. We do the same thing for the closing quotation around <tt>moo</tt>. Finally, we stick in another literal quote to finish quoting the argument to echo, and at the end, close the exterior quotation pair.</p></div>
 <div class="paragraph"><p>Quite a bit of detail here - but necessary to know if you&#8217;re going to be using aliases to perform complex tasks.</p></div>
-</div>
-<div class="sect3">
 <h4 id="plugin_anonymous">5.2.2. Anonymous</h4>
 <div class="paragraph"><p>Allows you to provide users a way to chat on a channel anonymously (eg. only the bot owner(s) know via logs who are talking).</p></div>
 <div class="dlist"><dl>
@@ -2491,10 +2229,8 @@ cellspacing="0" cellpadding="4">
 </tbody>
 </table>
 </div>
-</div>
-<div class="sect3">
 <h4 id="plugin_dict">5.2.3. Dict</h4>
-<div class="paragraph"><p><span class="green">Dict</span> provides dictionary functionality using dict.org. You can also use a local dictd server.</p></div>
+<div class="paragraph"><p><span style="color:green;">Dict</span> provides dictionary functionality using dict.org. You can also use a local dictd server.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <tt>dict [dictionary] &lt;word&gt;</tt>
@@ -2537,8 +2273,6 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="plugin_later">5.2.4. Later</h4>
 <div class="paragraph"><p>This is a nick-based replacement for NoteServ and the likes. Simply put, you give the bot a note to deliver to a nick (or wildcard) the next time it sees a matching nick. In other words, this can be used to deliver messages to people who are not registered to the bot. Naturally that is not a very safe method of communicating.</p></div>
 <div class="dlist"><dl>
@@ -2575,8 +2309,6 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="plugin_moobotfactoids">5.2.5. MoobotFactoids</h4>
 <div class="paragraph"><p>MoobotFactoids implements nifty factoids.</p></div>
 <div class="listingblock">
@@ -2605,10 +2337,8 @@ load moobotfactoids</tt></pre>
 <pre><tt>NoSuitableDatabase: No suitable databases were found.  Suitable databases include sqlite.
 Error: You need to have PySQLite installed to use this plugin.  Download it at &lt;http://pysqlite.org/&gt;</tt></pre>
 </div></div>
-</div>
-<div class="sect3">
 <h4 id="plugin_seen">5.2.6. Seen</h4>
-<div class="paragraph"><p>The <span class="green">Seen</span> plugin keeps track of last channel/nick/user activity. Most typical use is asking the bot when a given user was last seen chatting on a channel.</p></div>
+<div class="paragraph"><p>The <span style="color:green;">Seen</span> plugin keeps track of last channel/nick/user activity. Most typical use is asking the bot when a given user was last seen chatting on a channel.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <tt>seen any [channel] [--user &lt;user&gt;] [nick]</tt>
@@ -2637,10 +2367,8 @@ Error: You need to have PySQLite installed to use this plugin.  Download it at &
 </dl></div>
 <div class="paragraph"><p><tt>seen user [channel] &lt;user&gt;</tt>:
         Ditto, except use a user name, disregarding what nick the said user had.</p></div>
-</div>
-<div class="sect3">
 <h4 id="plugin_web">5.2.7. Web</h4>
-<div class="paragraph"><p>The <span class="green">Web</span> plugin contains some useful WWW-related functionality, such as fetching titles for URLs users paste on the channel.</p></div>
+<div class="paragraph"><p>The <span style="color:green;">Web</span> plugin contains some useful WWW-related functionality, such as fetching titles for URLs users paste on the channel.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
 <tt>doctype &lt;url&gt;</tt>
@@ -2764,13 +2492,9 @@ cellspacing="0" cellpadding="4">
 </tbody>
 </table>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_entertainment">5.3. Entertainment</h3>
-<div class="sect3">
+<h3 id="_entertainment">5.3. Entertainment</h3><div style="clear:left"></div>
 <h4 id="plugin_channelstats">5.3.1. ChannelStats</h4>
-<div class="paragraph"><p><span class="green">ChannelStats</span> provides channel/registered user statistics (statistics as in <em>large numbers</em>).</p></div>
+<div class="paragraph"><p><span style="color:green;">ChannelStats</span> provides channel/registered user statistics (statistics as in <em>large numbers</em>).</p></div>
 <div class="paragraph"><p><tt>channelstats [channel]</tt>:
         Show statistics for <tt>channel</tt>: messages, characters, words, smileys, frowns, actions, joins, parts, quits, kicks, mode changes, and topic changes.</p></div>
 <div class="paragraph"><p><tt>stats [channel] [user]</tt>:
@@ -2841,8 +2565,6 @@ cellspacing="0" cellpadding="4">
 </tbody>
 </table>
 </div>
-</div>
-<div class="sect3">
 <h4 id="plugin_games">5.3.2. Games</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -2886,8 +2608,6 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="plugin_nickometer">5.3.3. Nickometer</h4>
 <div class="paragraph"><p><tt>nickometer [nick]</tt>:
         Give an objective evaluation on the lameness of <tt>nick</tt>, or your nick if not provided. This is similar to the same command in blootbot.</p></div>
@@ -2896,8 +2616,6 @@ cellspacing="0" cellpadding="4">
 <div class="content">
 <pre><tt>The "lame nick-o-meter" reading for "1eEteStWaReZL0rD[69X~" is 99.98%.</tt></pre>
 </div></div>
-</div>
-<div class="sect3">
 <h4 id="plugin_quote">5.3.4. Quote</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -2957,8 +2675,6 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
-</div>
-<div class="sect3">
 <h4 id="plugin_quotegrabs">5.3.5. QuoteGrabs</h4>
 <div class="paragraph"><p>This plugin allows users to <em>grab</em> the most recent line of another nick as a quote.</p></div>
 <div class="dlist"><dl>
@@ -3080,11 +2796,8 @@ cellspacing="0" cellpadding="4">
 </tbody>
 </table>
 </div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_third_party_plugins">5.4. Third-party plugins</h3>
-<div class="sect3">
+<h3 id="_third_party_plugins">5.4. Third-party plugins</h3><div style="clear:left"></div>
+<div class="paragraph"><p>This section lists some useful third-party plugins. See <a href="#installing_plugins">Installing additional plugins</a> for how to install third-party plugins. If you feel something is missing from this session, please e-mail the author.</p></div>
 <h4 id="plugin_messageparser">5.4.1. MessageParser</h4>
 <div class="listingblock">
 <div class="content">
@@ -3096,15 +2809,16 @@ cellspacing="0" cellpadding="4">
 </div></div>
 <div class="paragraph"><p>MessageParser allows adding regular expression triggers that can match any line. Multiple triggers can match a single line, and the same trigger can match several times. This plugin is a very useful addition for support channels.</p></div>
 <div class="paragraph"><p>Visit the <a href="http://sourceforge.net/apps/mediawiki/gribble/index.php?title=MessageParser_Plugin">MessageParser wiki</a> for more information.</p></div>
-</div>
-<div class="sect3">
 <h4 id="plugin_twitter">5.4.2. Twitter</h4>
 <div class="paragraph"><p>Robert Bergermann has written a <a href="https://github.com/rbbremen/Twitter4Supybot">Twitter plugin</a> for Supybot. See <a href="https://github.com/rbbremen/Twitter4Supybot/tree/master/Twitter#readme">the readme</a> for more information.</p></div>
+<h4 id="plugin_weather">5.4.3. Weather</h4>
+<div class="listingblock">
+<div class="content">
+<pre><tt>&lt;user&gt; weather berlin, germany
+&lt;supybot&gt; The current temperature in Prenzlauer Berg, Berlin, Germany is -7.1°C (6:13 PM CET on February 01, 2012). Conditions: Clear. Humidity: 25%. Dew Point: -24.0°C. Windchill: -12.0°C. Pressure: 30.66 in 1038.1 hPa (Rising).</tt></pre>
+</div></div>
+<div class="paragraph"><p>James McCoy has written a <a href="https://github.com/jamessan/Supybot-Weather">Weather plugin</a>.</p></div>
 </div>
-</div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="_caveats">6. Caveats</h2>
 <div class="sectionbody">
 <div class="paragraph"><p>This is a list of issues I have not yet figured out how to do, or there simply isn&#8217;t a way.</p></div>
@@ -3173,13 +2887,10 @@ Capabilities/anticapabilities for commands with spaces in them are not supported
 </li>
 </ul></div>
 </div>
-</div>
-<div class="sect1">
 <h2 id="_tips">7. Tips</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_how_to_emulate_blootbot_cmds_using_moobotfactoids">7.1. How to emulate blootbot CMDs using MoobotFactoids</h3>
-<div class="paragraph"><p>Thanks to Tobias "beardy" Rosenqvist for the tip!</p></div>
+<h3 id="_how_to_emulate_blootbot_cmds_using_moobotfactoids">7.1. How to emulate blootbot CMDs using MoobotFactoids</h3><div style="clear:left"></div>
+<div class="paragraph"><p><span style="background-color:yellow;">Thanks to Tobias "beardy" Rosenqvist for the tip!</span></p></div>
 <div class="paragraph"><p>We try to make a command factoid, like we are used to with blootbot:</p></div>
 <div class="listingblock">
 <div class="content">
@@ -3215,19 +2926,15 @@ is found in the Reply plugin), here you also see a use of a nested command:</p><
 &lt;user&gt; givefruit someone
  * bot gives a pear to someone</tt></pre>
 </div></div>
-</div>
-<div class="sect2">
-<h3 id="_tidier_bot_replies">7.2. Tidier bot replies</h3>
+<h3 id="_tidier_bot_replies">7.2. Tidier bot replies</h3><div style="clear:left"></div>
 <div class="paragraph"><p>I don&#8217;t personally like the default Supybot replies: I hate the nick prefix and the way too verbose <em>The operation succeeded.</em>.</p></div>
 <div class="paragraph"><p>Fortunately there are plenty of settings to configure how Supybot replies. These can be listed with <tt>config reply</tt> and <tt>config replies</tt>.</p></div>
 <div class="paragraph"><p>The <tt>reply</tt> items determine how Supybot acts, and <tt>replies</tt> contains some messages it uses. I prefer:</p></div>
 <div class="paragraph"><p><tt>config reply.withNickPrefix False</tt></p></div>
 <div class="paragraph"><p><tt>config replies.success OK</tt></p></div>
 <div class="paragraph"><p><tt>config reply.error.inPrivate True</tt>.</p></div>
-</div>
-<div class="sect2">
-<h3 id="_more_on_nested_commands">7.3. More on nested commands</h3>
-<div class="paragraph"><p>Thanks to Tobias "beardy" Rosenqvist for the tip!</p></div>
+<h3 id="_more_on_nested_commands">7.3. More on nested commands</h3><div style="clear:left"></div>
+<div class="paragraph"><p><span style="background-color:yellow;">Thanks to Tobias "beardy" Rosenqvist for the tip!</span></p></div>
 <div class="paragraph"><p>For those familliar with unix shells, (bash in particular), nested commands can be compared to doing command substitution, as in <tt>$(command)</tt>.</p></div>
 <div class="paragraph"><p>Nested commands are by default enclosed by square brackets (<tt>[]</tt>). The <tt>commands.nested.brackets</tt> configuration variable can be used to set these to <tt>&lt;&gt;</tt>, <tt>{}</tt>, or <tt>()</tt>.</p></div>
 <div class="listingblock">
@@ -3243,14 +2950,9 @@ is found in the Reply plugin), here you also see a use of a nested command:</p><
 &lt;bot&gt; The title of the Supybot website is: Welcome to Supybot.com! Supybot Website</tt></pre>
 </div></div>
 </div>
-</div>
-</div>
-<div class="sect1">
 <h2 id="_reference">8. Reference</h2>
 <div class="sectionbody">
-<div class="sect2">
-<h3 id="_configuration_2">8.1. Configuration</h3>
-<div class="sect3">
+<h3 id="_configuration_2">8.1. Configuration</h3><div style="clear:left"></div>
 <h4 id="config_reply">8.1.1. reply</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -3430,10 +3132,7 @@ Whether to use notices instead of private messages.
 </p>
 </dd>
 </dl></div>
-</div>
-</div>
-<div class="sect2">
-<h3 id="_directory_tree">8.2. Directory tree</h3>
+<h3 id="_directory_tree">8.2. Directory tree</h3><div style="clear:left"></div>
 <div class="paragraph"><p>This section contains list of the directories and files supybot uses, and what they are for.</p></div>
 <div class="admonitionblock">
 <table><tr>
@@ -3535,13 +3234,11 @@ Whether to use notices instead of private messages.
 </dl></div>
 </div>
 </div>
-</div>
-</div>
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version v0.0.4-1-g917a31e+dirty<br />
-Last updated 2011-10-02 10:35:42 EEST
+Version v0.0.4-4-gc376014+dirty<br />
+Last updated 2012-02-01 19:14:55 EEST
 </div>
 </div>
 </body>
