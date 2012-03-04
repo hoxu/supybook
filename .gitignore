@@ -1,5 +1,5 @@
-*.html
-*.pdf
-*.xml
+index.html
+index.pdf
+index.xml
 supybook-*.tar.gz
 Makefile.local

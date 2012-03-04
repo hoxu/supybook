@@ -1,4 +1,4 @@
-PARAMS=-a toc -a toclevels=3 -a date=$(shell date +%Y-%m-%d) -a numbered -d book
+PARAMS=-a toc -a toclevels=3 -a date=$(shell date +%Y-%m-%d) -a numbered -a docinfo -d book
 ifdef VERSION
 REVISION=$(VERSION)
 endif
