@@ -1072,6 +1072,25 @@ randomGrabber.minimumWords,3,"Ditto, but for words."
 
 This section lists some useful third-party plugins. See <<installing_plugins,Installing additional plugins>> for how to install third-party plugins. If you feel something is missing from this session, please e-mail the author.
 
+[[plugin_meetbot]]
+==== MeetBot ====
+
+MeetBot assists in running meetings and taking notes. One can start meetings, set meeting topics, document agreement, add info/action/idea/help/link items to the meeting minutes etc. When the meeting is ended, a summary webpage is generated and the link to summary and full logs pasted to the channel.
+
+Visit http://wiki.debian.org/MeetBot[MeetBot wiki page] and https://altinukshini.wordpress.com/2011/09/10/how-to-setup-meetbot/[a tutorial] for more information.
+
+The installation and configuration is not quite straight-forward. After getting the files, I recommend doing the following:
+
+----
+config plugins.meetbot.enableSupybotBasedConfig True
+reload MeetBot
+config list plugins.meetbot
+config plugins.meetbot.logFileDir /home/supybot/public_html/meetings/
+config plugins.meetbot.logUrlPrefix http://hostname/~supybot/meetings/
+----
+
+See MeetBot/ircmeeting/meeting.py for the configuration items and their documentation.
+
 [[plugin_messageparser]]
 ==== MessageParser ====
 
