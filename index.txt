@@ -547,6 +547,20 @@ Key,Default,Description
 
 See also <<capabilities,Capabilities>>.
 
+[[channel-lobotomy]]
+==== Silencing the bot ====
+
+The bot can be silenced on some channels by using the lobotomy commands.
+
+`lobotomy add [channel]`::
+	Make the bot silent and ignore all requests in the `channel`.
+
+`lobotomy list`::
+	List channels the bot is silent on.
+
+`lobotomy remove [channel]`::
+	Break silence on a channel.
+
 === Users ===
 
 Related plugins: [green]#Users#.
