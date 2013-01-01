@@ -1125,6 +1125,8 @@ Visit the http://sourceforge.net/apps/mediawiki/gribble/index.php?title=MessageP
 
 Robert Bergermann has written a https://github.com/rbbremen/Twitter4Supybot[Twitter plugin] for Supybot. See https://github.com/rbbremen/Twitter4Supybot/tree/master/Twitter#readme[the readme] for more information.
 
+Valentin Lorentz, the author of Limnoria (supybot fork), has written https://github.com/ProgVal/Supybot-plugins/tree/master/Twitter[an advanced Twitter plugin] for Supybot.
+
 [[plugin_weather]]
 ==== Weather ====
 
