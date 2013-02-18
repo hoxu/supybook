@@ -612,19 +612,24 @@ NOTE: If users knowing each others' nicks is an issue, they could come up with d
 
 ==== Manipulating hostmasks ====
 
-`user hostmask add` - add your current hostmask. Obviously this makes only sense after identify.
+`user hostmask add`::
+	Add your current hostmask. Obviously this makes only sense after identify.
 
-`user hostmask add [name] [hostmask] [password]` - add hostmask for another user. If not owner, password must be given.
+`user hostmask add [name] [hostmask] [password]`::
+	Add hostmask for another user. If not owner, password must be given.
 
-`user hostmask list [name]` - show hostmasks defined for the given user, or current user if none.
+`user hostmask list [name]`::
+	Show hostmasks defined for the given user, or current user if none.
 
-`user hostmask remove <name> <hostmask> [password]`
+`user hostmask remove <name> <hostmask> [password]`::
+	Remove the given `hostmask` from `name`.
 
 NOTE: There is no way to add network-specific hostmasks.
 
 ==== Listing users ====
 
-`user list [glob]` - list registered users. Note that the list of users is global across networks.
+`user list [glob]`::
+	List registered users, matching `glob` pattern if given. Note that the list of users is global across networks.
 
 ==== Deleting users ====
 
