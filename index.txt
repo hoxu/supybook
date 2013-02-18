@@ -583,6 +583,8 @@ NOTE: If users knowing each others' nicks is an issue, they could come up with d
 
 `user hostmask add [name] [hostmask] [password]` - add hostmask for another user. If not owner, password must be given.
 
+`user hostmask list [name]` - show hostmasks defined for the given user, or current user if none.
+
 `user hostmask remove <name> <hostmask> [password]`
 
 NOTE: There is no way to add network-specific hostmasks.
