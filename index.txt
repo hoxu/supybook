@@ -222,6 +222,39 @@ Related plugins: [green]#Network, Services#.
 `network connect [--ssl] <network> [<host[:port]>] [password]`::
 	Connect to `network`. `host` must be provided if the network is new or has no servers defined.
 
+===== SSL =====
+
+If you try connecting using SSL right away, you get the following error:
+
+----
+WARNING 2013-02-18T18:27:25 The Socket driver can not connect to SSL servers.
+        Try the Twisted driver instead.
+----
+
+To use SSL, you need to install the twisted socket driver. On Debian you can install python-twisted and python-twisted-names. After that run `config drivers.module Twisted` to change the driver.
+
+WARNING: Due to a bug in python-twisted-names, after you change the network driver to Twisted, *even non-SSL servers* having AAAA records stop working. Freenode is a good example of this serious problem.
+
+===== SSL on Freenode =====
+
+----
+config drivers.module Twisted
+network connect --ssl freenode chat.us.freenode.net:6697
+network driver freenode
+----
+
+.Another pitfall with using supybot SSL on Freenode
+----
+WARNING 2013-02-18T18:32:12 Error connecting to chat.freenode.net:6697: An
+        error occurred while connecting: -9: Unknown error 4294967287.
+----
+
+Unfortunately https://twistedmatrix.com/trac/ticket/4212[python-twisted-names can not handle servers with AAAA records] (eg. chat.freenode.net), and spits out that illegible error. The workaround is to either use a direct IP or a server hostname that does not have AAAA records, for example chat.us.freenode.net (see https://freenode.net/irc_servers.shtml[Freenode server list] for non-IPv6 ones).
+
+That's the rumour at least! Last time I personally tried, I could not successfully establish an SSL connection to Freenode.
+
+If you want to push your luck, go ahead and try, two blog posts available via web.archive.org may be of help: http://web.archive.org/web/20110408115121/http://asininetech.com/2011/03/30/howto-use-ssl-with-supybot/[HOWTO: Use SSL with Supybot], http://web.archive.org/web/20110409011606/http://pebkac.homelinux.net/2010/01/30/supybot-and-ssl-with-freenode/[supybot and SSL with freenode]. If you get it working, let me know!
+
 ==== Reconnecting ====
 
 `reconnect [network] [message]`::
