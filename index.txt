@@ -913,6 +913,31 @@ NoSuitableDatabase: No suitable databases were found.  Suitable databases includ
 Error: You need to have PySQLite installed to use this plugin.  Download it at <http://pysqlite.org/>
 ----
 
+[[plugin_scheduler]]
+==== Scheduler ====
+
+[green]#Scheduler# allows you to run commands at a later time.
+
+----
+<user> !scheduler add [seconds 1h] echo $who: ping
+<bot> OK  Event #631 added.
+<bot> user: ping
+----
+
+`scheduler add <seconds> <command>`::
+	Add a `command` to be run `seconds` seconds later. For the `seconds` parameter you probably want to use `seconds` command available in the [green]#Time# plugin, eg. `scheduler add [seconds 1d 3h] echo $who: give feedback on supybook`.
+
+`scheduler list`::
+	Lists scheduled events, with their `id` for removal. Unfortunately it does not show much time is left until each event.
+
+`scheduler remove <id>`::
+	Removes event `id`. `id` can be a numerical value as given by `scheduler add` and `scheduler list`, or a `name` that was given via `scheduler repeat`.
+
+`scheduler repeat <name> <seconds> <command>`::
+	Like `scheduler add`, but adds a repeating command, and allows giving a name for it. The first trigger happens immediately, and then after every `seconds`.
+
+There are two quirks with this plugin. First one is that `scheduler list` does not display how much time is left until each event. The second one is the weird inconsistency between `scheduler add` and `scheduler repeat` - the latter allows giving a name for the event, unlike the first one.
+
 [[plugin_seen]]
 ==== Seen ====
 
