@@ -89,6 +89,8 @@ Supybot allows nested commands, in other words, you can pass the result of a com
 
 Obviously, that wasn't very neat. They could've included a `config reset <key>` command instead, for example. But I'm sure you can figure out *something* more useful to do with this, as a homework ;-)
 
+See the <<plugin_time,Time>> and <<plugin_scheduler,Scheduler>> plugins for some examples.
+
 === Plugins ===
 
 Pretty much everything in Supybot is a plugin. Most commands you use belong to a plugin. If two plugins provide the same command, then you need to prefix the command with the plugin name. For example, the `ignore list` command yields the following output:
