@@ -554,8 +554,8 @@ footnotes: function () {
 <h1>Supybook</h1>
 <span id="author">Heikki Hokkanen</span><br />
 <span id="email"><tt>&lt;<a href="mailto:hoxu@users.sf.net">hoxu@users.sf.net</a>&gt;</tt></span><br />
-<span id="revnumber">version v0.0.4-10-g5d3a8bf+dirty,</span>
-<span id="revdate">2013-01-01</span>
+<span id="revnumber">version v0.0.5,</span>
+<span id="revdate">2013-02-18</span>
 <script type="text/javascript">
 
   var _gaq = _gaq || [];
@@ -577,7 +577,7 @@ footnotes: function () {
 <div id="content">
 <div id="preamble">
 <div class="sectionbody">
-<div class="paragraph"><p>v0.0.4-10-g5d3a8bf+dirty</p></div>
+<div class="paragraph"><p>v0.0.5</p></div>
 </div>
 </div>
 <h2 id="_preface">1. Preface</h2>
@@ -682,6 +682,7 @@ $ supybot configFile</tt></pre>
 <div class="paragraph"><p>Supybot allows nested commands, in other words, you can pass the result of a command to another command as a parameter. What does this allow then, though, apart from the obvious bragging rights? For example, if you want to restore a configuration entry to the default value, you can type:</p></div>
 <div class="paragraph"><p><tt>config reply.withNickPrefix [config default reply.withNickPrefix]</tt></p></div>
 <div class="paragraph"><p>Obviously, that wasn&#8217;t very neat. They could&#8217;ve included a <tt>config reset &lt;key&gt;</tt> command instead, for example. But I&#8217;m sure you can figure out <strong>something</strong> more useful to do with this, as a homework ;-)</p></div>
+<div class="paragraph"><p>See the <a href="#plugin_time">Time</a> and <a href="#plugin_scheduler">Scheduler</a> plugins for some examples.</p></div>
 <h3 id="_plugins">3.2. Plugins</h3><div style="clear:left"></div>
 <div class="paragraph"><p>Pretty much everything in Supybot is a plugin. Most commands you use belong to a plugin. If two plugins provide the same command, then you need to prefix the command with the plugin name. For example, the <tt>ignore list</tt> command yields the following output:</p></div>
 <div class="listingblock">
@@ -957,6 +958,38 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 </dl></div>
+<h5 id="_ssl">SSL</h5>
+<div class="paragraph"><p>If you try connecting using SSL right away, you get the following error:</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>WARNING 2013-02-18T18:27:25 The Socket driver can not connect to SSL servers.
+        Try the Twisted driver instead.</tt></pre>
+</div></div>
+<div class="paragraph"><p>To use SSL, you need to install the twisted socket driver. On Debian you can install python-twisted and python-twisted-names. After that run <tt>config drivers.module Twisted</tt> to change the driver.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Warning</div>
+</td>
+<td class="content">Due to a bug in python-twisted-names, after you change the network driver to Twisted, <strong>even non-SSL servers</strong> having AAAA records stop working. Freenode is a good example of this serious problem.</td>
+</tr></table>
+</div>
+<h5 id="_ssl_on_freenode">SSL on Freenode</h5>
+<div class="listingblock">
+<div class="content">
+<pre><tt>config drivers.module Twisted
+network connect --ssl freenode chat.us.freenode.net:6697
+network driver freenode</tt></pre>
+</div></div>
+<div class="listingblock">
+<div class="title">Another pitfall with using supybot SSL on Freenode</div>
+<div class="content">
+<pre><tt>WARNING 2013-02-18T18:32:12 Error connecting to chat.freenode.net:6697: An
+        error occurred while connecting: -9: Unknown error 4294967287.</tt></pre>
+</div></div>
+<div class="paragraph"><p>Unfortunately <a href="https://twistedmatrix.com/trac/ticket/4212">python-twisted-names can not handle servers with AAAA records</a> (eg. chat.freenode.net), and spits out that illegible error. The workaround is to either use a direct IP or a server hostname that does not have AAAA records, for example chat.us.freenode.net (see <a href="https://freenode.net/irc_servers.shtml">Freenode server list</a> for non-IPv6 ones).</p></div>
+<div class="paragraph"><p>That&#8217;s the rumour at least! Last time I personally tried, I could not successfully establish an SSL connection to Freenode.</p></div>
+<div class="paragraph"><p>If you want to push your luck, go ahead and try, two blog posts available via web.archive.org may be of help: <a href="http://web.archive.org/web/20110408115121/http://asininetech.com/2011/03/30/howto-use-ssl-with-supybot/">HOWTO: Use SSL with Supybot</a>, <a href="http://web.archive.org/web/20110409011606/http://pebkac.homelinux.net/2010/01/30/supybot-and-ssl-with-freenode/">supybot and SSL with freenode</a>. If you get it working, let me know!</p></div>
 <h4 id="_reconnecting">4.1.2. Reconnecting</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -1831,9 +1864,40 @@ cellspacing="0" cellpadding="4">
 <h4 id="_adding_a_new_user">4.3.1. Adding a new user</h4>
 <div class="paragraph"><p><tt>user register &lt;name&gt; &lt;password&gt;</tt></p></div>
 <h4 id="_manipulating_hostmasks">4.3.2. Manipulating hostmasks</h4>
-<div class="paragraph"><p><tt>user hostmask add</tt> - add your current hostmask. Obviously this makes only sense after identify.</p></div>
-<div class="paragraph"><p><tt>user hostmask add [name] [hostmask] [password]</tt> - add hostmask for another user. If not owner, password must be given.</p></div>
-<div class="paragraph"><p><tt>user hostmask remove &lt;name&gt; &lt;hostmask&gt; [password]</tt></p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<tt>user hostmask add</tt>
+</dt>
+<dd>
+<p>
+        Add your current hostmask. Obviously this makes only sense after identify.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>user hostmask add [name] [hostmask] [password]</tt>
+</dt>
+<dd>
+<p>
+        Add hostmask for another user. If not owner, password must be given.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>user hostmask list [name]</tt>
+</dt>
+<dd>
+<p>
+        Show hostmasks defined for the given user, or current user if none.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>user hostmask remove &lt;name&gt; &lt;hostmask&gt; [password]</tt>
+</dt>
+<dd>
+<p>
+        Remove the given <tt>hostmask</tt> from <tt>name</tt>.
+</p>
+</dd>
+</dl></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -1843,7 +1907,16 @@ cellspacing="0" cellpadding="4">
 </tr></table>
 </div>
 <h4 id="_listing_users">4.3.3. Listing users</h4>
-<div class="paragraph"><p><tt>user list [glob]</tt> - list registered users. Note that the list of users is global across networks.</p></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<tt>user list [glob]</tt>
+</dt>
+<dd>
+<p>
+        List registered users, matching <tt>glob</tt> pattern if given. Note that the list of users is global across networks.
+</p>
+</dd>
+</dl></div>
 <h4 id="_deleting_users">4.3.4. Deleting users</h4>
 <div class="paragraph"><p><tt>user unregister &lt;name&gt; [password]</tt></p></div>
 <h4 id="_changing_password">4.3.5. Changing password</h4>
@@ -2378,7 +2451,50 @@ load moobotfactoids</tt></pre>
 <pre><tt>NoSuitableDatabase: No suitable databases were found.  Suitable databases include sqlite.
 Error: You need to have PySQLite installed to use this plugin.  Download it at &lt;http://pysqlite.org/&gt;</tt></pre>
 </div></div>
-<h4 id="plugin_seen">5.2.6. Seen</h4>
+<h4 id="plugin_scheduler">5.2.6. Scheduler</h4>
+<div class="paragraph"><p><span style="color:green;">Scheduler</span> allows you to run commands at a later time.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>&lt;user&gt; !scheduler add [seconds 1h] echo $who: ping
+&lt;bot&gt; OK  Event #631 added.
+&lt;bot&gt; user: ping</tt></pre>
+</div></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<tt>scheduler add &lt;seconds&gt; &lt;command&gt;</tt>
+</dt>
+<dd>
+<p>
+        Add a <tt>command</tt> to be run <tt>seconds</tt> seconds later. For the <tt>seconds</tt> parameter you probably want to use <tt>seconds</tt> command available in the <span style="color:green;">Time</span> plugin, eg. <tt>scheduler add [seconds 1d 3h] echo $who: give feedback on supybook</tt>.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>scheduler list</tt>
+</dt>
+<dd>
+<p>
+        Lists scheduled events, with their <tt>id</tt> for removal. Unfortunately it does not show much time is left until each event.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>scheduler remove &lt;id&gt;</tt>
+</dt>
+<dd>
+<p>
+        Removes event <tt>id</tt>. <tt>id</tt> can be a numerical value as given by <tt>scheduler add</tt> and <tt>scheduler list</tt>, or a <tt>name</tt> that was given via <tt>scheduler repeat</tt>.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>scheduler repeat &lt;name&gt; &lt;seconds&gt; &lt;command&gt;</tt>
+</dt>
+<dd>
+<p>
+        Like <tt>scheduler add</tt>, but adds a repeating command, and allows giving a name for it. The first trigger happens immediately, and then after every <tt>seconds</tt>.
+</p>
+</dd>
+</dl></div>
+<div class="paragraph"><p>There are two quirks with this plugin. First one is that <tt>scheduler list</tt> does not display how much time is left until each event. The second one is the weird inconsistency between <tt>scheduler add</tt> and <tt>scheduler repeat</tt> - the latter allows giving a name for the event, unlike the first one.</p></div>
+<h4 id="plugin_seen">5.2.7. Seen</h4>
 <div class="paragraph"><p>The <span style="color:green;">Seen</span> plugin keeps track of last channel/nick/user activity. Most typical use is asking the bot when a given user was last seen chatting on a channel.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -2408,7 +2524,85 @@ Error: You need to have PySQLite installed to use this plugin.  Download it at &
 </dl></div>
 <div class="paragraph"><p><tt>seen user [channel] &lt;user&gt;</tt>:
         Ditto, except use a user name, disregarding what nick the said user had.</p></div>
-<h4 id="plugin_web">5.2.7. Web</h4>
+<h4 id="plugin_time">5.2.8. Time</h4>
+<div class="paragraph"><p>The <span style="color:green;">Time</span> plugin is an utility plugin for basic time-related tasks. Mostly useful when used in nested commands with other commands.</p></div>
+<div class="listingblock">
+<div class="content">
+<pre><tt>&lt;user&gt; ctime [time at "Today is 25 of September of 2003, exactly at 10:49:41"]
+&lt;bot&gt; Thu Sep 25 10:49:41 2003
+
+&lt;user&gt; time ctime 0
+&lt;bot&gt; Thu Jan  1 00:00:00 1970
+
+&lt;user&gt; time ctime
+&lt;bot&gt; Mon Feb 18 17:27:51 2013
+
+&lt;user&gt; time seconds 1d 3h
+&lt;bot&gt; 97200
+
+&lt;user&gt; time elapsed 97200
+&lt;bot&gt; 1 day, 3 hours, and 0 seconds
+
+&lt;user&gt; time time %Y-%m-%d 0
+&lt;bot&gt; 1970-01-01
+
+&lt;user&gt; time until 2015-01-01
+&lt;bot&gt; 58860661
+
+&lt;user&gt; time elapsed [time until 2015-01-01]
+&lt;bot&gt; 1 year, 45 weeks, 1 day, 6 hours, 10 minutes, and 38 seconds</tt></pre>
+</div></div>
+<div class="dlist"><dl>
+<dt class="hdlist1">
+<tt>time at &lt;time string&gt;</tt>
+</dt>
+<dd>
+<p>
+        Show unix epoch timestamp for <tt>time string</tt>. Supybot internally uses <a href="https://labix.org/python-dateutil">python-dateutil</a> for the parsing, so a wide variety of formats is supported. See section 8.3.4 for the examples.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>time ctime [seconds]</tt>
+</dt>
+<dd>
+<p>
+        Show formatted date for unix epoch timestamp <tt>seconds</tt>, for example <tt>Thu Jan  1 00:00:00 1970</tt>.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>time elapsed &lt;seconds&gt;</tt>
+</dt>
+<dd>
+<p>
+        Shows how many years/weeks/days/hours/minutes/seconds <tt>seconds</tt> equals to. Counterpart of <tt>time seconds</tt> below.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>time seconds [&lt;years&gt;y] [&lt;weeks&gt;w] [&lt;days&gt;d] [&lt;hours&gt;h] [&lt;minutes&gt;m] [&lt;seconds&gt;s]</tt>
+</dt>
+<dd>
+<p>
+        Convert given years/weeks/days/hours/minutes into seconds. Very useful with the <a href="#plugin_scheduler">Scheduler plugin</a>. I have hard time remembering that you can <strong>not</strong> have space after each number, though.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>time time [&lt;format&gt;] [&lt;seconds since epoch&gt;]</tt>
+</dt>
+<dd>
+<p>
+        Formats the given unix epoch timestamp in <tt>format</tt>, using python&#8217;s <a href="http://docs.python.org/2/library/time.html#time.strftime">time.strftime</a>.
+</p>
+</dd>
+<dt class="hdlist1">
+<tt>time until &lt;time string&gt;</tt>
+</dt>
+<dd>
+<p>
+        How many seconds are until <tt>time string</tt>. Same format as for <tt>time at</tt>. The given time can also be in the past, making the result negative.
+</p>
+</dd>
+</dl></div>
+<h4 id="plugin_web">5.2.9. Web</h4>
 <div class="paragraph"><p>The <span style="color:green;">Web</span> plugin contains some useful WWW-related functionality, such as fetching titles for URLs users paste on the channel.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
@@ -3292,8 +3486,8 @@ Whether to use notices instead of private messages.
 <div id="footnotes"><hr /></div>
 <div id="footer">
 <div id="footer-text">
-Version v0.0.4-10-g5d3a8bf+dirty<br />
-Last updated 2013-01-01 20:40:20 EEST
+Version v0.0.5<br />
+Last updated 2013-02-18 21:33:01 EEST
 </div>
 </div>
 </body>
