@@ -955,6 +955,55 @@ The [green]#Seen# plugin keeps track of last channel/nick/user activity. Most ty
 `seen user [channel] <user>`:
 	Ditto, except use a user name, disregarding what nick the said user had.
 
+[[plugin_time]]
+==== Time ====
+
+The [green]#Time# plugin is an utility plugin for basic time-related tasks. Mostly useful when used in nested commands with other commands.
+
+----
+<user> ctime [time at "Today is 25 of September of 2003, exactly at 10:49:41"]
+<bot> Thu Sep 25 10:49:41 2003
+
+<user> time ctime 0
+<bot> Thu Jan  1 00:00:00 1970
+
+<user> time ctime
+<bot> Mon Feb 18 17:27:51 2013
+
+<user> time seconds 1d 3h
+<bot> 97200
+
+<user> time elapsed 97200
+<bot> 1 day, 3 hours, and 0 seconds
+
+<user> time time %Y-%m-%d 0
+<bot> 1970-01-01
+
+<user> time until 2015-01-01
+<bot> 58860661
+
+<user> time elapsed [time until 2015-01-01]
+<bot> 1 year, 45 weeks, 1 day, 6 hours, 10 minutes, and 38 seconds
+----
+
+`time at <time string>`::
+	Show unix epoch timestamp for `time string`. Supybot internally uses https://labix.org/python-dateutil[python-dateutil] for the parsing, so a wide variety of formats is supported. See section 8.3.4 for the examples.
+
+`time ctime [seconds]`::
+	Show formatted date for unix epoch timestamp `seconds`, for example `Thu Jan  1 00:00:00 1970`.
+
+`time elapsed <seconds>`::
+	Shows how many years/weeks/days/hours/minutes/seconds `seconds` equals to. Counterpart of `time seconds` below.
+
+`time seconds [<years>y] [<weeks>w] [<days>d] [<hours>h] [<minutes>m] [<seconds>s]`::
+	Convert given years/weeks/days/hours/minutes into seconds. Very useful with the <<plugin_scheduler,Scheduler plugin>>. I have hard time remembering that you can *not* have space after each number, though.
+
+`time time [<format>] [<seconds since epoch>]`::
+	Formats the given unix epoch timestamp in `format`, using python's http://docs.python.org/2/library/time.html#time.strftime[time.strftime].
+
+`time until <time string>`::
+	How many seconds are until `time string`. Same format as for `time at`. The given time can also be in the past, making the result negative.
+
 [[plugin_web]]
 ==== Web ====
 
