@@ -1026,6 +1026,10 @@ The [green]#Time# plugin is an utility plugin for basic time-related tasks. Most
 
 <user> time elapsed [time until 2015-01-01]
 <bot> 1 year, 45 weeks, 1 day, 6 hours, 10 minutes, and 38 seconds
+
+<user> alias add timedelta "time elapsed [calc [time at $2] - [time at $1]]"
+<user> timedelta 2012-01-01 2013-02-23
+<bot> 1 year, 7 weeks, 5 days, 0 hours, and 0 seconds
 ----
 
 `time at <time string>`::
