@@ -769,7 +769,7 @@ Alias is one of the most powerful plugins available in Supybot. It allows you to
 As a simple example, let's say you want to set up a quick check to see if some website is down, using the downforeveryoneorjustme.com service. See the following example session for how you'd accomlish that:
 
 ----
-<user> alias add isitdown web title http://downforeveryoneorjustme.com/$1
+<user> alias add isitdown web title http://isitup.org/$1
 <supybot> The operation succeeded.
 <user> isitdown google.com
 <supybot> It's just you.
