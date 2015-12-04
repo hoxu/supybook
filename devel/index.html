@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
 <head>
 <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=UTF-8" />
-<meta name="generator" content="AsciiDoc 8.6.7" />
+<meta name="generator" content="AsciiDoc 8.6.9" />
 <title>Supybook</title>
 <style type="text/css">
 /* Shared CSS for AsciiDoc xhtml11 and html5 backends */
@@ -87,9 +87,15 @@ ul, ol, li > p {
 ul > li     { color: #aaa; }
 ul > li > * { color: black; }
 
-pre {
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
   padding: 0;
   margin: 0;
+}
+pre {
+  white-space: pre-wrap;
 }
 
 #author {
@@ -219,7 +225,7 @@ div.exampleblock > div.content {
 }
 
 div.imageblock div.content { padding-left: 0; }
-span.image img { border-style: none; }
+span.image img { border-style: none; vertical-align: text-bottom; }
 a.image:visited { color: white; }
 
 dl {
@@ -415,12 +421,6 @@ div.unbreakable { page-break-inside: avoid; }
  *
  * */
 
-tt {
-  font-family: "Courier New", Courier, monospace;
-  font-size: inherit;
-  color: navy;
-}
-
 div.tableblock {
   margin-top: 1.0em;
   margin-bottom: 1.5em;
@@ -453,12 +453,6 @@ div.tableblock > table[frame="vsides"] {
  * html5 specific
  *
  * */
-
-.monospaced {
-  font-family: "Courier New", Courier, monospace;
-  font-size: inherit;
-  color: navy;
-}
 
 table.tableblock {
   margin-top: 1.0em;
@@ -539,6 +533,8 @@ body.manpage div.sectionbody {
 @media print {
   body.manpage div#toc { display: none; }
 }
+
+
 </style>
 <script type="text/javascript">
 /*<![CDATA[*/
@@ -752,9 +748,9 @@ asciidoc.install(3);
 <div id="header">
 <h1>Supybook</h1>
 <span id="author">Heikki Hokkanen</span><br />
-<span id="email"><tt>&lt;<a href="mailto:hoxu@users.sf.net">hoxu@users.sf.net</a>&gt;</tt></span><br />
+<span id="email"><code>&lt;<a href="mailto:hoxu@users.sf.net">hoxu@users.sf.net</a>&gt;</code></span><br />
 <span id="revnumber">version v0.0.5-2-g992c213+dirty,</span>
-<span id="revdate">2013-12-27</span>
+<span id="revdate">2015-12-04</span>
 <div id="toc">
   <div id="toctitle">Table of Contents</div>
   <noscript><p><b>JavaScript must be enabled in your browser to display the table of contents.</b></p></noscript>
@@ -799,15 +795,15 @@ asciidoc.install(3);
 <h3 id="_conventions_used_in_this_document">1.3. Conventions used in this document</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>command &lt;name&gt; [value]</tt>
+<code>command &lt;name&gt; [value]</code>
 </dt>
 <dd>
 <p>
-        A command that takes <tt>name</tt> as a required parameter and <tt>value</tt> as an optional parameter.
+        A command that takes <code>name</code> as a required parameter and <code>value</code> as an optional parameter.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>command &lt;nick...&gt;</tt>
+<code>command &lt;nick...&gt;</code>
 </dt>
 <dd>
 <p>
@@ -815,11 +811,11 @@ asciidoc.install(3);
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>command [--{foo,bar}] &lt;value&gt;</tt>
+<code>command [--{foo,bar}] &lt;value&gt;</code>
 </dt>
 <dd>
 <p>
-        A command that takes two optional options as parameters, eg. <tt>--foo value</tt> and/or <tt>--bar value</tt>.
+        A command that takes two optional options as parameters, eg. <code>--foo value</code> and/or <code>--bar value</code>.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -838,7 +834,7 @@ asciidoc.install(3);
 </div>
 <div class="sect2">
 <h3 id="_how_to_give_feedback">1.5. How to give feedback</h3>
-<div class="paragraph"><p>If you spot an error, have suggestions or just want to tell me how much you love/hate the document, send e-mail to <a href="mailto:hoxu@users.sf.net">hoxu@users.sf.net</a>. Prefix the Subject with <tt>[supybook]</tt>.</p></div>
+<div class="paragraph"><p>If you spot an error, have suggestions or just want to tell me how much you love/hate the document, send e-mail to <a href="mailto:hoxu@users.sf.net">hoxu@users.sf.net</a>. Prefix the Subject with <code>[supybook]</code>.</p></div>
 </div>
 </div>
 </div>
@@ -847,37 +843,37 @@ asciidoc.install(3);
 <div class="sectionbody">
 <div class="sect2">
 <h3 id="_initial_configuration">2.1. Initial configuration</h3>
-<div class="paragraph"><p>Create a new directory (eg. <tt>mkdir ~/supybot</tt>) and run <tt>supybot-wizard</tt> in it. Follow the directions to get the bot initially configured.</p></div>
+<div class="paragraph"><p>Create a new directory (eg. <code>mkdir ~/supybot</code>) and run <code>supybot-wizard</code> in it. Follow the directions to get the bot initially configured.</p></div>
 <div class="paragraph"><p>Once you are ready with the wizard, I suggest you start the bot inside screen:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>$ screen
-$ supybot configFile</tt></pre>
+<pre><code>$ screen
+$ supybot configFile</code></pre>
 </div></div>
-<div class="paragraph"><p>This way you can attach to the screen later to see the messages it writes to stdout, while still running the bot in the background. Alternative is to run it in the daemon mode, <tt>supybot --daemon configFile</tt>.</p></div>
+<div class="paragraph"><p>This way you can attach to the screen later to see the messages it writes to stdout, while still running the bot in the background. Alternative is to run it in the daemon mode, <code>supybot --daemon configFile</code>.</p></div>
 <div class="paragraph"><p>You can set up a crontab to start the bot automatically, for example:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>$ crontab -e
-&gt; @reboot screen -d -m supybot /path/to/configFile</tt></pre>
+<pre><code>$ crontab -e
+&gt; @reboot screen -d -m supybot /path/to/configFile</code></pre>
 </div></div>
 </div>
 <div class="sect2">
 <h3 id="_identifying_to_the_bot">2.2. Identifying to the bot</h3>
-<div class="paragraph"><p>After running supybot-wizard and starting the bot, connect to the same IRC network it is on, and /query it. You can identify with the <tt>identify &lt;name&gt; &lt;password&gt;</tt> command. You can check the bot&#8217;s idea of who you are with the <tt>whoami</tt> command.</p></div>
+<div class="paragraph"><p>After running supybot-wizard and starting the bot, connect to the same IRC network it is on, and /query it. You can identify with the <code>identify &lt;name&gt; &lt;password&gt;</code> command. You can check the bot&#8217;s idea of who you are with the <code>whoami</code> command.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
 <div class="title">Note</div>
 </td>
-<td class="content">All commands that contain a <tt>password</tt> must be sent to the bot in private.</td>
+<td class="content">All commands that contain a <code>password</code> must be sent to the bot in private.</td>
 </tr></table>
 </div>
 </div>
 <div class="sect2">
 <h3 id="_accessing_the_online_help">2.3. Accessing the online help</h3>
-<div class="paragraph"><p>Most commands on the bot have a short online help available. You can use <tt>list</tt> to list loaded plugins, and <tt>list &lt;plugin&gt;</tt> to list commands in those plugins. <tt>help [plugin] &lt;command&gt;</tt> can be used to access the command help. Use <tt>more</tt> to read long messages from the bot.</p></div>
-<div class="paragraph"><p>Help for configuration items can be accessed with the <tt>config help &lt;key&gt;</tt> command.</p></div>
+<div class="paragraph"><p>Most commands on the bot have a short online help available. You can use <code>list</code> to list loaded plugins, and <code>list &lt;plugin&gt;</code> to list commands in those plugins. <code>help [plugin] &lt;command&gt;</code> can be used to access the command help. Use <code>more</code> to read long messages from the bot.</p></div>
+<div class="paragraph"><p>Help for configuration items can be accessed with the <code>config help &lt;key&gt;</code> command.</p></div>
 </div>
 </div>
 </div>
@@ -888,33 +884,33 @@ $ supybot configFile</tt></pre>
 <div class="sect2">
 <h3 id="_nested_commands">3.1. Nested commands</h3>
 <div class="paragraph"><p>Supybot allows nested commands, in other words, you can pass the result of a command to another command as a parameter. What does this allow then, though, apart from the obvious bragging rights? For example, if you want to restore a configuration entry to the default value, you can type:</p></div>
-<div class="paragraph"><p><tt>config reply.withNickPrefix [config default reply.withNickPrefix]</tt></p></div>
-<div class="paragraph"><p>Obviously, that wasn&#8217;t very neat. They could&#8217;ve included a <tt>config reset &lt;key&gt;</tt> command instead, for example. But I&#8217;m sure you can figure out <strong>something</strong> more useful to do with this, as a homework ;-)</p></div>
+<div class="paragraph"><p><code>config reply.withNickPrefix [config default reply.withNickPrefix]</code></p></div>
+<div class="paragraph"><p>Obviously, that wasn&#8217;t very neat. They could&#8217;ve included a <code>config reset &lt;key&gt;</code> command instead, for example. But I&#8217;m sure you can figure out <strong>something</strong> more useful to do with this, as a homework ;-)</p></div>
 <div class="paragraph"><p>See the <a href="#plugin_time">Time</a> and <a href="#plugin_scheduler">Scheduler</a> plugins for some examples.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_plugins">3.2. Plugins</h3>
-<div class="paragraph"><p>Pretty much everything in Supybot is a plugin. Most commands you use belong to a plugin. If two plugins provide the same command, then you need to prefix the command with the plugin name. For example, the <tt>ignore list</tt> command yields the following output:</p></div>
+<div class="paragraph"><p>Pretty much everything in Supybot is a plugin. Most commands you use belong to a plugin. If two plugins provide the same command, then you need to prefix the command with the plugin name. For example, the <code>ignore list</code> command yields the following output:</p></div>
 <div class="listingblock">
 <div class="title">output</div>
 <div class="content">
-<pre><tt>Error: The command "ignore list" is available in the Admin and Channel plugins.
-Please specify the plugin whose command you wish to call by using its name as a command before "ignore list".</tt></pre>
+<pre><code>Error: The command "ignore list" is available in the Admin and Channel plugins.
+Please specify the plugin whose command you wish to call by using its name as a command before "ignore list".</code></pre>
 </div></div>
-<div class="paragraph"><p>Thus, you need to either use <tt>admin ignore list</tt> or <tt>channel ignore list</tt> command. That is, unless you define which plugin is the default one using the <tt>defaultplugin [--remove] &lt;command&gt; [plugin]</tt> command provided in the <span class="green">Owner</span> plugin.</p></div>
-<div class="paragraph"><p>The <tt>list</tt> command (<span class="green">Plugin</span>) can be used to list loaded plugins. You can prevent some plugins from showing in the list with the command:</p></div>
-<div class="paragraph"><p><tt>config plugins.&lt;plugin&gt;.public False</tt></p></div>
+<div class="paragraph"><p>Thus, you need to either use <code>admin ignore list</code> or <code>channel ignore list</code> command. That is, unless you define which plugin is the default one using the <code>defaultplugin [--remove] &lt;command&gt; [plugin]</code> command provided in the <span class="green">Owner</span> plugin.</p></div>
+<div class="paragraph"><p>The <code>list</code> command (<span class="green">Plugin</span>) can be used to list loaded plugins. You can prevent some plugins from showing in the list with the command:</p></div>
+<div class="paragraph"><p><code>config plugins.&lt;plugin&gt;.public False</code></p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
 <div class="title">Warning</div>
 </td>
-<td class="content">This does not really make the plugins private. They can still be listed by unregistered users (unless they have anticapability for <tt>list</tt>). This is a bug in my opinion.</td>
+<td class="content">This does not really make the plugins private. They can still be listed by unregistered users (unless they have anticapability for <code>list</code>). This is a bug in my opinion.</td>
 </tr></table>
 </div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>list</tt>
+<code>list</code>
 </dt>
 <dd>
 <p>
@@ -922,7 +918,7 @@ Please specify the plugin whose command you wish to call by using its name as a 
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>list --private</tt>
+<code>list --private</code>
 </dt>
 <dd>
 <p>
@@ -930,7 +926,7 @@ Please specify the plugin whose command you wish to call by using its name as a 
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>list &lt;plugin&gt;</tt>
+<code>list &lt;plugin&gt;</code>
 </dt>
 <dd>
 <p>
@@ -938,15 +934,15 @@ Please specify the plugin whose command you wish to call by using its name as a 
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>load [--deprecated] &lt;plugin&gt;</tt>
+<code>load [--deprecated] &lt;plugin&gt;</code>
 </dt>
 <dd>
 <p>
-        Load a plugin. Supybot looks for plugins in directories listed in <tt>config conf.supybot.directories.plugins</tt>. Use comma as a separator.
+        Load a plugin. Supybot looks for plugins in directories listed in <code>config conf.supybot.directories.plugins</code>. Use comma as a separator.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>unload &lt;plugin&gt;</tt>
+<code>unload &lt;plugin&gt;</code>
 </dt>
 <dd>
 <p>
@@ -959,17 +955,17 @@ Please specify the plugin whose command you wish to call by using its name as a 
 <td class="icon">
 <div class="title">Note</div>
 </td>
-<td class="content">Plugins can store information in a database. By default, the database is channel-specific. This can be changed by modifying <tt>config databases.plugins.channelSpecific</tt> to be global. The config item can also be set on per-channel basis.</td>
+<td class="content">Plugins can store information in a database. By default, the database is channel-specific. This can be changed by modifying <code>config databases.plugins.channelSpecific</code> to be global. The config item can also be set on per-channel basis.</td>
 </tr></table>
 </div>
 <div class="sect3">
 <h4 id="installing_plugins">3.2.1. Installing additional plugins</h4>
-<div class="paragraph"><p>To install a third-party plugin, you need first need to copy the plugin in one of the directories listed in <tt>conf.supybot.directories.plugins</tt> (<tt>~/supybot/plugins/</tt> for example). Then you simply <tt>load &lt;plugin&gt;</tt>.</p></div>
+<div class="paragraph"><p>To install a third-party plugin, you need first need to copy the plugin in one of the directories listed in <code>conf.supybot.directories.plugins</code> (<code>~/supybot/plugins/</code> for example). Then you simply <code>load &lt;plugin&gt;</code>.</p></div>
 <div class="listingblock">
 <div class="title">For example:</div>
 <div class="content">
-<pre><tt>cd ~/supybot/plugins
-git clone git://github.com/jamessan/Supybot-Weather.git Weather</tt></pre>
+<pre><code>cd ~/supybot/plugins
+git clone git://github.com/jamessan/Supybot-Weather.git Weather</code></pre>
 </div></div>
 <div class="admonitionblock">
 <table><tr>
@@ -985,18 +981,18 @@ git clone git://github.com/jamessan/Supybot-Weather.git Weather</tt></pre>
 <h3 id="_configuration">3.3. Configuration</h3>
 <div class="paragraph"><p>Most of Supybot configuration is done online using the <span class="green">Config</span> plugin. This excludes things such as granting the owner capability (must be done by modifying the files).</p></div>
 <div class="paragraph"><p>There are two types of configuration items: global and channel-specific. The latter are actually no different from the global ones, except that they can be set for channels as well. This means you can have a global default which is overridden for specific channels.</p></div>
-<div class="paragraph"><p>Configuration items are hierarchical. The "root" item is <tt>supybot</tt>, which can be omitted. Configs for plugins live under their own key, <tt>supybot.plugins</tt>, or shortly, <tt>plugins</tt>.</p></div>
+<div class="paragraph"><p>Configuration items are hierarchical. The "root" item is <code>supybot</code>, which can be omitted. Configs for plugins live under their own key, <code>supybot.plugins</code>, or shortly, <code>plugins</code>.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>config &lt;name&gt; [value]</tt>
+<code>config &lt;name&gt; [value]</code>
 </dt>
 <dd>
 <p>
-        Get the current value of <tt>name</tt>, or set it to <tt>value</tt> if provided.
+        Get the current value of <code>name</code>, or set it to <code>value</code> if provided.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config channel [channel] &lt;name&gt; [value]</tt>
+<code>config channel [channel] &lt;name&gt; [value]</code>
 </dt>
 <dd>
 <p>
@@ -1004,15 +1000,15 @@ git clone git://github.com/jamessan/Supybot-Weather.git Weather</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config default &lt;name&gt;</tt>
+<code>config default &lt;name&gt;</code>
 </dt>
 <dd>
 <p>
-        Get the default value of <tt>name</tt>. This does not change the value. No, there is no command to reset an item to default value. You need to use <tt>config &lt;name&gt; [config default &lt;name&gt;]</tt> for that.
+        Get the default value of <code>name</code>. This does not change the value. No, there is no command to reset an item to default value. You need to use <code>config &lt;name&gt; [config default &lt;name&gt;]</code> for that.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config export &lt;filename&gt;</tt>
+<code>config export &lt;filename&gt;</code>
 </dt>
 <dd>
 <p>
@@ -1020,7 +1016,7 @@ git clone git://github.com/jamessan/Supybot-Weather.git Weather</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config help &lt;name&gt;</tt>
+<code>config help &lt;name&gt;</code>
 </dt>
 <dd>
 <p>
@@ -1028,15 +1024,15 @@ git clone git://github.com/jamessan/Supybot-Weather.git Weather</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config list &lt;group&gt;</tt>
+<code>config list &lt;group&gt;</code>
 </dt>
 <dd>
 <p>
-        List configuration items in <tt>group</tt>. Subgroups are prefixed with <em>@</em>, channel-specific items with <em>#</em>.
+        List configuration items in <code>group</code>. Subgroups are prefixed with <em>@</em>, channel-specific items with <em>#</em>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config reload</tt>
+<code>config reload</code>
 </dt>
 <dd>
 <p>
@@ -1044,19 +1040,19 @@ git clone git://github.com/jamessan/Supybot-Weather.git Weather</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config search &lt;word&gt;</tt>
+<code>config search &lt;word&gt;</code>
 </dt>
 <dd>
 <p>
-        Show configuration items matching <tt>word</tt>.
+        Show configuration items matching <code>word</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>owner flush</tt>
+<code>owner flush</code>
 </dt>
 <dd>
 <p>
-        Save configuration changes to disk. This should be done automatically as well, if the <tt>flush</tt> configuration item is True (the default).
+        Save configuration changes to disk. This should be done automatically as well, if the <code>flush</code> configuration item is True (the default).
 </p>
 </dd>
 </dl></div>
@@ -1065,7 +1061,7 @@ git clone git://github.com/jamessan/Supybot-Weather.git Weather</tt></pre>
 <td class="icon">
 <div class="title">Note</div>
 </td>
-<td class="content">Some of the sections in this document have a list of related configuration items. They are listed similarly to the table below. In this example the config value could be modified with the <tt>config plugin.example.foo &lt;True|False&gt;</tt> command. If the key is prefixed with <tt>#</tt>, the config value can be set both globally and on channel-specific basis.</td>
+<td class="content">Some of the sections in this document have a list of related configuration items. They are listed similarly to the table below. In this example the config value could be modified with the <code>config plugin.example.foo &lt;True|False&gt;</code> command. If the key is prefixed with <code>#</code>, the config value can be set both globally and on channel-specific basis.</td>
 </tr></table>
 </div>
 <div class="tableblock">
@@ -1119,21 +1115,21 @@ cellspacing="0" cellpadding="4">
 <div class="sect2">
 <h3 id="capabilities">3.4. Capabilities</h3>
 <div class="paragraph"><p>Many traditional IRC bots manage permissions of users using flags. Some network services in fact, do, too. Each user can have various flags on each channel. The flags can mean auto-op, op, use of !ban command and so forth. On side of those, there are often global user flags that entitle the user to full access, global auto-op, etc. Some bots also support channel flags that determine what bot functionality is available on the channel.</p></div>
-<div class="paragraph"><p>Supybot does not have any flags. Instead, the permissions are managed using <em>capabilities</em>. There are two kinds of capabilities: <tt>user capabilities</tt> and <tt>channel capabilities</tt>.</p></div>
-<div class="paragraph"><p><em>User capabilities</em> are checked first when a user tries to run a command. If the user has an <em>anticapability</em> for the command (eg. <tt>-command</tt>, <tt>-Plugin.command</tt>) or the Plugin (<tt>-Plugin</tt>), it won&#8217;t be run.</p></div>
-<div class="paragraph"><p>Next, if the command was run on the channel, the <em>channel capabilities</em> are checked. The logic is same as above, but the checked capabilities are prefixed with <tt>#channel,</tt>, for example <tt>#channel,-Plugin.command</tt>.</p></div>
+<div class="paragraph"><p>Supybot does not have any flags. Instead, the permissions are managed using <em>capabilities</em>. There are two kinds of capabilities: <code>user capabilities</code> and <code>channel capabilities</code>.</p></div>
+<div class="paragraph"><p><em>User capabilities</em> are checked first when a user tries to run a command. If the user has an <em>anticapability</em> for the command (eg. <code>-command</code>, <code>-Plugin.command</code>) or the Plugin (<code>-Plugin</code>), it won&#8217;t be run.</p></div>
+<div class="paragraph"><p>Next, if the command was run on the channel, the <em>channel capabilities</em> are checked. The logic is same as above, but the checked capabilities are prefixed with <code>#channel,</code>, for example <code>#channel,-Plugin.command</code>.</p></div>
 <div class="paragraph"><p>There are some special capabilities recognized by Supybot:</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>owner</tt>
+<code>owner</code>
 </dt>
 <dd>
 <p>
-        For bot owners: the people who have "physical" access to the bot and its files. This cannot be granted online; the <em>conf/users.conf</em> file must be edited by hand followed by <tt>reload</tt>. Owners are exempt from <tt>#channel,op</tt> capability checks and channel anticapabilities.
+        For bot owners: the people who have "physical" access to the bot and its files. This cannot be granted online; the <em>conf/users.conf</em> file must be edited by hand followed by <code>reload</code>. Owners are exempt from <code>#channel,op</code> capability checks and channel anticapabilities.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>admin</tt>
+<code>admin</code>
 </dt>
 <dd>
 <p>
@@ -1141,7 +1137,7 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>#channel,op</tt>
+<code>#channel,op</code>
 </dt>
 <dd>
 <p>
@@ -1149,7 +1145,7 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>trusted</tt>
+<code>trusted</code>
 </dt>
 <dd>
 <p>
@@ -1171,11 +1167,11 @@ cellspacing="0" cellpadding="4">
 <h4 id="_adding_a_network">4.1.1. Adding a network</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>network connect [--ssl] &lt;network&gt; [&lt;host[:port]&gt;] [password]</tt>
+<code>network connect [--ssl] &lt;network&gt; [&lt;host[:port]&gt;] [password]</code>
 </dt>
 <dd>
 <p>
-        Connect to <tt>network</tt>. <tt>host</tt> must be provided if the network is new or has no servers defined.
+        Connect to <code>network</code>. <code>host</code> must be provided if the network is new or has no servers defined.
 </p>
 </dd>
 </dl></div>
@@ -1184,10 +1180,10 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p>If you try connecting using SSL right away, you get the following error:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>WARNING 2013-02-18T18:27:25 The Socket driver can not connect to SSL servers.
-        Try the Twisted driver instead.</tt></pre>
+<pre><code>WARNING 2013-02-18T18:27:25 The Socket driver can not connect to SSL servers.
+        Try the Twisted driver instead.</code></pre>
 </div></div>
-<div class="paragraph"><p>To use SSL, you need to install the twisted socket driver. On Debian you can install python-twisted and python-twisted-names. After that run <tt>config drivers.module Twisted</tt> to change the driver.</p></div>
+<div class="paragraph"><p>To use SSL, you need to install the twisted socket driver. On Debian you can install python-twisted and python-twisted-names. After that run <code>config drivers.module Twisted</code> to change the driver.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -1201,15 +1197,15 @@ cellspacing="0" cellpadding="4">
 <h5 id="_ssl_on_freenode">SSL on Freenode</h5>
 <div class="listingblock">
 <div class="content">
-<pre><tt>config drivers.module Twisted
+<pre><code>config drivers.module Twisted
 network connect --ssl freenode chat.us.freenode.net:6697
-network driver freenode</tt></pre>
+network driver freenode</code></pre>
 </div></div>
 <div class="listingblock">
 <div class="title">Another pitfall with using supybot SSL on Freenode</div>
 <div class="content">
-<pre><tt>WARNING 2013-02-18T18:32:12 Error connecting to chat.freenode.net:6697: An
-        error occurred while connecting: -9: Unknown error 4294967287.</tt></pre>
+<pre><code>WARNING 2013-02-18T18:32:12 Error connecting to chat.freenode.net:6697: An
+        error occurred while connecting: -9: Unknown error 4294967287.</code></pre>
 </div></div>
 <div class="paragraph"><p>Unfortunately <a href="https://twistedmatrix.com/trac/ticket/4212">python-twisted-names can not handle servers with AAAA records</a> (eg. chat.freenode.net), and spits out that illegible error. The workaround is to either use a direct IP or a server hostname that does not have AAAA records, for example chat.us.freenode.net (see <a href="https://freenode.net/irc_servers.shtml">Freenode server list</a> for non-IPv6 ones).</p></div>
 <div class="paragraph"><p>That&#8217;s the rumour at least! Last time I personally tried, I could not successfully establish an SSL connection to Freenode.</p></div>
@@ -1220,11 +1216,11 @@ network driver freenode</tt></pre>
 <h4 id="_reconnecting">4.1.2. Reconnecting</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>reconnect [network] [message]</tt>
+<code>reconnect [network] [message]</code>
 </dt>
 <dd>
 <p>
-        Disconnects and connects <tt>network</tt>, or current if not specified. <tt>message</tt>, if given, is shown as the quit message, otherwise <tt>config plugins.Owner.quitMsg</tt> is used, or your nickname.
+        Disconnects and connects <code>network</code>, or current if not specified. <code>message</code>, if given, is shown as the quit message, otherwise <code>config plugins.Owner.quitMsg</code> is used, or your nickname.
 </p>
 </dd>
 </dl></div>
@@ -1233,11 +1229,11 @@ network driver freenode</tt></pre>
 <h4 id="_disconnecting">4.1.3. Disconnecting</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>network disconnect [network] [message]</tt>
+<code>network disconnect [network] [message]</code>
 </dt>
 <dd>
 <p>
-        Disconnect <tt>network</tt>, or current if not specified. <tt>message</tt> as above.
+        Disconnect <code>network</code>, or current if not specified. <code>message</code> as above.
 </p>
 </dd>
 </dl></div>
@@ -1246,7 +1242,7 @@ network driver freenode</tt></pre>
 <h4 id="_listing_networks">4.1.4. Listing networks</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>networks</tt>
+<code>networks</code>
 </dt>
 <dd>
 <p>
@@ -1257,11 +1253,11 @@ network driver freenode</tt></pre>
 <div class="listingblock">
 <div class="title">output</div>
 <div class="content">
-<pre><tt>freenode: wolfe.freenode.net and ircnet: irc.elisa.fi</tt></pre>
+<pre><code>freenode: wolfe.freenode.net and ircnet: irc.elisa.fi</code></pre>
 </div></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>config list networks</tt>
+<code>config list networks</code>
 </dt>
 <dd>
 <p>
@@ -1273,15 +1269,15 @@ network driver freenode</tt></pre>
 <div class="sect3">
 <h4 id="_adding_more_servers">4.1.5. Adding more servers</h4>
 <div class="paragraph"><p>Once you&#8217;ve added a network with the initial server, you can add more servers:</p></div>
-<div class="paragraph"><p><tt>config networks.&lt;network&gt;.servers [config networks.&lt;network&gt;.servers] server:6667</tt></p></div>
+<div class="paragraph"><p><code>config networks.&lt;network&gt;.servers [config networks.&lt;network&gt;.servers] server:6667</code></p></div>
 </div>
 <div class="sect3">
 <h4 id="_listing_network_servers">4.1.6. Listing network servers</h4>
-<div class="paragraph"><p><tt>config networks.&lt;network&gt;.servers</tt></p></div>
+<div class="paragraph"><p><code>config networks.&lt;network&gt;.servers</code></p></div>
 <div class="listingblock">
 <div class="title">output</div>
 <div class="content">
-<pre><tt>chat.freenode.net:6667</tt></pre>
+<pre><code>chat.freenode.net:6667</code></pre>
 </div></div>
 </div>
 <div class="sect3">
@@ -1297,7 +1293,7 @@ network driver freenode</tt></pre>
 <div class="paragraph"><p>You can make Supybot identify itself to the network NickServ after it has connected.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>config plugins.Services.noJoinsUntilIdentified True</tt>
+<code>config plugins.Services.noJoinsUntilIdentified True</code>
 </dt>
 <dd>
 <p>
@@ -1305,7 +1301,7 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config plugins.Services.NickServ NickServ</tt>
+<code>config plugins.Services.NickServ NickServ</code>
 </dt>
 <dd>
 <p>
@@ -1313,7 +1309,7 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>services password &lt;nick&gt; [password]</tt>
+<code>services password &lt;nick&gt; [password]</code>
 </dt>
 <dd>
 <p>
@@ -1321,11 +1317,11 @@ network driver freenode</tt></pre>
 </p>
 <div class="literalblock">
 <div class="content">
-<pre><tt>NOTE: Password removal did not work for me on Supybot 0.83.3</tt></pre>
+<pre><code>NOTE: Password removal did not work for me on Supybot 0.83.3</code></pre>
 </div></div>
 </dd>
 <dt class="hdlist1">
-<tt>services identify</tt>
+<code>services identify</code>
 </dt>
 <dd>
 <p>
@@ -1339,7 +1335,7 @@ network driver freenode</tt></pre>
 <div class="paragraph"><p>You can make Supybot request op after joining a channel on a network with ChanServ.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>config plugins.Services.ChanServ ChanServ</tt>
+<code>config plugins.Services.ChanServ ChanServ</code>
 </dt>
 <dd>
 <p>
@@ -1347,7 +1343,7 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config plugins.Services.ChanServ.op &lt;on|off&gt;</tt>
+<code>config plugins.Services.ChanServ.op &lt;on|off&gt;</code>
 </dt>
 <dd>
 <p>
@@ -1355,11 +1351,11 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config channel [channel] plugins.services.ChanServ.op &lt;on|off&gt;</tt>
+<code>config channel [channel] plugins.services.ChanServ.op &lt;on|off&gt;</code>
 </dt>
 <dd>
 <p>
-        Set to request op on the given <tt>channel</tt>.
+        Set to request op on the given <code>channel</code>.
 </p>
 </dd>
 </dl></div>
@@ -1374,7 +1370,7 @@ network driver freenode</tt></pre>
 <td class="icon">
 <div class="title">Note</div>
 </td>
-<td class="content">Commands in this section (such as adding/removing channels) work in the current network, eg. the one you are messaging the bot in. The commands also accept a <tt>[channel]</tt> parameter which is needed only when the command is written in private.</td>
+<td class="content">Commands in this section (such as adding/removing channels) work in the current network, eg. the one you are messaging the bot in. The commands also accept a <code>[channel]</code> parameter which is needed only when the command is written in private.</td>
 </tr></table>
 </div>
 <div class="admonitionblock">
@@ -1382,7 +1378,7 @@ network driver freenode</tt></pre>
 <td class="icon">
 <div class="title">Note</div>
 </td>
-<td class="content">If you want to /msg the bot in one network, while having the command apply in another network, you can use the <tt>network command &lt;network&gt; &lt;command&gt; [params]</tt> command. The reply comes in the other network if you are there as well.</td>
+<td class="content">If you want to /msg the bot in one network, while having the command apply in another network, you can use the <code>network command &lt;network&gt; &lt;command&gt; [params]</code> command. The reply comes in the other network if you are there as well.</td>
 </tr></table>
 </div>
 <div class="admonitionblock">
@@ -1390,18 +1386,18 @@ network driver freenode</tt></pre>
 <td class="icon">
 <div class="title">Warning</div>
 </td>
-<td class="content">The <tt>network command</tt> command does not seem to check if the user having your nick in the other network is recognized (eg. identified or recognized by hostmasks), so the reply may end up to someone else.</td>
+<td class="content">The <code>network command</code> command does not seem to check if the user having your nick in the other network is recognized (eg. identified or recognized by hostmasks), so the reply may end up to someone else.</td>
 </tr></table>
 </div>
 <div class="sect3">
 <h4 id="_adding_a_new_channel">4.2.1. Adding a new channel</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>join &lt;channel&gt; [key]</tt>
+<code>join &lt;channel&gt; [key]</code>
 </dt>
 <dd>
 <p>
-        Joins the <tt>channel</tt> using <tt>key</tt> if provided. Channels are automatically remembered and joined when the bot connects to the network next time.
+        Joins the <code>channel</code> using <code>key</code> if provided. Channels are automatically remembered and joined when the bot connects to the network next time.
 </p>
 </dd>
 </dl></div>
@@ -1410,13 +1406,13 @@ network driver freenode</tt></pre>
 <td class="icon">
 <div class="title">Note</div>
 </td>
-<td class="content"><tt>config plugins.Channel.alwaysRejoin</tt> determines whether the bot will (attempt to) rejoin the channel when kicked out (the default).</td>
+<td class="content"><code>config plugins.Channel.alwaysRejoin</code> determines whether the bot will (attempt to) rejoin the channel when kicked out (the default).</td>
 </tr></table>
 </div>
 </div>
 <div class="sect3">
 <h4 id="_listing_channels">4.2.2. Listing channels</h4>
-<div class="paragraph"><p><tt>channels</tt></p></div>
+<div class="paragraph"><p><code>channels</code></p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -1425,17 +1421,17 @@ network driver freenode</tt></pre>
 <td class="content">This only works in private, to prevent knowledge of top secret channels from falling into wrong hands.</td>
 </tr></table>
 </div>
-<div class="paragraph"><p>You can list channels in another network with <tt>config networks.&lt;network&gt;.channels</tt>. Or with <tt>network command &lt;network&gt; channels</tt>.</p></div>
+<div class="paragraph"><p>You can list channels in another network with <code>config networks.&lt;network&gt;.channels</code>. Or with <code>network command &lt;network&gt; channels</code>.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_removing_a_channel">4.2.3. Removing a channel</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>part [channel] [reason]</tt>
+<code>part [channel] [reason]</code>
 </dt>
 <dd>
 <p>
-        Makes the bot leave <tt>channel</tt>, showing <tt>reason</tt> as part message if given. Note that all channel data is retained, but the bot does not join the channel anymore the next time it connects to the network.
+        Makes the bot leave <code>channel</code>, showing <code>reason</code> as part message if given. Note that all channel data is retained, but the bot does not join the channel anymore the next time it connects to the network.
 </p>
 </dd>
 </dl></div>
@@ -1444,11 +1440,11 @@ network driver freenode</tt></pre>
 <h4 id="_modifying_channel_config">4.2.4. Modifying channel config</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>config channel [channel] &lt;name&gt; &lt;value&gt;</tt>
+<code>config channel [channel] &lt;name&gt; &lt;value&gt;</code>
 </dt>
 <dd>
 <p>
-        Sets config item <tt>name</tt> on <tt>channel</tt> to <tt>value</tt>, overriding the global value.
+        Sets config item <code>name</code> on <code>channel</code> to <code>value</code>, overriding the global value.
 </p>
 </dd>
 </dl></div>
@@ -1457,11 +1453,11 @@ network driver freenode</tt></pre>
 <h4 id="_setting_the_key">4.2.5. Setting the key</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>channel key [channel] [key]</tt>
+<code>channel key [channel] [key]</code>
 </dt>
 <dd>
 <p>
-        Sets key on <tt>channel</tt> to <tt>key</tt>, or removes it if <tt>key</tt> is not given.
+        Sets key on <code>channel</code> to <code>key</code>, or removes it if <code>key</code> is not given.
 </p>
 </dd>
 </dl></div>
@@ -1470,11 +1466,11 @@ network driver freenode</tt></pre>
 <h4 id="_setting_the_limit">4.2.6. Setting the limit</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>channel limit [channel] [limit]</tt>
+<code>channel limit [channel] [limit]</code>
 </dt>
 <dd>
 <p>
-        Sets limit on <tt>channel</tt> to <tt>limit</tt>, or removes it if <tt>limit</tt> is not given (or is zero).
+        Sets limit on <code>channel</code> to <code>limit</code>, or removes it if <code>limit</code> is not given (or is zero).
 </p>
 </dd>
 </dl></div>
@@ -1484,7 +1480,7 @@ network driver freenode</tt></pre>
 <div class="paragraph"><p>Channel ops can use the following commands to control the channel via the bot, assuming it is opped.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>op [channel] [nick...]</tt>
+<code>op [channel] [nick...]</code>
 </dt>
 <dd>
 <p>
@@ -1492,7 +1488,7 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>deop [channel] [nick...]</tt>
+<code>deop [channel] [nick...]</code>
 </dt>
 <dd>
 <p>
@@ -1500,7 +1496,7 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>voice [channel] [nick...]</tt>
+<code>voice [channel] [nick...]</code>
 </dt>
 <dd>
 <p>
@@ -1508,7 +1504,7 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>devoice [channel] [nick...]</tt>
+<code>devoice [channel] [nick...]</code>
 </dt>
 <dd>
 <p>
@@ -1516,15 +1512,15 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>kban [channel] [--{exact,nick,user,host}] &lt;nick&gt; [seconds] [reason]</tt>
+<code>kban [channel] [--{exact,nick,user,host}] &lt;nick&gt; [seconds] [reason]</code>
 </dt>
 <dd>
 <p>
-        Bans and kicks the given nick from the channel. If <tt>seconds</tt> is specified and is not 0, the ban will expire after that time.
+        Bans and kicks the given nick from the channel. If <code>seconds</code> is specified and is not 0, the ban will expire after that time.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>mode [channel] &lt;mode&gt; [params]</tt>
+<code>mode [channel] &lt;mode&gt; [params]</code>
 </dt>
 <dd>
 <p>
@@ -1532,7 +1528,7 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>moderate [channel]</tt>
+<code>moderate [channel]</code>
 </dt>
 <dd>
 <p>
@@ -1540,7 +1536,7 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>unmoderate [channel]</tt>
+<code>unmoderate [channel]</code>
 </dt>
 <dd>
 <p>
@@ -1548,7 +1544,7 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic lock [channel]</tt>
+<code>topic lock [channel]</code>
 </dt>
 <dd>
 <p>
@@ -1556,7 +1552,7 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic unlock [channel]</tt>
+<code>topic unlock [channel]</code>
 </dt>
 <dd>
 <p>
@@ -1564,15 +1560,15 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>alert [channel] &lt;text&gt;</tt>
+<code>alert [channel] &lt;text&gt;</code>
 </dt>
 <dd>
 <p>
-        Sends <tt>text</tt> to all users on the channel with op capability.
+        Sends <code>text</code> to all users on the channel with op capability.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>cycle [channel]</tt>
+<code>cycle [channel]</code>
 </dt>
 <dd>
 <p>
@@ -1585,15 +1581,15 @@ network driver freenode</tt></pre>
 <h4 id="_maintaining_the_ban_list">4.2.8. Maintaining the ban list</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>ban add [channel] &lt;nick|hostmask&gt; [expires]</tt>
+<code>ban add [channel] &lt;nick|hostmask&gt; [expires]</code>
 </dt>
 <dd>
 <p>
-        Add ban for given nick or hostmask on the channel. If nick is given, the full hostmask is banned. <tt>expires</tt> when gives, expires the ban after so many seconds.
+        Add ban for given nick or hostmask on the channel. If nick is given, the full hostmask is banned. <code>expires</code> when gives, expires the ban after so many seconds.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>ban list [channel]</tt>
+<code>ban list [channel]</code>
 </dt>
 <dd>
 <p>
@@ -1601,19 +1597,19 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>ban remove [channel] &lt;hostmask&gt;</tt>
+<code>ban remove [channel] &lt;hostmask&gt;</code>
 </dt>
 <dd>
 <p>
-        Removes the ban on given <tt>hostmask</tt>.
+        Removes the ban on given <code>hostmask</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config plugins.Channel.banmask &lt;string&gt;</tt>
+<code>config plugins.Channel.banmask &lt;string&gt;</code>
 </dt>
 <dd>
 <p>
-        Hostmask style for <tt>ban add</tt>: <tt>exact</tt>, <tt>nick</tt>, <tt>user</tt>, <tt>host</tt>. This means which parts of the nick&#8217;s current hostmask are used (rest are wildcarded). Default is <tt>host user</tt> (eg. <tt>*!user@host</tt>).
+        Hostmask style for <code>ban add</code>: <code>exact</code>, <code>nick</code>, <code>user</code>, <code>host</code>. This means which parts of the nick&#8217;s current hostmask are used (rest are wildcarded). Default is <code>host user</code> (eg. <code>*!user@host</code>).
 </p>
 </dd>
 </dl></div>
@@ -1622,7 +1618,7 @@ network driver freenode</tt></pre>
 <td class="icon">
 <div class="title">Note</div>
 </td>
-<td class="content">Users matching the ban list are not automatically kicked off the channel. See the <tt>kban</tt> command in the previous section to kick and ban a user.</td>
+<td class="content">Users matching the ban list are not automatically kicked off the channel. See the <code>kban</code> command in the previous section to kick and ban a user.</td>
 </tr></table>
 </div>
 </div>
@@ -1630,27 +1626,27 @@ network driver freenode</tt></pre>
 <h4 id="_maintaining_the_ignore_list">4.2.9. Maintaining the ignore list</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>channel ignore add [channel] &lt;nick|hostmask&gt; [expires]</tt>
+<code>channel ignore add [channel] &lt;nick|hostmask&gt; [expires]</code>
 </dt>
 <dd>
 <p>
-        Ignores <tt>hostmask</tt> (or the full hostmask <tt>nick</tt> currently has) on <tt>channel</tt>. If <tt>expires</tt> is given, the ignore expires after that many seconds.
+        Ignores <code>hostmask</code> (or the full hostmask <code>nick</code> currently has) on <code>channel</code>. If <code>expires</code> is given, the ignore expires after that many seconds.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>channel ignore list [channel]</tt>
+<code>channel ignore list [channel]</code>
 </dt>
 <dd>
 <p>
-        Show ignored hostmasks on <tt>channel</tt>. This does not show the expire times, though (argh!).
+        Show ignored hostmasks on <code>channel</code>. This does not show the expire times, though (argh!).
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>channel ignore remove [channel] &lt;hostmask&gt;</tt>
+<code>channel ignore remove [channel] &lt;hostmask&gt;</code>
 </dt>
 <dd>
 <p>
-        Remove <tt>hostmask</tt> from list of ignored hostmasks on <tt>channel</tt>.
+        Remove <code>hostmask</code> from list of ignored hostmasks on <code>channel</code>.
 </p>
 </dd>
 </dl></div>
@@ -1665,16 +1661,16 @@ network driver freenode</tt></pre>
 </div>
 <div class="sect3">
 <h4 id="_listing_channel_nicks">4.2.10. Listing channel nicks</h4>
-<div class="paragraph"><p><tt>channel nicks [channel]</tt></p></div>
+<div class="paragraph"><p><code>channel nicks [channel]</code></p></div>
 </div>
 <div class="sect3">
 <h4 id="_topic_operations">4.2.11. Topic operations</h4>
 <div class="paragraph"><p>Related plugins: <span class="green">Topic</span>.</p></div>
-<div class="paragraph"><p>Supybot allows elaborate manipulation of the channel topic. Topic consists of items, separated by a configurable character (default is <tt>||</tt>). Items are one-indexed.</p></div>
+<div class="paragraph"><p>Supybot allows elaborate manipulation of the channel topic. Topic consists of items, separated by a configurable character (default is <code>||</code>). Items are one-indexed.</p></div>
 <div class="paragraph"><p>People who have used the Oer bot may notice that the topic manipulation commands are <a href="http://oer.equnet.org/help.php#um39">somewhat similar</a>.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>topic add [channel] &lt;text&gt;</tt>
+<code>topic add [channel] &lt;text&gt;</code>
 </dt>
 <dd>
 <p>
@@ -1682,39 +1678,39 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic change [channel] &lt;number&gt; &lt;regexp&gt;</tt>
+<code>topic change [channel] &lt;number&gt; &lt;regexp&gt;</code>
 </dt>
 <dd>
 <p>
-        Do a regular expression substitution on the topic item <tt>number</tt>. For example: <tt>topic change 2 s/foo/bar/</tt>.
+        Do a regular expression substitution on the topic item <code>number</code>. For example: <code>topic change 2 s/foo/bar/</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic default [channel]</tt>
+<code>topic default [channel]</code>
 </dt>
 <dd>
 <p>
-        Restore topic on channel to the default set with <tt>config plugins.Topic.default</tt>.
+        Restore topic on channel to the default set with <code>config plugins.Topic.default</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic fit [channel] &lt;text&gt;</tt>
+<code>topic fit [channel] &lt;text&gt;</code>
 </dt>
 <dd>
 <p>
-        Adds a new topic item at the end like <tt>topic add</tt>, but if there isn&#8217;t enough space, first removes some items from the beginning. <tt>topic add</tt> complains if there isn&#8217;t enough space.
+        Adds a new topic item at the end like <code>topic add</code>, but if there isn&#8217;t enough space, first removes some items from the beginning. <code>topic add</code> complains if there isn&#8217;t enough space.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic get [channel] &lt;number&gt;</tt>
+<code>topic get [channel] &lt;number&gt;</code>
 </dt>
 <dd>
 <p>
-        Return topic item <tt>number</tt>.
+        Return topic item <code>number</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic insert [channel] &lt;text&gt;</tt>
+<code>topic insert [channel] &lt;text&gt;</code>
 </dt>
 <dd>
 <p>
@@ -1722,7 +1718,7 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic list [channel]</tt>
+<code>topic list [channel]</code>
 </dt>
 <dd>
 <p>
@@ -1730,15 +1726,15 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic lock [channel]</tt>
+<code>topic lock [channel]</code>
 </dt>
 <dd>
 <p>
-        Set channel mode <tt>+t</tt>, preventing non-opped users from changing the topic.
+        Set channel mode <code>+t</code>, preventing non-opped users from changing the topic.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic redo [channel]</tt>
+<code>topic redo [channel]</code>
 </dt>
 <dd>
 <p>
@@ -1746,31 +1742,31 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic remove [channel] &lt;number&gt;</tt>
+<code>topic remove [channel] &lt;number&gt;</code>
 </dt>
 <dd>
 <p>
-        Remove item <tt>number</tt> from the topic.
+        Remove item <code>number</code> from the topic.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic reorder [channel] &lt;number&gt;...</tt>
+<code>topic reorder [channel] &lt;number&gt;...</code>
 </dt>
 <dd>
 <p>
-        Reorder topic items in the given order. You must give as many numbers as there are items. For example, to move third item to first position, use <tt>topic reorder 3 1 2</tt>.
+        Reorder topic items in the given order. You must give as many numbers as there are items. For example, to move third item to first position, use <code>topic reorder 3 1 2</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic replace [channel] &lt;number&gt; &lt;text&gt;</tt>
+<code>topic replace [channel] &lt;number&gt; &lt;text&gt;</code>
 </dt>
 <dd>
 <p>
-        Replace topic item <tt>number</tt> with <tt>text</tt>.
+        Replace topic item <code>number</code> with <code>text</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic restore [channel]</tt>
+<code>topic restore [channel]</code>
 </dt>
 <dd>
 <p>
@@ -1778,23 +1774,23 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic separator [channel] &lt;separator&gt;</tt>
+<code>topic separator [channel] &lt;separator&gt;</code>
 </dt>
 <dd>
 <p>
-        Change the topic separator to <tt>separator</tt>.
+        Change the topic separator to <code>separator</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic set [channel] [number] &lt;text&gt;</tt>
+<code>topic set [channel] [number] &lt;text&gt;</code>
 </dt>
 <dd>
 <p>
-        Replace either the whole topic or, if <tt>number</tt> is given, one item. In the latter case, this is the same as <tt>topic replace</tt>.
+        Replace either the whole topic or, if <code>number</code> is given, one item. In the latter case, this is the same as <code>topic replace</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic shuffle [channel]</tt>
+<code>topic shuffle [channel]</code>
 </dt>
 <dd>
 <p>
@@ -1802,7 +1798,7 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic swap [channel] &lt;number1&gt; &lt;number2&gt;</tt>
+<code>topic swap [channel] &lt;number1&gt; &lt;number2&gt;</code>
 </dt>
 <dd>
 <p>
@@ -1810,7 +1806,7 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic [channel]</tt>
+<code>topic [channel]</code>
 </dt>
 <dd>
 <p>
@@ -1818,7 +1814,7 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic undo [channel]</tt>
+<code>topic undo [channel]</code>
 </dt>
 <dd>
 <p>
@@ -1826,11 +1822,11 @@ network driver freenode</tt></pre>
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>topic unlock [channel]</tt>
+<code>topic unlock [channel]</code>
 </dt>
 <dd>
 <p>
-        Set channel mode <tt>-t</tt>, allowing all users to change the topic.
+        Set channel mode <code>-t</code>, allowing all users to change the topic.
 </p>
 </dd>
 </dl></div>
@@ -1916,15 +1912,15 @@ cellspacing="0" cellpadding="4">
 <div class="listingblock">
 <div class="title">Aliases for partial oer compatibility:</div>
 <div class="content">
-<pre><tt>alias add ta topic add $1
+<pre><code>alias add ta topic add $1
 alias add td topic delete $1
 alias add te topic replace $1 $2
-alias add ts topic swap $1 $2</tt></pre>
+alias add ts topic swap $1 $2</code></pre>
 </div></div>
 </div>
 <div class="sect3">
 <h4 id="_logging">4.2.12. Logging</h4>
-<div class="paragraph"><p>Logging of channels is provided by the <span class="green">ChannelLogger</span> plugin. Various channel-specific configuration items are provided, see <tt>config list plugins.ChannelLogger</tt>.</p></div>
+<div class="paragraph"><p>Logging of channels is provided by the <span class="green">ChannelLogger</span> plugin. Various channel-specific configuration items are provided, see <code>config list plugins.ChannelLogger</code>.</p></div>
 <div class="paragraph"><p>By default logs will go into logs/ChannelLogger/&lt;network&gt;/&lt;channel&gt;/&lt;channel&gt;.log and will be rotated when the default "%d-%a-%Y" (eg. 06-Sat-2008) timestamp rotates. See <a href="http://docs.python.org/lib/module-time.html">the python documentation for strftime</a> for the formatting characters.</p></div>
 <div class="admonitionblock">
 <table><tr>
@@ -1940,7 +1936,7 @@ alias add ts topic swap $1 $2</tt></pre>
 <div class="paragraph"><p>Auto-opping is provided by the <span class="green">AutoMode</span> plugin.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>load AutoMode</tt>
+<code>load AutoMode</code>
 </dt>
 <dd>
 <p>
@@ -1989,7 +1985,7 @@ cellspacing="0" cellpadding="4">
     False
     </td>
     <td align="left">
-    If enabled and <tt>op</tt> is False, halfops/voices instead if they are True.
+    If enabled and <code>op</code> is False, halfops/voices instead if they are True.
     </td>
   </tr>
   <tr>
@@ -2000,7 +1996,7 @@ cellspacing="0" cellpadding="4">
     True
     </td>
     <td align="left">
-    Halfop users with the <tt>halfop</tt> capability.
+    Halfop users with the <code>halfop</code> capability.
     </td>
   </tr>
   <tr>
@@ -2055,35 +2051,35 @@ cellspacing="0" cellpadding="4">
 <h4 id="channel-capabilities">4.2.14. Manipulating channel capabilities</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>capability list [channel]</tt>
+<code>capability list [channel]</code>
 </dt>
 <dd>
 <p>
-        List capabilities on <tt>channel</tt>.
+        List capabilities on <code>channel</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>capability set [channel] &lt;capability..&gt;</tt>
+<code>capability set [channel] &lt;capability..&gt;</code>
 </dt>
 <dd>
 <p>
-        Adds the given <tt>capability</tt> to <tt>channel</tt>.
+        Adds the given <code>capability</code> to <code>channel</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>capability unset [channel] &lt;capability..&gt;</tt>
+<code>capability unset [channel] &lt;capability..&gt;</code>
 </dt>
 <dd>
 <p>
-        Removes the given <tt>capability</tt> from <tt>channel</tt>.
+        Removes the given <code>capability</code> from <code>channel</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>capability setdefault [channel] &lt;True|False&gt;</tt>
+<code>capability setdefault [channel] &lt;True|False&gt;</code>
 </dt>
 <dd>
 <p>
-        Whether to allow users on <tt>channel</tt> by default to access non-maintenance related commands. Default is True.
+        Whether to allow users on <code>channel</code> by default to access non-maintenance related commands. Default is True.
        <br />
         Note that this concerns unregistered users as well. So if you want to disallow use of commands by unregistered users, set default user capabilities to allow them, and set this to False.
 </p>
@@ -2096,15 +2092,15 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p>The bot can be silenced on some channels by using the lobotomy commands.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>lobotomy add [channel]</tt>
+<code>lobotomy add [channel]</code>
 </dt>
 <dd>
 <p>
-        Make the bot silent and ignore all requests in the <tt>channel</tt>.
+        Make the bot silent and ignore all requests in the <code>channel</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>lobotomy list</tt>
+<code>lobotomy list</code>
 </dt>
 <dd>
 <p>
@@ -2112,7 +2108,7 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>lobotomy remove [channel]</tt>
+<code>lobotomy remove [channel]</code>
 </dt>
 <dd>
 <p>
@@ -2126,7 +2122,7 @@ cellspacing="0" cellpadding="4">
 <h3 id="_users">4.3. Users</h3>
 <div class="paragraph"><p>Related plugins: <span class="green">Users</span>.</p></div>
 <div class="paragraph"><p>Supybot users are global: they are visible across networks. This means the same username/password and hostmasks will work in all networks the bot is on.</p></div>
-<div class="paragraph"><p>Users are recognized either by matching hostmasks, or after manually identifying to the bot. In secure mode, the user must both match a hostmask and identify to the bot (<tt>uset set secure [password] &lt;True|False&gt;</tt>).</p></div>
+<div class="paragraph"><p>Users are recognized either by matching hostmasks, or after manually identifying to the bot. In secure mode, the user must both match a hostmask and identify to the bot (<code>uset set secure [password] &lt;True|False&gt;</code>).</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -2137,13 +2133,13 @@ cellspacing="0" cellpadding="4">
 </div>
 <div class="sect3">
 <h4 id="_adding_a_new_user">4.3.1. Adding a new user</h4>
-<div class="paragraph"><p><tt>user register &lt;name&gt; &lt;password&gt;</tt></p></div>
+<div class="paragraph"><p><code>user register &lt;name&gt; &lt;password&gt;</code></p></div>
 </div>
 <div class="sect3">
 <h4 id="_manipulating_hostmasks">4.3.2. Manipulating hostmasks</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>user hostmask add</tt>
+<code>user hostmask add</code>
 </dt>
 <dd>
 <p>
@@ -2151,7 +2147,7 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>user hostmask add [name] [hostmask] [password]</tt>
+<code>user hostmask add [name] [hostmask] [password]</code>
 </dt>
 <dd>
 <p>
@@ -2159,7 +2155,7 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>user hostmask list [name]</tt>
+<code>user hostmask list [name]</code>
 </dt>
 <dd>
 <p>
@@ -2167,11 +2163,11 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>user hostmask remove &lt;name&gt; &lt;hostmask&gt; [password]</tt>
+<code>user hostmask remove &lt;name&gt; &lt;hostmask&gt; [password]</code>
 </dt>
 <dd>
 <p>
-        Remove the given <tt>hostmask</tt> from <tt>name</tt>.
+        Remove the given <code>hostmask</code> from <code>name</code>.
 </p>
 </dd>
 </dl></div>
@@ -2188,49 +2184,49 @@ cellspacing="0" cellpadding="4">
 <h4 id="_listing_users">4.3.3. Listing users</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>user list [glob]</tt>
+<code>user list [glob]</code>
 </dt>
 <dd>
 <p>
-        List registered users, matching <tt>glob</tt> pattern if given. Note that the list of users is global across networks.
+        List registered users, matching <code>glob</code> pattern if given. Note that the list of users is global across networks.
 </p>
 </dd>
 </dl></div>
 </div>
 <div class="sect3">
 <h4 id="_deleting_users">4.3.4. Deleting users</h4>
-<div class="paragraph"><p><tt>user unregister &lt;name&gt; [password]</tt></p></div>
+<div class="paragraph"><p><code>user unregister &lt;name&gt; [password]</code></p></div>
 </div>
 <div class="sect3">
 <h4 id="_changing_password">4.3.5. Changing password</h4>
-<div class="paragraph"><p><tt>user set password &lt;user&gt; &lt;old password&gt; &lt;new password&gt;</tt>.</p></div>
+<div class="paragraph"><p><code>user set password &lt;user&gt; &lt;old password&gt; &lt;new password&gt;</code>.</p></div>
 </div>
 <div class="sect3">
 <h4 id="_renaming_a_user">4.3.6. Renaming a user</h4>
-<div class="paragraph"><p><tt>user changename &lt;name&gt; &lt;new name&gt; [password]</tt></p></div>
+<div class="paragraph"><p><code>user changename &lt;name&gt; &lt;new name&gt; [password]</code></p></div>
 <div class="paragraph"><p>Users can change their name themselves.</p></div>
 </div>
 <div class="sect3">
 <h4 id="user-capabilities">4.3.7. Manipulating user capabilities</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>capabilities [user]</tt>
+<code>capabilities [user]</code>
 </dt>
 <dd>
 <p>
-        List capabilities of the <tt>user</tt>, or the calling user.
+        List capabilities of the <code>user</code>, or the calling user.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>admin capability add &lt;user|hostmask&gt; &lt;capability&gt;</tt>
+<code>admin capability add &lt;user|hostmask&gt; &lt;capability&gt;</code>
 </dt>
 <dd>
 <p>
-        Add <tt>capability</tt> to <tt>user</tt> or a user that matches the <tt>hostmask</tt>.
+        Add <code>capability</code> to <code>user</code> or a user that matches the <code>hostmask</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>admin capability remove &lt;user|hostmask&gt; &lt;capability&gt;</tt>
+<code>admin capability remove &lt;user|hostmask&gt; &lt;capability&gt;</code>
 </dt>
 <dd>
 <p>
@@ -2238,31 +2234,31 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>channel capability add [channel] &lt;nick|user&gt; &lt;capability..&gt;</tt>
+<code>channel capability add [channel] &lt;nick|user&gt; &lt;capability..&gt;</code>
 </dt>
 <dd>
 <p>
-        Add capability <tt>capability</tt> on <tt>channel</tt> to <tt>nick</tt>/<tt>user</tt>.
+        Add capability <code>capability</code> on <code>channel</code> to <code>nick</code>/<code>user</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>channel capability remove [channel] &lt;nick|user&gt; &lt;capability..&gt;</tt>
+<code>channel capability remove [channel] &lt;nick|user&gt; &lt;capability..&gt;</code>
 </dt>
 <dd>
 <p>
-        Remove capability <tt>capability</tt> on <tt>channel</tt> from <tt>nick</tt>/<tt>user</tt>.
+        Remove capability <code>capability</code> on <code>channel</code> from <code>nick</code>/<code>user</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>defaultcapability &lt;add|remove&gt; &lt;capability&gt;</tt>
+<code>defaultcapability &lt;add|remove&gt; &lt;capability&gt;</code>
 </dt>
 <dd>
 <p>
-        Add or remove <tt>capability</tt> from list of capabilities given to new users.
+        Add or remove <code>capability</code> from list of capabilities given to new users.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config capabilities</tt>
+<code>config capabilities</code>
 </dt>
 <dd>
 <p>
@@ -2273,7 +2269,7 @@ cellspacing="0" cellpadding="4">
 <div class="listingblock">
 <div class="title">output</div>
 <div class="content">
-<pre><tt>-owner -admin -trusted</tt></pre>
+<pre><code>-owner -admin -trusted</code></pre>
 </div></div>
 <div class="paragraph"><p>See also <a href="#capabilities">Capabilities</a>.</p></div>
 </div>
@@ -2285,15 +2281,15 @@ cellspacing="0" cellpadding="4">
 <h4 id="_setting_nickname_amp_alternative_nick">4.4.1. Setting nickname &amp; alternative nick</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>admin nick &lt;newnick&gt;</tt>
+<code>admin nick &lt;newnick&gt;</code>
 </dt>
 <dd>
 <p>
-        Change nick to <tt>newnick</tt>.
+        Change nick to <code>newnick</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config nick</tt>
+<code>config nick</code>
 </dt>
 <dd>
 <p>
@@ -2301,7 +2297,7 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config nick.alternates</tt>
+<code>config nick.alternates</code>
 </dt>
 <dd>
 <p>
@@ -2322,11 +2318,11 @@ cellspacing="0" cellpadding="4">
 <h4 id="_setting_ident">4.4.2. Setting ident</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>config ident &lt;newident&gt;</tt>
+<code>config ident &lt;newident&gt;</code>
 </dt>
 <dd>
 <p>
-        Sets the bot&#8217;s ident (<tt>nick!ident@host</tt>).
+        Sets the bot&#8217;s ident (<code>nick!ident@host</code>).
 </p>
 </dd>
 </dl></div>
@@ -2335,21 +2331,21 @@ cellspacing="0" cellpadding="4">
 <h4 id="_setting_ircname">4.4.3. Setting ircname</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>config user [ircname]</tt>
+<code>config user [ircname]</code>
 </dt>
 <dd>
 <p>
-        Sets the bot&#8217;s ircname/realname to <tt>ircname</tt>. If left empty, defaults to <em>Supybot 0.83.3</em> for example.
+        Sets the bot&#8217;s ircname/realname to <code>ircname</code>. If left empty, defaults to <em>Supybot 0.83.3</em> for example.
 </p>
 </dd>
 </dl></div>
 </div>
 <div class="sect3">
 <h4 id="_setting_command_prefix_controlling_when_the_bot_replies">4.4.4. Setting command prefix / controlling when the bot replies</h4>
-<div class="paragraph"><p>Like most other bots, the bot can be addressed by its nickname, or a command prefix character (any or many of <tt>~!@#$%^&amp;*()_-+=[{}]\|'";:,&lt;.&gt;/?</tt>). For special (braindead?) purposes the bot can also be made assume that all lines are addressed to it.</p></div>
+<div class="paragraph"><p>Like most other bots, the bot can be addressed by its nickname, or a command prefix character (any or many of <code>~!@#$%^&amp;*()_-+=[{}]\|'";:,&lt;.&gt;/?</code>). For special (braindead?) purposes the bot can also be made assume that all lines are addressed to it.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>config reply.whenAddressedBy.chars</tt>
+<code>config reply.whenAddressedBy.chars</code>
 </dt>
 <dd>
 <p>
@@ -2357,7 +2353,7 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config channel [channel] reply.whenAddressedBy.chars</tt>
+<code>config channel [channel] reply.whenAddressedBy.chars</code>
 </dt>
 <dd>
 <p>
@@ -2365,15 +2361,15 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config reply.whenNotAddressed</tt>
+<code>config reply.whenNotAddressed</code>
 </dt>
 <dd>
 <p>
-        Assume everyone wants to talk to the bot, eg. treat all messages as if addressed to the bot. This does not imply <tt>reply.WhenNotCommand False</tt> which you should set as well.
+        Assume everyone wants to talk to the bot, eg. treat all messages as if addressed to the bot. This does not imply <code>reply.WhenNotCommand False</code> which you should set as well.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config reply.whenNotCommand</tt>
+<code>config reply.whenNotCommand</code>
 </dt>
 <dd>
 <p>
@@ -2388,7 +2384,7 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p>Like other bots, Supybot can be configured to try and keep the primary nick using the <span class="green">NickCapture</span> plugin. This is primarily useful in networks with no NickServ support.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>load NickCapture</tt>
+<code>load NickCapture</code>
 </dt>
 <dd>
 <p>
@@ -2396,15 +2392,15 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config plugins.NickCapture.ison</tt>
+<code>config plugins.NickCapture.ison</code>
 </dt>
 <dd>
 <p>
-        Whether the plugin is actively checking for the primary nick. This setting makes no sense, as you might as well <tt>unload NickCapture</tt> if you think about setting this to false.
+        Whether the plugin is actively checking for the primary nick. This setting makes no sense, as you might as well <code>unload NickCapture</code> if you think about setting this to false.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config plugins.NickCapture.ison.period</tt>
+<code>config plugins.NickCapture.ison.period</code>
 </dt>
 <dd>
 <p>
@@ -2416,8 +2412,8 @@ cellspacing="0" cellpadding="4">
 </div>
 <div class="sect2">
 <h3 id="_owner_commands">4.5. Owner commands</h3>
-<div class="paragraph"><p><tt>owner announce &lt;text&gt;</tt> - send <tt>text</tt> to all channels the bot is on.</p></div>
-<div class="paragraph"><p><tt>owner ircquote &lt;raw&gt;</tt> - send <tt>raw</tt> as-is to the server. You need to know your way around <a href="http://www.faqs.org/rfcs/rfc1459.html">RFC1459</a> pretty well to use this.</p></div>
+<div class="paragraph"><p><code>owner announce &lt;text&gt;</code> - send <code>text</code> to all channels the bot is on.</p></div>
+<div class="paragraph"><p><code>owner ircquote &lt;raw&gt;</code> - send <code>raw</code> as-is to the server. You need to know your way around <a href="http://www.faqs.org/rfcs/rfc1459.html">RFC1459</a> pretty well to use this.</p></div>
 </div>
 </div>
 </div>
@@ -2428,23 +2424,23 @@ cellspacing="0" cellpadding="4">
 <h3 id="searching-history">5.1. Searching the history</h3>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>url last [channel] [--{from,with,without,near,proto} value] [--nolimit]</tt>
+<code>url last [channel] [--{from,with,without,near,proto} value] [--nolimit]</code>
 </dt>
 <dd>
 <p>
-        Find last URL (or all with <tt>--nolimit</tt>) matching given criteria. From matches nick, with(out) part of the URL, near rest of the line where the URL was, and proto matches the protocol (https, ftp, etc). In case of multiple URLs, the newest is listed first. Multiple criterias can be given.
+        Find last URL (or all with <code>--nolimit</code>) matching given criteria. From matches nick, with(out) part of the URL, near rest of the line where the URL was, and proto matches the protocol (https, ftp, etc). In case of multiple URLs, the newest is listed first. Multiple criterias can be given.
 </p>
 <div class="literalblock">
 <div class="content">
-<pre><tt>NOTE: This command lists only the URLs, not nick or what message the URLs were part of. No date is shown either.</tt></pre>
+<pre><code>NOTE: This command lists only the URLs, not nick or what message the URLs were part of. No date is shown either.</code></pre>
 </div></div>
 </dd>
 <dt class="hdlist1">
-<tt>last [--from,in,on,with,without,regexp} value] [--nolimit]</tt>
+<code>last [--from,in,on,with,without,regexp} value] [--nolimit]</code>
 </dt>
 <dd>
 <p>
-        Find messages matching given criteria. From matches nick, in matches channel, on matches network, with(out) matches part of the message, regexp matches messages that are included by the regular expression. Also see <tt>config protocols.irc.maxHistoryLength</tt>.
+        Find messages matching given criteria. From matches nick, in matches channel, on matches network, with(out) matches part of the message, regexp matches messages that are included by the regular expression. Also see <code>config protocols.irc.maxHistoryLength</code>.
 </p>
 </dd>
 </dl></div>
@@ -2453,116 +2449,116 @@ cellspacing="0" cellpadding="4">
 <h3 id="_useful_plugins">5.2. Useful plugins</h3>
 <div class="sect3">
 <h4 id="plugin_alias">5.2.1. Alias</h4>
-<div class="paragraph"><p>Alias is one of the most powerful plugins available in Supybot. It allows you to set up <em>shortcuts</em> to other commands. When put together with command nesting, and the ability to provide arbitrary number of required and optional arguments to each alias, this becomes a very versatile feature. The main commands in this plugin are <tt>add</tt> and <tt>remove</tt> to add and remove aliases:</p></div>
+<div class="paragraph"><p>Alias is one of the most powerful plugins available in Supybot. It allows you to set up <em>shortcuts</em> to other commands. When put together with command nesting, and the ability to provide arbitrary number of required and optional arguments to each alias, this becomes a very versatile feature. The main commands in this plugin are <code>add</code> and <code>remove</code> to add and remove aliases:</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>add &lt;name&gt; &lt;alias&gt;</tt>
+<code>add &lt;name&gt; &lt;alias&gt;</code>
 </dt>
 <dd>
 <p>
-         Defines an alias <tt>name</tt> that executes <tt>alias</tt>. The <tt>alias</tt> should be in the standard "command argument [nestedcommand argument]" arguments to the alias; they&#8217;ll be filled with the first, second, etc. arguments. $1, $2, etc. can be used for required arguments. @1, @2, etc. can be used for optional arguments. $* simply means "all remaining arguments," and cannot be combined with optional arguments.
+         Defines an alias <code>name</code> that executes <code>alias</code>. The <code>alias</code> should be in the standard "command argument [nestedcommand argument]" arguments to the alias; they&#8217;ll be filled with the first, second, etc. arguments. $1, $2, etc. can be used for required arguments. @1, @2, etc. can be used for optional arguments. $* simply means "all remaining arguments," and cannot be combined with optional arguments.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>remove &lt;name&gt;</tt>
+<code>remove &lt;name&gt;</code>
 </dt>
 <dd>
 <p>
-        Removes the alias named <tt>name</tt>.
+        Removes the alias named <code>name</code>.
 </p>
 </dd>
 </dl></div>
 <div class="paragraph"><p>As a simple example, let&#8217;s say you want to set up a quick check to see if some website is down, using the downforeveryoneorjustme.com service. See the following example session for how you&#8217;d accomlish that:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; alias add isitdown web title http://isitup.org/$1
+<pre><code>&lt;user&gt; alias add isitdown web title http://isitup.org/$1
 &lt;supybot&gt; The operation succeeded.
 &lt;user&gt; isitdown google.com
-&lt;supybot&gt; It's just you.</tt></pre>
+&lt;supybot&gt; It's just you.</code></pre>
 </div></div>
-<div class="paragraph"><p>What this has accomplished is that you don&#8217;t have to give the full command, which would be <tt>web title http://downforeveryoneorjustme.com/google.com</tt>, instead you now have a quick shortcut to check the status of a site. Aliases get their own help messages, just like all the normal commands, which tell us what got stored in the alias. For example, for the alias above:</p></div>
+<div class="paragraph"><p>What this has accomplished is that you don&#8217;t have to give the full command, which would be <code>web title http://downforeveryoneorjustme.com/google.com</code>, instead you now have a quick shortcut to check the status of a site. Aliases get their own help messages, just like all the normal commands, which tell us what got stored in the alias. For example, for the alias above:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; help isitdown
-&lt;supybot&gt; (isitdown &lt;an alias, 1 argument&gt;) -- Alias for "web title http://downforeveryoneorjustme.com/$1".</tt></pre>
+<pre><code>&lt;user&gt; help isitdown
+&lt;supybot&gt; (isitdown &lt;an alias, 1 argument&gt;) -- Alias for "web title http://downforeveryoneorjustme.com/$1".</code></pre>
 </div></div>
-<div class="paragraph"><p>We have introduced the variable substitution feature of aliases here. Note the <tt>$1</tt> in the alias, which means "put the first argument provided to this command right here". You can also have optional arguments, which are represented as <tt>@1</tt>, <tt>@2</tt>, etc. There is also <tt>$*</tt> which acts as a placeholder for "all the remaining arguments", but it cannot be mixed with optional arguments. For example, we can try the following:</p></div>
+<div class="paragraph"><p>We have introduced the variable substitution feature of aliases here. Note the <code>$1</code> in the alias, which means "put the first argument provided to this command right here". You can also have optional arguments, which are represented as <code>@1</code>, <code>@2</code>, etc. There is also <code>$*</code> which acts as a placeholder for "all the remaining arguments", but it cannot be mixed with optional arguments. For example, we can try the following:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; alias add saymoo echo moo $1 @1
+<pre><code>&lt;user&gt; alias add saymoo echo moo $1 @1
 &lt;supybot&gt; The operation succeeded.
 &lt;user&gt; help saymoo
 &lt;supybot&gt; (saymoo &lt;an alias, at least 1 argument&gt;) -- Alias for "echo moo $1 @1".
 &lt;user&gt; saymoo bla
 &lt;supybot&gt; moo bla
 &lt;user&gt; saymoo bla stuff
-&lt;supybot&gt; moo bla stuff</tt></pre>
+&lt;supybot&gt; moo bla stuff</code></pre>
 </div></div>
 <div class="paragraph"><p>There are some important details to understand when you use nested commands and quotes in your aliases. For example, you might naively try the following:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; alias add test echo [uptime]
+<pre><code>&lt;user&gt; alias add test echo [uptime]
 &lt;supybot&gt; The operation succeeded.
 &lt;user&gt; help test
-&lt;supybot&gt; (test &lt;an alias, 0 arguments&gt;) -- Alias for "echo I have been running for 1 day, 14 hours, 46 minutes, and 53 seconds.".</tt></pre>
+&lt;supybot&gt; (test &lt;an alias, 0 arguments&gt;) -- Alias for "echo I have been running for 1 day, 14 hours, 46 minutes, and 53 seconds.".</code></pre>
 </div></div>
 <div class="paragraph"><p>Notice what happened - the uptime command was executed, then stored into the alias, rather than the actual command nesting getting stored. Every time you call the test command, the output will always be exactly the same. This is probably not what you had in mind. To avoid immediate nested command evaluation, you must put quotes around the argument to alias (or around the argument to echo). Like so:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; alias add test "echo [uptime]"
+<pre><code>&lt;user&gt; alias add test "echo [uptime]"
 &lt;supybot&gt; The operation succeeded.
 &lt;user&gt; help test
 &lt;supybot&gt; (test &lt;an alias, 0 arguments&gt;) -- Alias for "echo [uptime]".
 &lt;user&gt; test
-&lt;supybot&gt; I have been running for 1 day, 14 hours, 50 minutes, and 19 seconds.</tt></pre>
+&lt;supybot&gt; I have been running for 1 day, 14 hours, 50 minutes, and 19 seconds.</code></pre>
 </div></div>
 <div class="paragraph"><p>There, much better!</p></div>
 <div class="paragraph"><p>Another issue we&#8217;ll want to address is, what if you want literal quotes in your alias output? For example, say you want an alias that would give the following output:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; test
-&lt;supybot&gt; bla "moo" bla</tt></pre>
+<pre><code>&lt;user&gt; test
+&lt;supybot&gt; bla "moo" bla</code></pre>
 </div></div>
-<div class="paragraph"><p>We are going to use the <tt>echo</tt> command from the <em>Utilities</em> plugin, which lets the user make the bot say any string. Our first naive try may be the following:</p></div>
+<div class="paragraph"><p>We are going to use the <code>echo</code> command from the <em>Utilities</em> plugin, which lets the user make the bot say any string. Our first naive try may be the following:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; alias add test echo bla "moo" bla
+<pre><code>&lt;user&gt; alias add test echo bla "moo" bla
 &lt;supybot&gt; The operation succeeded.
 &lt;user&gt; help test
 &lt;supybot&gt; (test &lt;an alias, 0 arguments&gt;) -- Alias for "echo bla moo bla".
 &lt;user&gt; test
-&lt;supybot&gt; bla moo bla</tt></pre>
+&lt;supybot&gt; bla moo bla</code></pre>
 </div></div>
 <div class="paragraph"><p>Doesn&#8217;t work. The quotes are simply taken as quoting an argument, and don&#8217;t make it into the alias. Let&#8217;s try escaping the quotes and see what happens.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; alias add test echo bla \"moo\" bla
+<pre><code>&lt;user&gt; alias add test echo bla \"moo\" bla
 &lt;supybot&gt; The operation succeeded.
 &lt;user&gt; help test
 &lt;supybot&gt; (test &lt;an alias, 0 arguments&gt;) -- Alias for "echo bla \"moo\" bla".
 &lt;user&gt; test
-&lt;supybot&gt; bla \"moo\" bla</tt></pre>
+&lt;supybot&gt; bla \"moo\" bla</code></pre>
 </div></div>
 <div class="paragraph"><p>Closer, but still no cigar - this is because of the way supybot argument parsing works - unquoted arguments get taken as string literals, while quoted arguments get string parsing done on them. Compare the two outputs below:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; echo bla\"bla
+<pre><code>&lt;user&gt; echo bla\"bla
 &lt;supybot&gt; bla\"bla
 &lt;user&gt; echo "bla\"bla"
-&lt;supybot&gt; bla"bla</tt></pre>
+&lt;supybot&gt; bla"bla</code></pre>
 </div></div>
-<div class="paragraph"><p>Raw unquoted string is taken as a literal, while the quoted string interprets the <tt>\"</tt> sequence as an escaped quote character. This is what we want. Our goal is, then, to get the string <tt>echo "bla \"moo\" bla"</tt> as the content of our alias.</p></div>
+<div class="paragraph"><p>Raw unquoted string is taken as a literal, while the quoted string interprets the <code>\"</code> sequence as an escaped quote character. This is what we want. Our goal is, then, to get the string <code>echo "bla \"moo\" bla"</code> as the content of our alias.</p></div>
 <div class="paragraph"><p>Our final, successful, try follows:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; alias add test "echo \"bla \\\"moo\\\" bla\""
+<pre><code>&lt;user&gt; alias add test "echo \"bla \\\"moo\\\" bla\""
 &lt;supybot&gt; The operation succeeded.
 &lt;user&gt; test
 &lt;supybot&gt; bla "moo" bla
 &lt;user&gt; help test
-&lt;supybot&gt; (test &lt;an alias, 0 arguments&gt;) -- Alias for "echo "bla \"moo\" bla"".</tt></pre>
+&lt;supybot&gt; (test &lt;an alias, 0 arguments&gt;) -- Alias for "echo "bla \"moo\" bla"".</code></pre>
 </div></div>
-<div class="paragraph"><p>Note what is happening here. First, we quote the entire content of the alias as an argument, to get string parsing going. We escape the quote character before bla, to get a literal quote character into the alias string. We then triple-escape the second quote character. <tt>\\</tt> gets a literal backslash into our alias string, while the following <tt>\"</tt> gets a literal quote. We do the same thing for the closing quotation around <tt>moo</tt>. Finally, we stick in another literal quote to finish quoting the argument to echo, and at the end, close the exterior quotation pair.</p></div>
+<div class="paragraph"><p>Note what is happening here. First, we quote the entire content of the alias as an argument, to get string parsing going. We escape the quote character before bla, to get a literal quote character into the alias string. We then triple-escape the second quote character. <code>\\</code> gets a literal backslash into our alias string, while the following <code>\"</code> gets a literal quote. We do the same thing for the closing quotation around <code>moo</code>. Finally, we stick in another literal quote to finish quoting the argument to echo, and at the end, close the exterior quotation pair.</p></div>
 <div class="paragraph"><p>Quite a bit of detail here - but necessary to know if you&#8217;re going to be using aliases to perform complex tasks.</p></div>
 </div>
 <div class="sect3">
@@ -2570,19 +2566,19 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p>Allows you to provide users a way to chat on a channel anonymously (eg. only the bot owner(s) know via logs who are talking).</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>do &lt;channel&gt; &lt;action&gt;</tt>
+<code>do &lt;channel&gt; &lt;action&gt;</code>
 </dt>
 <dd>
 <p>
-        Sends <tt>action</tt> to <tt>channel</tt>. This is the same as a normal IRC client <tt>/me does something</tt> command.
+        Sends <code>action</code> to <code>channel</code>. This is the same as a normal IRC client <code>/me does something</code> command.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>say &lt;channel&gt; &lt;text&gt;</tt>
+<code>say &lt;channel&gt; &lt;text&gt;</code>
 </dt>
 <dd>
 <p>
-        Say <tt>text</tt> on <tt>channel</tt>.
+        Say <code>text</code> on <code>channel</code>.
 </p>
 </dd>
 </dl></div>
@@ -2660,15 +2656,15 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p><span class="green">Dict</span> provides dictionary functionality using dict.org. You can also use a local dictd server.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>dict [dictionary] &lt;word&gt;</tt>
+<code>dict [dictionary] &lt;word&gt;</code>
 </dt>
 <dd>
 <p>
-        Show dictionary entry for <tt>word</tt>, from <tt>dictionary</tt> if provided. If <tt>plugins.Dict.default</tt> is set, use the specified dictionary instead of all.
+        Show dictionary entry for <code>word</code>, from <code>dictionary</code> if provided. If <code>plugins.Dict.default</code> is set, use the specified dictionary instead of all.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>dictionaries</tt>
+<code>dictionaries</code>
 </dt>
 <dd>
 <p>
@@ -2676,7 +2672,7 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>dict random</tt>
+<code>dict random</code>
 </dt>
 <dd>
 <p>
@@ -2684,7 +2680,7 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config plugins.Dict.server [server]</tt>
+<code>config plugins.Dict.server [server]</code>
 </dt>
 <dd>
 <p>
@@ -2692,11 +2688,11 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config plugins.Dict.default [dictionary]</tt>
+<code>config plugins.Dict.default [dictionary]</code>
 </dt>
 <dd>
 <p>
-        Channel-specific default dictionary for <tt>dict</tt> command. <tt>*</tt> means to use all dictionaries. <tt>wn</tt> is a good default if english words are mostly looked up.
+        Channel-specific default dictionary for <code>dict</code> command. <code>*</code> means to use all dictionaries. <code>wn</code> is a good default if english words are mostly looked up.
 </p>
 </dd>
 </dl></div>
@@ -2706,23 +2702,23 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p>This is a nick-based replacement for NoteServ and the likes. Simply put, you give the bot a note to deliver to a nick (or wildcard) the next time it sees a matching nick. In other words, this can be used to deliver messages to people who are not registered to the bot. Naturally that is not a very safe method of communicating.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>notes [nick]</tt>
+<code>notes [nick]</code>
 </dt>
 <dd>
 <p>
-        List nicks that have notes queued, or the notes queued for <tt>nick</tt> if given.
+        List nicks that have notes queued, or the notes queued for <code>nick</code> if given.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>later tell &lt;nick&gt; &lt;text&gt;</tt>
+<code>later tell &lt;nick&gt; &lt;text&gt;</code>
 </dt>
 <dd>
 <p>
-        Queues <tt>text</tt> to be sent to first matching <tt>nick</tt> when seen. Nick can contain wildcards, eg. <tt>foo*</tt>.
+        Queues <code>text</code> to be sent to first matching <code>nick</code> when seen. Nick can contain wildcards, eg. <code>foo*</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config plugins.Later.maximum</tt>
+<code>config plugins.Later.maximum</code>
 </dt>
 <dd>
 <p>
@@ -2730,7 +2726,7 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>config plugins.Later.private</tt>
+<code>config plugins.Later.private</code>
 </dt>
 <dd>
 <p>
@@ -2744,16 +2740,16 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p>MoobotFactoids implements nifty factoids.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; !supybook is &lt;reply&gt; Please read http://supybook.fealdia.org/ before asking.
+<pre><code>&lt;user&gt; !supybook is &lt;reply&gt; Please read http://supybook.fealdia.org/ before asking.
 &lt;bot&gt; OK
 &lt;user&gt; !supybook
-&lt;bot&gt; Please read http://supybook.fealdia.org/ before asking.</tt></pre>
+&lt;bot&gt; Please read http://supybook.fealdia.org/ before asking.</code></pre>
 </div></div>
 <div class="listingblock">
 <div class="title">Setting up</div>
 <div class="content">
-<pre><tt>config databases [config databases] sqlite
-load moobotfactoids</tt></pre>
+<pre><code>config databases [config databases] sqlite
+load moobotfactoids</code></pre>
 </div></div>
 <div class="admonitionblock">
 <table><tr>
@@ -2765,8 +2761,8 @@ load moobotfactoids</tt></pre>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>NoSuitableDatabase: No suitable databases were found.  Suitable databases include sqlite.
-Error: You need to have PySQLite installed to use this plugin.  Download it at &lt;http://pysqlite.org/&gt;</tt></pre>
+<pre><code>NoSuitableDatabase: No suitable databases were found.  Suitable databases include sqlite.
+Error: You need to have PySQLite installed to use this plugin.  Download it at &lt;http://pysqlite.org/&gt;</code></pre>
 </div></div>
 </div>
 <div class="sect3">
@@ -2774,60 +2770,60 @@ Error: You need to have PySQLite installed to use this plugin.  Download it at &
 <div class="paragraph"><p><span class="green">Scheduler</span> allows you to run commands at a later time.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; !scheduler add [seconds 1h] echo $who: ping
+<pre><code>&lt;user&gt; !scheduler add [seconds 1h] echo $who: ping
 &lt;bot&gt; OK  Event #631 added.
-&lt;bot&gt; user: ping</tt></pre>
+&lt;bot&gt; user: ping</code></pre>
 </div></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>scheduler add &lt;seconds&gt; &lt;command&gt;</tt>
+<code>scheduler add &lt;seconds&gt; &lt;command&gt;</code>
 </dt>
 <dd>
 <p>
-        Add a <tt>command</tt> to be run <tt>seconds</tt> seconds later. For the <tt>seconds</tt> parameter you probably want to use <tt>seconds</tt> command available in the <span class="green">Time</span> plugin, eg. <tt>scheduler add [seconds 1d 3h] echo $who: give feedback on supybook</tt>.
+        Add a <code>command</code> to be run <code>seconds</code> seconds later. For the <code>seconds</code> parameter you probably want to use <code>seconds</code> command available in the <span class="green">Time</span> plugin, eg. <code>scheduler add [seconds 1d 3h] echo $who: give feedback on supybook</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>scheduler list</tt>
+<code>scheduler list</code>
 </dt>
 <dd>
 <p>
-        Lists scheduled events, with their <tt>id</tt> for removal. Unfortunately it does not show much time is left until each event.
+        Lists scheduled events, with their <code>id</code> for removal. Unfortunately it does not show much time is left until each event.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>scheduler remove &lt;id&gt;</tt>
+<code>scheduler remove &lt;id&gt;</code>
 </dt>
 <dd>
 <p>
-        Removes event <tt>id</tt>. <tt>id</tt> can be a numerical value as given by <tt>scheduler add</tt> and <tt>scheduler list</tt>, or a <tt>name</tt> that was given via <tt>scheduler repeat</tt>.
+        Removes event <code>id</code>. <code>id</code> can be a numerical value as given by <code>scheduler add</code> and <code>scheduler list</code>, or a <code>name</code> that was given via <code>scheduler repeat</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>scheduler repeat &lt;name&gt; &lt;seconds&gt; &lt;command&gt;</tt>
+<code>scheduler repeat &lt;name&gt; &lt;seconds&gt; &lt;command&gt;</code>
 </dt>
 <dd>
 <p>
-        Like <tt>scheduler add</tt>, but adds a repeating command, and allows giving a name for it. The first trigger happens immediately, and then after every <tt>seconds</tt>.
+        Like <code>scheduler add</code>, but adds a repeating command, and allows giving a name for it. The first trigger happens immediately, and then after every <code>seconds</code>.
 </p>
 </dd>
 </dl></div>
-<div class="paragraph"><p>There are two quirks with this plugin. First one is that <tt>scheduler list</tt> does not display how much time is left until each event. The second one is the weird inconsistency between <tt>scheduler add</tt> and <tt>scheduler repeat</tt> - the latter allows giving a name for the event, unlike the first one.</p></div>
+<div class="paragraph"><p>There are two quirks with this plugin. First one is that <code>scheduler list</code> does not display how much time is left until each event. The second one is the weird inconsistency between <code>scheduler add</code> and <code>scheduler repeat</code> - the latter allows giving a name for the event, unlike the first one.</p></div>
 </div>
 <div class="sect3">
 <h4 id="plugin_seen">5.2.7. Seen</h4>
 <div class="paragraph"><p>The <span class="green">Seen</span> plugin keeps track of last channel/nick/user activity. Most typical use is asking the bot when a given user was last seen chatting on a channel.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>seen any [channel] [--user &lt;user&gt;] [nick]</tt>
+<code>seen any [channel] [--user &lt;user&gt;] [nick]</code>
 </dt>
 <dd>
 <p>
-        Lists any activity given <tt>nick</tt> or <tt>user</tt> was doing on the channel. If no <tt>nick</tt> or <tt>user</tt> is given, returns the last activity on the channel, regardless of who it was from.
+        Lists any activity given <code>nick</code> or <code>user</code> was doing on the channel. If no <code>nick</code> or <code>user</code> is given, returns the last activity on the channel, regardless of who it was from.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>seen last [channel]</tt>
+<code>seen last [channel]</code>
 </dt>
 <dd>
 <p>
@@ -2835,15 +2831,15 @@ Error: You need to have PySQLite installed to use this plugin.  Download it at &
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>seen [channel] &lt;nick&gt;</tt>
+<code>seen [channel] &lt;nick&gt;</code>
 </dt>
 <dd>
 <p>
-        Last time a <tt>nick</tt> was seen on a channel and what it said.
+        Last time a <code>nick</code> was seen on a channel and what it said.
 </p>
 </dd>
 </dl></div>
-<div class="paragraph"><p><tt>seen user [channel] &lt;user&gt;</tt>:
+<div class="paragraph"><p><code>seen user [channel] &lt;user&gt;</code>:
         Ditto, except use a user name, disregarding what nick the said user had.</p></div>
 </div>
 <div class="sect3">
@@ -2851,7 +2847,7 @@ Error: You need to have PySQLite installed to use this plugin.  Download it at &
 <div class="paragraph"><p>The <span class="green">Time</span> plugin is an utility plugin for basic time-related tasks. Mostly useful when used in nested commands with other commands.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; ctime [time at "Today is 25 of September of 2003, exactly at 10:49:41"]
+<pre><code>&lt;user&gt; ctime [time at "Today is 25 of September of 2003, exactly at 10:49:41"]
 &lt;bot&gt; Thu Sep 25 10:49:41 2003
 
 &lt;user&gt; time ctime 0
@@ -2877,35 +2873,35 @@ Error: You need to have PySQLite installed to use this plugin.  Download it at &
 
 &lt;user&gt; alias add timedelta "time elapsed [calc [time at $2] - [time at $1]]"
 &lt;user&gt; timedelta 2012-01-01 2013-02-23
-&lt;bot&gt; 1 year, 7 weeks, 5 days, 0 hours, and 0 seconds</tt></pre>
+&lt;bot&gt; 1 year, 7 weeks, 5 days, 0 hours, and 0 seconds</code></pre>
 </div></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>time at &lt;time string&gt;</tt>
+<code>time at &lt;time string&gt;</code>
 </dt>
 <dd>
 <p>
-        Show unix epoch timestamp for <tt>time string</tt>. Supybot internally uses <a href="https://labix.org/python-dateutil">python-dateutil</a> for the parsing, so a wide variety of formats is supported. See section 8.3.4 for the examples.
+        Show unix epoch timestamp for <code>time string</code>. Supybot internally uses <a href="https://labix.org/python-dateutil">python-dateutil</a> for the parsing, so a wide variety of formats is supported. See section 8.3.4 for the examples.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>time ctime [seconds]</tt>
+<code>time ctime [seconds]</code>
 </dt>
 <dd>
 <p>
-        Show formatted date for unix epoch timestamp <tt>seconds</tt>, for example <tt>Thu Jan  1 00:00:00 1970</tt>.
+        Show formatted date for unix epoch timestamp <code>seconds</code>, for example <code>Thu Jan  1 00:00:00 1970</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>time elapsed &lt;seconds&gt;</tt>
+<code>time elapsed &lt;seconds&gt;</code>
 </dt>
 <dd>
 <p>
-        Shows how many years/weeks/days/hours/minutes/seconds <tt>seconds</tt> equals to. Counterpart of <tt>time seconds</tt> below.
+        Shows how many years/weeks/days/hours/minutes/seconds <code>seconds</code> equals to. Counterpart of <code>time seconds</code> below.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>time seconds [&lt;years&gt;y] [&lt;weeks&gt;w] [&lt;days&gt;d] [&lt;hours&gt;h] [&lt;minutes&gt;m] [&lt;seconds&gt;s]</tt>
+<code>time seconds [&lt;years&gt;y] [&lt;weeks&gt;w] [&lt;days&gt;d] [&lt;hours&gt;h] [&lt;minutes&gt;m] [&lt;seconds&gt;s]</code>
 </dt>
 <dd>
 <p>
@@ -2913,19 +2909,19 @@ Error: You need to have PySQLite installed to use this plugin.  Download it at &
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>time time [&lt;format&gt;] [&lt;seconds since epoch&gt;]</tt>
+<code>time time [&lt;format&gt;] [&lt;seconds since epoch&gt;]</code>
 </dt>
 <dd>
 <p>
-        Formats the given unix epoch timestamp in <tt>format</tt>, using python&#8217;s <a href="http://docs.python.org/2/library/time.html#time.strftime">time.strftime</a>.
+        Formats the given unix epoch timestamp in <code>format</code>, using python&#8217;s <a href="http://docs.python.org/2/library/time.html#time.strftime">time.strftime</a>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>time until &lt;time string&gt;</tt>
+<code>time until &lt;time string&gt;</code>
 </dt>
 <dd>
 <p>
-        How many seconds are until <tt>time string</tt>. Same format as for <tt>time at</tt>. The given time can also be in the past, making the result negative.
+        How many seconds are until <code>time string</code>. Same format as for <code>time at</code>. The given time can also be in the past, making the result negative.
 </p>
 </dd>
 </dl></div>
@@ -2935,31 +2931,31 @@ Error: You need to have PySQLite installed to use this plugin.  Download it at &
 <div class="paragraph"><p>The <span class="green">Web</span> plugin contains some useful WWW-related functionality, such as fetching titles for URLs users paste on the channel.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>doctype &lt;url&gt;</tt>
+<code>doctype &lt;url&gt;</code>
 </dt>
 <dd>
 <p>
-        Show the doctype line of <tt>url</tt>, if any.
+        Show the doctype line of <code>url</code>, if any.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>fetch &lt;url&gt;</tt>
+<code>fetch &lt;url&gt;</code>
 </dt>
 <dd>
 <p>
-        Show the contents of <tt>url</tt>. Amount of data shown is determined by the configuration variable <tt>plugins.Web.fetch.maximum</tt>.
+        Show the contents of <code>url</code>. Amount of data shown is determined by the configuration variable <code>plugins.Web.fetch.maximum</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>headers &lt;url&gt;</tt>
+<code>headers &lt;url&gt;</code>
 </dt>
 <dd>
 <p>
-        Show web server headers for the <tt>url</tt>.
+        Show web server headers for the <code>url</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>netcraft &lt;hostname|ip&gt;</tt>
+<code>netcraft &lt;hostname|ip&gt;</code>
 </dt>
 <dd>
 <p>
@@ -2967,31 +2963,31 @@ Error: You need to have PySQLite installed to use this plugin.  Download it at &
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>size &lt;url&gt;</tt>
+<code>size &lt;url&gt;</code>
 </dt>
 <dd>
 <p>
-        Show size of <tt>url</tt>, based on the <tt>Content-Length</tt> header sent by the web server.
+        Show size of <code>url</code>, based on the <code>Content-Length</code> header sent by the web server.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>title &lt;url&gt;</tt>
+<code>title &lt;url&gt;</code>
 </dt>
 <dd>
 <p>
-        Show title for <tt>url</tt>. This can be done automatically for all URLs pasted on a channel; see the configuration variable <tt>plugins.Web.titleSnarfer</tt>.
+        Show title for <code>url</code>. This can be done automatically for all URLs pasted on a channel; see the configuration variable <code>plugins.Web.titleSnarfer</code>. Note that the amount of fetched data is determined by the configuration variable <code>protocols.http.peekSize</code>. You may need to increase that for certain pages, like YouTube.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>urlquote &lt;text&gt;</tt>
+<code>urlquote &lt;text&gt;</code>
 </dt>
 <dd>
 <p>
-        Return <tt>text</tt> quoted into a URL. Eg. <tt>urlquote foo bar</tt> &#8594; <tt>foo%20bar</tt>.
+        Return <code>text</code> quoted into a URL. Eg. <code>urlquote foo bar</code> &#8594; <code>foo%20bar</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>urlunquote &lt;text&gt;</tt>
+<code>urlunquote &lt;text&gt;</code>
 </dt>
 <dd>
 <p>
@@ -3050,7 +3046,7 @@ cellspacing="0" cellpadding="4">
     0
     </td>
     <td align="left">
-    Maximum bytes to fetch with the <tt>fetch</tt> command. If zero, <tt>fetch</tt> is disabled.
+    Maximum bytes to fetch with the <code>fetch</code> command. If zero, <code>fetch</code> is disabled.
     </td>
   </tr>
 </tbody>
@@ -3063,10 +3059,10 @@ cellspacing="0" cellpadding="4">
 <div class="sect3">
 <h4 id="plugin_channelstats">5.3.1. ChannelStats</h4>
 <div class="paragraph"><p><span class="green">ChannelStats</span> provides channel/registered user statistics (statistics as in <em>large numbers</em>).</p></div>
-<div class="paragraph"><p><tt>channelstats [channel]</tt>:
-        Show statistics for <tt>channel</tt>: messages, characters, words, smileys, frowns, actions, joins, parts, quits, kicks, mode changes, and topic changes.</p></div>
-<div class="paragraph"><p><tt>stats [channel] [user]</tt>:
-        Show statistics for <tt>user</tt> on <tt>channel</tt>: messages, characters, words, smileys, frowns, actions, joins, parts, quits, kicks given/received, topic changes, and mode changes.</p></div>
+<div class="paragraph"><p><code>channelstats [channel]</code>:
+        Show statistics for <code>channel</code>: messages, characters, words, smileys, frowns, actions, joins, parts, quits, kicks, mode changes, and topic changes.</p></div>
+<div class="paragraph"><p><code>stats [channel] [user]</code>:
+        Show statistics for <code>user</code> on <code>channel</code>: messages, characters, words, smileys, frowns, actions, joins, parts, quits, kicks given/received, topic changes, and mode changes.</p></div>
 <div class="admonitionblock">
 <table><tr>
 <td class="icon">
@@ -3102,7 +3098,7 @@ cellspacing="0" cellpadding="4">
     #frowns
     </td>
     <td align="left">
-    <tt>:| :-/ :-\ :\ :/ :( :-( :'(</tt>
+    <code>:| :-/ :-\ :\ :/ :( :-( :'(</code>
     </td>
     <td align="left">
     Space-separated list of frowns.
@@ -3113,7 +3109,7 @@ cellspacing="0" cellpadding="4">
     #selfStats
     </td>
     <td align="left">
-    <tt>True</tt>
+    <code>True</code>
     </td>
     <td align="left">
     Whether to include the bot in the statistics.
@@ -3124,7 +3120,7 @@ cellspacing="0" cellpadding="4">
     #smileys
     </td>
     <td align="left">
-    <tt>:) ;) ;] :-) :-D :D :P :p (= =)</tt>
+    <code>:) ;) ;] :-) :-D :D :P :p (= =)</code>
     </td>
     <td align="left">
     Space-separated list of smileys.
@@ -3138,7 +3134,7 @@ cellspacing="0" cellpadding="4">
 <h4 id="plugin_games">5.3.2. Games</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>coin</tt>
+<code>coin</code>
 </dt>
 <dd>
 <p>
@@ -3146,15 +3142,15 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>dice &lt;dices&gt;d&lt;sides&gt;</tt>
+<code>dice &lt;dices&gt;d&lt;sides&gt;</code>
 </dt>
 <dd>
 <p>
-        Roll <tt>dices</tt> dices, each having <tt>sides</tt> sides. Lists result for each dice separately. The sum will be between <tt>dices</tt> and <tt>dices</tt> x <tt>sides</tt>.
+        Roll <code>dices</code> dices, each having <code>sides</code> sides. Lists result for each dice separately. The sum will be between <code>dices</code> and <code>dices</code> x <code>sides</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>eightball [question]</tt>
+<code>eightball [question]</code>
 </dt>
 <dd>
 <p>
@@ -3162,86 +3158,86 @@ cellspacing="0" cellpadding="4">
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>monologue [channel]</tt>
+<code>monologue [channel]</code>
 </dt>
 <dd>
 <p>
-        Check how long your monologue on the <tt>channel</tt> is, in case you are lose count. This is probably my favourite useless command.
+        Check how long your monologue on the <code>channel</code> is, in case you are lose count. This is probably my favourite useless command.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>roulette ["spin"]</tt>
+<code>roulette ["spin"]</code>
 </dt>
 <dd>
 <p>
-        Russian roulette. If <tt>spin</tt> is given, spins the chambers. This isn&#8217;t really necessary since it will be done automatically at the end of the round. Provides a different experience if the bot is opped.
+        Russian roulette. If <code>spin</code> is given, spins the chambers. This isn&#8217;t really necessary since it will be done automatically at the end of the round. Provides a different experience if the bot is opped.
 </p>
 </dd>
 </dl></div>
 </div>
 <div class="sect3">
 <h4 id="plugin_nickometer">5.3.3. Nickometer</h4>
-<div class="paragraph"><p><tt>nickometer [nick]</tt>:
-        Give an objective evaluation on the lameness of <tt>nick</tt>, or your nick if not provided. This is similar to the same command in blootbot.</p></div>
+<div class="paragraph"><p><code>nickometer [nick]</code>:
+        Give an objective evaluation on the lameness of <code>nick</code>, or your nick if not provided. This is similar to the same command in blootbot.</p></div>
 <div class="listingblock">
 <div class="title">output</div>
 <div class="content">
-<pre><tt>The "lame nick-o-meter" reading for "1eEteStWaReZL0rD[69X~" is 99.98%.</tt></pre>
+<pre><code>The "lame nick-o-meter" reading for "1eEteStWaReZL0rD[69X~" is 99.98%.</code></pre>
 </div></div>
 </div>
 <div class="sect3">
 <h4 id="plugin_quote">5.3.4. Quote</h4>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>quote add [channel] &lt;text&gt;</tt>
+<code>quote add [channel] &lt;text&gt;</code>
 </dt>
 <dd>
 <p>
-        Add <tt>text</tt> as a quote for <tt>channel</tt>.
+        Add <code>text</code> as a quote for <code>channel</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>quote change [channel] &lt;id&gt; &lt;regexp&gt;</tt>
+<code>quote change [channel] &lt;id&gt; &lt;regexp&gt;</code>
 </dt>
 <dd>
 <p>
-        Change quote <tt>id</tt> on <tt>channel</tt> using <tt>regexp</tt>. For example, <tt>s/foo/bar/g</tt> changes all instances of <tt>foo</tt> to <tt>bar</tt>.
+        Change quote <code>id</code> on <code>channel</code> using <code>regexp</code>. For example, <code>s/foo/bar/g</code> changes all instances of <code>foo</code> to <code>bar</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>quote get [channel] &lt;id&gt;</tt>
+<code>quote get [channel] &lt;id&gt;</code>
 </dt>
 <dd>
 <p>
-        Show quote # <tt>id</tt> for <tt>channel</tt>.
+        Show quote # <code>id</code> for <code>channel</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>quote random [channel]</tt>
+<code>quote random [channel]</code>
 </dt>
 <dd>
 <p>
-        Show random quote from <tt>channel</tt>.
+        Show random quote from <code>channel</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>quote remove [channel] &lt;id&gt;</tt>
+<code>quote remove [channel] &lt;id&gt;</code>
 </dt>
 <dd>
 <p>
-        Remove quote # <tt>id</tt> from <tt>channel</tt>.
+        Remove quote # <code>id</code> from <code>channel</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>quote search [channel] [--{regexp,by} value] [glob]</tt>
+<code>quote search [channel] [--{regexp,by} value] [glob]</code>
 </dt>
 <dd>
 <p>
-        Find quotes from <tt>channel</tt> matching regexp if provided, added by nick <tt>by</tt> if provided, and matching <tt>glob</tt> if provided. <tt>glob</tt> may contain wildcards (eg. <tt>foo*bar</tt>), while <tt>regexp</tt> is a regular expression (eg. <tt>/la.*laa/</tt>). Note that you can really provide both regexp and the glob - both must match in that case.
+        Find quotes from <code>channel</code> matching regexp if provided, added by nick <code>by</code> if provided, and matching <code>glob</code> if provided. <code>glob</code> may contain wildcards (eg. <code>foo*bar</code>), while <code>regexp</code> is a regular expression (eg. <code>/la.*laa/</code>). Note that you can really provide both regexp and the glob - both must match in that case.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>quote stats [channel]</tt>
+<code>quote stats [channel]</code>
 </dt>
 <dd>
 <p>
@@ -3255,51 +3251,51 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p>This plugin allows users to <em>grab</em> the most recent line of another nick as a quote.</p></div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>quotegrabs get [channel] &lt;id&gt;</tt>
+<code>quotegrabs get [channel] &lt;id&gt;</code>
 </dt>
 <dd>
 <p>
-        Show quote # <tt>id</tt> .
+        Show quote # <code>id</code> .
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>quotegrabs grab [channel] &lt;nick&gt;</tt>
+<code>quotegrabs grab [channel] &lt;nick&gt;</code>
 </dt>
 <dd>
 <p>
-        Save last line from <tt>nick</tt> as a quote.
+        Save last line from <code>nick</code> as a quote.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>quotegrabs list [channel] &lt;nick&gt;</tt>
+<code>quotegrabs list [channel] &lt;nick&gt;</code>
 </dt>
 <dd>
 <p>
-        List quotes for <tt>nick</tt>, newest first. This does not display full quotes, but part of each, along with the id.
+        List quotes for <code>nick</code>, newest first. This does not display full quotes, but part of each, along with the id.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>quotegrabs quote [channel] &lt;nick&gt;</tt>
+<code>quotegrabs quote [channel] &lt;nick&gt;</code>
 </dt>
 <dd>
 <p>
-        Show last quote of <tt>nick</tt>.
+        Show last quote of <code>nick</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>quotegrabs random [channel] [nick]</tt>
+<code>quotegrabs random [channel] [nick]</code>
 </dt>
 <dd>
 <p>
-        Random quote from any nick, or <tt>nick</tt> if provided.
+        Random quote from any nick, or <code>nick</code> if provided.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>quotegrabs search [channel] &lt;text&gt;</tt>
+<code>quotegrabs search [channel] &lt;text&gt;</code>
 </dt>
 <dd>
 <p>
-        Show quotes containing <tt>text</tt>. Unfortunately, this does not list the nick or allow searching only given nick&#8217;s quotes. Id and quote content will be shown.
+        Show quotes containing <code>text</code>. Unfortunately, this does not list the nick or allow searching only given nick&#8217;s quotes. Id and quote content will be shown.
 </p>
 </dd>
 </dl></div>
@@ -3384,11 +3380,11 @@ cellspacing="0" cellpadding="4">
 <div class="paragraph"><p>The installation and configuration is not quite straight-forward. After getting the files, I recommend doing the following:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>config plugins.meetbot.enableSupybotBasedConfig True
+<pre><code>config plugins.meetbot.enableSupybotBasedConfig True
 reload MeetBot
 config list plugins.meetbot
 config plugins.meetbot.logFileDir /home/supybot/public_html/meetings/
-config plugins.meetbot.logUrlPrefix http://hostname/~supybot/meetings/</tt></pre>
+config plugins.meetbot.logUrlPrefix http://hostname/~supybot/meetings/</code></pre>
 </div></div>
 <div class="paragraph"><p>See MeetBot/ircmeeting/meeting.py for the configuration items and their documentation.</p></div>
 </div>
@@ -3396,11 +3392,11 @@ config plugins.meetbot.logUrlPrefix http://hostname/~supybot/meetings/</tt></pre
 <h4 id="plugin_messageparser">5.4.2. MessageParser</h4>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; your question is covered in the ,,supybook
+<pre><code>&lt;user&gt; your question is covered in the ,,supybook
 &lt;supybot&gt; Follow this link to the supybook, a supybot handbook: http://supybook.fealdia.org/
 
 &lt;user&gt; I'd like a ,,(factoids search *) please
-&lt;supybot&gt; 'conditional', 'ggc', 'ggr', 'git', 'gitrepo', 'gribblegitcontent', 'gribblegitrepo'</tt></pre>
+&lt;supybot&gt; 'conditional', 'ggc', 'ggr', 'git', 'gitrepo', 'gribblegitcontent', 'gribblegitrepo'</code></pre>
 </div></div>
 <div class="paragraph"><p>MessageParser allows adding regular expression triggers that can match any line. Multiple triggers can match a single line, and the same trigger can match several times. This plugin is a very useful addition for support channels.</p></div>
 <div class="paragraph"><p>Visit the <a href="http://sourceforge.net/apps/mediawiki/gribble/index.php?title=MessageParser_Plugin">MessageParser wiki</a> for more information.</p></div>
@@ -3415,8 +3411,8 @@ config plugins.meetbot.logUrlPrefix http://hostname/~supybot/meetings/</tt></pre
 <div class="paragraph"><p>James McCoy has written a <a href="https://github.com/jamessan/Supybot-Weather">Weather plugin</a>.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; weather berlin, germany
-&lt;supybot&gt; The current temperature in Prenzlauer Berg, Berlin, Germany is -7.1°C (6:13 PM CET on February 01, 2012). Conditions: Clear. Humidity: 25%. Dew Point: -24.0°C. Windchill: -12.0°C. Pressure: 30.66 in 1038.1 hPa (Rising).</tt></pre>
+<pre><code>&lt;user&gt; weather berlin, germany
+&lt;supybot&gt; The current temperature in Prenzlauer Berg, Berlin, Germany is -7.1°C (6:13 PM CET on February 01, 2012). Conditions: Clear. Humidity: 25%. Dew Point: -24.0°C. Windchill: -12.0°C. Pressure: 30.66 in 1038.1 hPa (Rising).</code></pre>
 </div></div>
 </div>
 </div>
@@ -3501,64 +3497,64 @@ Capabilities/anticapabilities for commands with spaces in them are not supported
 <div class="paragraph"><p>We try to make a command factoid, like we are used to with blootbot:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; cmdtest is &lt;action&gt; gives $1 "(an apple|a pear)"
-&lt;bot&gt; Ok.</tt></pre>
+<pre><code>&lt;user&gt; cmdtest is &lt;action&gt; gives $1 "(an apple|a pear)"
+&lt;bot&gt; Ok.</code></pre>
 </div></div>
 <div class="paragraph"><p>Then we test it:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; cmdtest someone</tt></pre>
+<pre><code>&lt;user&gt; cmdtest someone</code></pre>
 </div></div>
 <div class="paragraph"><p>But it doesn&#8217;t work.
 However, the factoid works:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; cmdtest
-  * bot gives $1 an apple</tt></pre>
+<pre><code>&lt;user&gt; cmdtest
+  * bot gives $1 an apple</code></pre>
 </div></div>
 <div class="paragraph"><p>The Moobotfactoids plugin in supybot doesn&#8217;t handle arguments, (yet)
 unfortunately, so you need to do it another way.
 Use the Moobotfactoids to do the random part(s):</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; fruits is &lt;reply&gt; "(an apple|an orange|a banana|a pear)"
-&lt;bot&gt; Ok.</tt></pre>
+<pre><code>&lt;user&gt; fruits is &lt;reply&gt; "(an apple|an orange|a banana|a pear)"
+&lt;bot&gt; Ok.</code></pre>
 </div></div>
 <div class="paragraph"><p>Then use an alias to do the command, with arguments (the "action" command
 is found in the Reply plugin), here you also see a use of a nested command:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; alias add givefruit action gives "[fruits]" to $1
+<pre><code>&lt;user&gt; alias add givefruit action gives "[fruits]" to $1
 &lt;bot&gt; Ok.
 &lt;user&gt; givefruit someone
- * bot gives a pear to someone</tt></pre>
+ * bot gives a pear to someone</code></pre>
 </div></div>
 </div>
 <div class="sect2">
 <h3 id="_tidier_bot_replies">7.2. Tidier bot replies</h3>
 <div class="paragraph"><p>I don&#8217;t personally like the default Supybot replies: I hate the nick prefix and the way too verbose <em>The operation succeeded.</em>.</p></div>
-<div class="paragraph"><p>Fortunately there are plenty of settings to configure how Supybot replies. These can be listed with <tt>config reply</tt> and <tt>config replies</tt>.</p></div>
-<div class="paragraph"><p>The <tt>reply</tt> items determine how Supybot acts, and <tt>replies</tt> contains some messages it uses. I prefer:</p></div>
-<div class="paragraph"><p><tt>config reply.withNickPrefix False</tt></p></div>
-<div class="paragraph"><p><tt>config replies.success OK</tt></p></div>
-<div class="paragraph"><p><tt>config reply.error.inPrivate True</tt>.</p></div>
+<div class="paragraph"><p>Fortunately there are plenty of settings to configure how Supybot replies. These can be listed with <code>config reply</code> and <code>config replies</code>.</p></div>
+<div class="paragraph"><p>The <code>reply</code> items determine how Supybot acts, and <code>replies</code> contains some messages it uses. I prefer:</p></div>
+<div class="paragraph"><p><code>config reply.withNickPrefix False</code></p></div>
+<div class="paragraph"><p><code>config replies.success OK</code></p></div>
+<div class="paragraph"><p><code>config reply.error.inPrivate True</code>.</p></div>
 </div>
 <div class="sect2">
 <h3 id="_more_on_nested_commands">7.3. More on nested commands</h3>
 <div class="paragraph"><p>Thanks to Tobias "beardy" Rosenqvist for the tip!</p></div>
-<div class="paragraph"><p>For those familliar with unix shells, (bash in particular), nested commands can be compared to doing command substitution, as in <tt>$(command)</tt>.</p></div>
-<div class="paragraph"><p>Nested commands are by default enclosed by square brackets (<tt>[]</tt>). The <tt>commands.nested.brackets</tt> configuration variable can be used to set these to <tt>&lt;&gt;</tt>, <tt>{}</tt>, or <tt>()</tt>.</p></div>
+<div class="paragraph"><p>For those familliar with unix shells, (bash in particular), nested commands can be compared to doing command substitution, as in <code>$(command)</code>.</p></div>
+<div class="paragraph"><p>Nested commands are by default enclosed by square brackets (<code>[]</code>). The <code>commands.nested.brackets</code> configuration variable can be used to set these to <code>&lt;&gt;</code>, <code>{}</code>, or <code>()</code>.</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; echo The title of the Supybot website is: [web title http://www.supybot.com/]
-&lt;bot&gt; The title of the Supybot website is: Welcome to Supybot.com! Supybot Website</tt></pre>
+<pre><code>&lt;user&gt; echo The title of the Supybot website is: [web title http://www.supybot.com/]
+&lt;bot&gt; The title of the Supybot website is: Welcome to Supybot.com! Supybot Website</code></pre>
 </div></div>
-<div class="paragraph"><p>Another way nested commands can work, is like a pipe, if the configuration variable <tt>commands.nested.pipeSyntax</tt> is set to <tt>True</tt>.</p></div>
+<div class="paragraph"><p>Another way nested commands can work, is like a pipe, if the configuration variable <code>commands.nested.pipeSyntax</code> is set to <code>True</code>.</p></div>
 <div class="paragraph"><p>Same example as above, but using the pipeSyntax:</p></div>
 <div class="listingblock">
 <div class="content">
-<pre><tt>&lt;user&gt; web title http://www.supybot.com/ | echo The title of the Supybot website is:
-&lt;bot&gt; The title of the Supybot website is: Welcome to Supybot.com! Supybot Website</tt></pre>
+<pre><code>&lt;user&gt; web title http://www.supybot.com/ | echo The title of the Supybot website is:
+&lt;bot&gt; The title of the Supybot website is: Welcome to Supybot.com! Supybot Website</code></pre>
 </div></div>
 </div>
 </div>
@@ -3600,7 +3596,7 @@ Whether to be extra helpful when a user fails syntax of a command.
 </dt>
 <dd>
 <p>
-Assume everyone wants to talk to the bot, eg. treat all messages as if addressed to the bot. This does not imply <tt>reply.WhenNotCommand False</tt> which you should set as well.
+Assume everyone wants to talk to the bot, eg. treat all messages as if addressed to the bot. This does not imply <code>reply.WhenNotCommand False</code> which you should set as well.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -3632,7 +3628,7 @@ Whether to use notices instead of regular messages.
 </dt>
 <dd>
 <p>
-How many messages to send initially before prompting for <tt>more</tt>. Default is 1.
+How many messages to send initially before prompting for <code>more</code>. Default is 1.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -3688,7 +3684,7 @@ Whether to show an exception or a generic error when something breaks. Mostly us
 </dt>
 <dd>
 <p>
-Format string for timestamps (<tt>%I:%M %p, %B %d, %Y</tt>, eg. <em>08:41 PM, September 11, 2008</em>).
+Format string for timestamps (<code>%I:%M %p, %B %d, %Y</code>, eg. <em>08:41 PM, September 11, 2008</em>).
 </p>
 </dd>
 <dt class="hdlist1">
@@ -3728,7 +3724,7 @@ Whether to consider messages that end in the bot&#8217;s nick to be addressed to
 </dt>
 <dd>
 <p>
-Maximum length of a reply message from the bot. This does not mean the length of a single message (prompting for <tt>more</tt>), but the whole message.
+Maximum length of a reply message from the bot. This does not mean the length of a single message (prompting for <code>more</code>), but the whole message.
 </p>
 </dd>
 <dt class="hdlist1">
@@ -3758,12 +3754,12 @@ Whether to use notices instead of private messages.
 <td class="icon">
 <div class="title">Note</div>
 </td>
-<td class="content">If you modify the configuration files by hand when the bot is running, you need to run <tt>config reload</tt>.</td>
+<td class="content">If you modify the configuration files by hand when the bot is running, you need to run <code>config reload</code>.</td>
 </tr></table>
 </div>
 <div class="dlist"><dl>
 <dt class="hdlist1">
-<tt>backup/</tt>
+<code>backup/</code>
 </dt>
 <dd>
 <p>
@@ -3771,7 +3767,7 @@ Whether to use notices instead of private messages.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>conf/</tt>
+<code>conf/</code>
 </dt>
 <dd>
 <p>
@@ -3779,7 +3775,7 @@ Whether to use notices instead of private messages.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>data/</tt>
+<code>data/</code>
 </dt>
 <dd>
 <p>
@@ -3787,7 +3783,7 @@ Whether to use notices instead of private messages.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>data/#channel/</tt>
+<code>data/#channel/</code>
 </dt>
 <dd>
 <p>
@@ -3795,7 +3791,7 @@ Whether to use notices instead of private messages.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>data/tmp/</tt>
+<code>data/tmp/</code>
 </dt>
 <dd>
 <p>
@@ -3803,7 +3799,7 @@ Whether to use notices instead of private messages.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>logs/</tt>
+<code>logs/</code>
 </dt>
 <dd>
 <p>
@@ -3811,7 +3807,7 @@ Whether to use notices instead of private messages.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>logs/ChannelLogger/</tt>
+<code>logs/ChannelLogger/</code>
 </dt>
 <dd>
 <p>
@@ -3819,7 +3815,7 @@ Whether to use notices instead of private messages.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>logs/messages.log</tt>
+<code>logs/messages.log</code>
 </dt>
 <dd>
 <p>
@@ -3827,15 +3823,15 @@ Whether to use notices instead of private messages.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>plugins/</tt>
+<code>plugins/</code>
 </dt>
 <dd>
 <p>
-        Local plugin directory. This is by default listed in <tt>config directories.plugins</tt>.
+        Local plugin directory. This is by default listed in <code>config directories.plugins</code>.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>&lt;bot&gt;.conf</tt>
+<code>&lt;bot&gt;.conf</code>
 </dt>
 <dd>
 <p>
@@ -3843,7 +3839,7 @@ Whether to use notices instead of private messages.
 </p>
 </dd>
 <dt class="hdlist1">
-<tt>tmp/</tt>
+<code>tmp/</code>
 </dt>
 <dd>
 <p>
@@ -3859,7 +3855,8 @@ Whether to use notices instead of private messages.
 <div id="footer">
 <div id="footer-text">
 Version v0.0.5-2-g992c213+dirty<br />
-Last updated 2013-12-27 13:36:54 EET
+Last updated
+ 2015-12-04 17:02:03 EET
 </div>
 </div>
 </body>
