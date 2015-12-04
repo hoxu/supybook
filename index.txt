@@ -1071,7 +1071,7 @@ The [green]#Web# plugin contains some useful WWW-related functionality, such as 
 	Show size of `url`, based on the `Content-Length` header sent by the web server.
 
 `title <url>`::
-	Show title for `url`. This can be done automatically for all URLs pasted on a channel; see the configuration variable `plugins.Web.titleSnarfer`.
+	Show title for `url`. This can be done automatically for all URLs pasted on a channel; see the configuration variable `plugins.Web.titleSnarfer`. Note that the amount of fetched data is determined by the configuration variable `protocols.http.peekSize`. You may need to increase that for certain pages, like YouTube.
 
 `urlquote <text>`::
 	Return `text` quoted into a URL. Eg. `urlquote foo bar` -> `foo%20bar`.
